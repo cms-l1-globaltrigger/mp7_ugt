@@ -8,6 +8,16 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 Versions of ugt with new GTL structure (v2.0.0 and higher)
 
+### [v2.4.1] - 2019-10-23
+
+#### Comment
+
+- mp7_ugt firmware release v2.4.1 (bug fixed in script)
+
+#### Changed
+- script:
+  - ../scripts/runIpbbSynth.py
+
 ### [v2.4.0] - 2019-10-22
 
 #### Comment
