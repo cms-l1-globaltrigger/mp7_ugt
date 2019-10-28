@@ -2,6 +2,7 @@
 -- Calculation of transverse mass based on LUTs.
 
 -- Version history:
+-- HB 2019-10-28: Added use clause lut_pkg.
 -- HB 2019-08-20: Changed types.
 -- HB 2019-01-14: No output register.
 -- HB 2018-11-26: First design.
@@ -13,6 +14,7 @@ use ieee.std_logic_arith.all;
 use work.math_pkg.all;
 
 use work.gtl_pkg.all;
+use work.lut_pkg.all;
 
 entity transverse_mass is
     generic(
