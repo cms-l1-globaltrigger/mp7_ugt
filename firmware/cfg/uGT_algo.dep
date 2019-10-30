@@ -31,10 +31,10 @@ src data/gtl/conversions.vhd
 src data/gtl/lut_comparator.vhd
 src data/gtl/comparators_obj_cuts.vhd
 src data/gtl/comparators_corr_cuts.vhd
-src data/gtl/comparator_muon_cc_double.vhd
-src data/gtl/comparator_muon_cc_triple.vhd
-src data/gtl/comparator_muon_cc_quad.vhd
-src data/gtl/comparator_muon_charge_corr.vhd
+#src data/gtl/comparator_muon_cc_double.vhd
+#src data/gtl/comparator_muon_cc_triple.vhd
+#src data/gtl/comparator_muon_cc_quad.vhd
+src data/gtl/comparators_muon_charge_corr.vhd
 src data/gtl/combinatorial_conditions.vhd
 src data/gtl/combinatorial_conditions_ovrm.vhd
 src data/gtl/correlation_conditions.vhd
