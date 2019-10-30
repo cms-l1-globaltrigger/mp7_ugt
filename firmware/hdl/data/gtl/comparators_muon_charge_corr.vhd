@@ -2,6 +2,7 @@
 -- Comparators for muon charge correlations.
 
 -- Version-history:
+-- HB 2019-10-30: Changed entity name.
 -- HB 2019-06-28: Changed types.
 -- HB 2018-11-26: First design.
 
@@ -14,7 +15,7 @@ use ieee.std_logic_unsigned.all;
 use work.lhc_data_pkg.all;
 use work.gtl_pkg.all;
 
-entity comparator_muon_charge_corr is
+entity comparators_muon_charge_corr is
     generic(
         MODE : comp_mode_cc; -- double, triple or quad
         REQ : std_logic_vector(MUON_CHARGE_WIDTH-1 downto 0)
@@ -28,9 +29,9 @@ entity comparator_muon_charge_corr is
         comp_o_triple : out muon_cc_triple_std_logic_array := (others => (others => (others => '0')));
         comp_o_quad : out muon_cc_quad_std_logic_array := (others => (others => (others => (others => '0'))))
     );
-end comparator_muon_charge_corr;
+end comparators_muon_charge_corr;
 
-architecture rtl of comparator_muon_charge_corr is
+architecture rtl of comparators_muon_charge_corr is
         
     signal cc_double_i :muon_cc_double_array;
     signal cc_triple_i :muon_cc_triple_array;
