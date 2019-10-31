@@ -8,6 +8,19 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 Versions of ugt with new GTL structure (v2.0.0 and higher)
 
+### [v2.4.2] - 2019-10-31
+
+#### Comment
+
+- mp7_ugt firmware release v2.4.2
+
+#### Changed
+- source file:
+  - ../hdl/data/gtl/muon_charge_correlations.vhd
+  - ../hdl/packages/gt_mp7_core_pkg.vhd
+- file name:
+  - ../hdl/data/gtl/comparator_muon_charge_corr.vhd to ../hdl/data/gtl/comparators_muon_charge_corr.vhd
+
 ### [v2.4.1] - 2019-10-23
 
 #### Comment
