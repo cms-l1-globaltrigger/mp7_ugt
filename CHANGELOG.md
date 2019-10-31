@@ -17,6 +17,10 @@ Versions of ugt with new GTL structure (v2.0.0 and higher)
 #### Changed
 - file name:
   - ../hdl/data/gtl/comparator_muon_charge_corr.vhd to ../hdl/data/gtl/comparators_muon_charge_corr.vhd
+  - ../hdl/data/gtl/sub_eta.vhd to ../hdl/data/gtl/deta_calc.vhd
+  - ../hdl/data/gtl/sub_phi.vhd to ../hdl/data/gtl/dphi_calc.vhd
+  - ../hdl/data/gtl/diff_eta_lut.vhd to ../hdl/data/gtl/deta_lut.vhd
+  - ../hdl/data/gtl/diff_phi_lut.vhd to ../hdl/data/gtl/dphi_lut.vhd
 - source file:
   - ../hdl/data/gtl/muon_charge_correlations.vhd
   - ../hdl/data/gtl/comparators_muon_charge_corr.vhd
