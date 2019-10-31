@@ -2,6 +2,7 @@
 -- Differences in phi.
 
 -- Version-history:
+-- HB 2019-10-31: Changed name.
 -- HB 2019-08-27: Cases for "same objects" and "different objects" (less resources for "same objects").
 -- HB 2019-06-27: Changed type of outputs.
 -- HB 2019-01-11: First design.
@@ -11,7 +12,7 @@ use ieee.std_logic_1164.all;
 
 use work.gtl_pkg.all;
 
-entity sub_phi is
+entity dphi_calc is
     generic(
         N_OBJ_1 : positive;
         N_OBJ_2 : positive;
@@ -23,9 +24,9 @@ entity sub_phi is
         phi_2 : in conv_integer_array;
         sub_phi_o : out max_phi_range_array := (others => (others => 0))
     );
-end sub_phi;
+end dphi_calc;
 
-architecture rtl of sub_phi is
+architecture rtl of dphi_calc is
 
     signal sub_temp : max_phi_range_array := (others => (others => 0));
     

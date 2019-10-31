@@ -2,6 +2,7 @@
 -- Subtraction in eta.
 
 -- Version-history:
+-- HB 2019-10-31: Changed name.
 -- HB 2019-08-27: Added use clauses.
 -- HB 2019-08-27: Cases for "same objects" and "different objects" (less resources for "same objects").
 -- HB 2019-06-27: Changed type of outputs.
@@ -14,7 +15,7 @@ use ieee.std_logic_signed.all;
 
 use work.gtl_pkg.all;
 
-entity sub_eta is
+entity deta_calc is
     generic(
         N_OBJ_1 : positive;
         N_OBJ_2 : positive;
@@ -25,9 +26,9 @@ entity sub_eta is
         eta_2 : in conv_integer_array;
         sub_eta_o : out max_eta_range_array := (others => (others => 0))
     );
-end sub_eta;
+end deta_calc;
 
-architecture rtl of sub_eta is
+architecture rtl of deta_calc is
 
 begin
 

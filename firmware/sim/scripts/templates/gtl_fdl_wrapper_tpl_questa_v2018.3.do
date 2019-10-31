@@ -61,9 +61,6 @@ vcom -93 -work work $HDL_DIR/data/gtl/comp_signed.vhd
 vcom -93 -work work $HDL_DIR/data/gtl/lut_comparator.vhd
 vcom -93 -work work $HDL_DIR/data/gtl/comparators_obj_cuts.vhd
 vcom -93 -work work $HDL_DIR/data/gtl/comparators_corr_cuts.vhd
-#vcom -93 -work work $HDL_DIR/data/gtl/comparator_muon_cc_double.vhd
-#vcom -93 -work work $HDL_DIR/data/gtl/comparator_muon_cc_triple.vhd
-#vcom -93 -work work $HDL_DIR/data/gtl/comparator_muon_cc_quad.vhd
 vcom -93 -work work $HDL_DIR/data/gtl/comparators_muon_charge_corr.vhd
 vcom -93 -work work $HDL_DIR/data/gtl/combinatorial_conditions.vhd
 vcom -93 -work work $HDL_DIR/data/gtl/combinatorial_conditions_ovrm.vhd
@@ -72,13 +69,11 @@ vcom -93 -work work $HDL_DIR/data/gtl/correlation_conditions_ovrm.vhd
 
 ## HB 2019-01-11: used for less amount of resources
 vcom -93 -work work $HDL_DIR/data/gtl/luts_corr_cuts.vhd
-vcom -93 -work work $HDL_DIR/data/gtl/sub_eta_calc.vhd
-vcom -93 -work work $HDL_DIR/data/gtl/sub_eta.vhd
-vcom -93 -work work $HDL_DIR/data/gtl/diff_eta_lut.vhd
+vcom -93 -work work $HDL_DIR/data/gtl/deta_calc.vhd
+vcom -93 -work work $HDL_DIR/data/gtl/deta_lut.vhd
 vcom -93 -work work $HDL_DIR/data/gtl/cosh_deta_lut.vhd
-vcom -93 -work work $HDL_DIR/data/gtl/sub_phi_calc.vhd
-vcom -93 -work work $HDL_DIR/data/gtl/sub_phi.vhd
-vcom -93 -work work $HDL_DIR/data/gtl/diff_phi_lut.vhd
+vcom -93 -work work $HDL_DIR/data/gtl/dphi_calc.vhd
+vcom -93 -work work $HDL_DIR/data/gtl/dphi_lut.vhd
 vcom -93 -work work $HDL_DIR/data/gtl/cos_dphi_lut.vhd
 
 vcom -93 -work work $HDL_DIR/data/gtl/delta_r_calc.vhd
