@@ -15,11 +15,12 @@ Versions of ugt with new GTL structure (v2.0.0 and higher)
 - mp7_ugt firmware release v2.4.2
 
 #### Changed
-- source file:
-  - ../hdl/data/gtl/muon_charge_correlations.vhd
-  - ../hdl/packages/gt_mp7_core_pkg.vhd
 - file name:
   - ../hdl/data/gtl/comparator_muon_charge_corr.vhd to ../hdl/data/gtl/comparators_muon_charge_corr.vhd
+- source file:
+  - ../hdl/data/gtl/muon_charge_correlations.vhd
+  - ../hdl/data/gtl/comparators_muon_charge_corr.vhd
+  - ../hdl/packages/gt_mp7_core_pkg.vhd
 
 ### [v2.4.1] - 2019-10-23
 

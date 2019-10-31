@@ -2,6 +2,7 @@
 -- Comparators for muon charge correlations.
 
 -- Version-history:
+-- HB 2019-10-31: Reduced instances of comp_unsigned with additional if-statements for triple and quad, cleaned up code.
 -- HB 2019-10-30: Changed entity name.
 -- HB 2019-06-28: Changed types.
 -- HB 2018-11-26: First design.
@@ -46,7 +47,6 @@ architecture rtl of comparators_muon_charge_corr is
     signal comp_r_triple : comp_i_triple_array;
     signal comp_i_quad : comp_i_quad_array := (others => (others => (others => (others => (others => '0')))));
     signal comp_r_quad : comp_i_quad_array;
-    constant dummy_limit : std_logic_vector(1 downto 0) := (others => '0');
 
 begin
     
@@ -57,7 +57,7 @@ begin
                     generic map(MUON_CHARGE_WIDTH, IN_REG_COMP)  
                     port map(clk, cc_double(i,j), cc_double_i(i,j));
                 comp_i : entity work.comp_unsigned
-                    generic map(chargeCorr, dummy_limit, dummy_limit, REQ)  
+                    generic map(chargeCorr, "00", "00", REQ)  
                     port map(cc_double_i(i,j), comp_i_double(i,j)(0));
                 out_reg_i : entity work.reg_mux
                     generic map(1, OUT_REG_COMP)  
@@ -69,9 +69,11 @@ begin
                     in_reg_i : entity work.reg_mux
                         generic map(MUON_CHARGE_WIDTH, IN_REG_COMP)  
                         port map(clk, cc_triple(i,j,k), cc_triple_i(i,j,k));
-                    comp_i : entity work.comp_unsigned
-                        generic map(chargeCorr, dummy_limit, dummy_limit, REQ)  
-                        port map(cc_triple_i(i,j,k), comp_i_triple(i,j,k)(0));
+                    if_i: if (j/=i and k/=i and k/=j) generate 
+                        comp_i : entity work.comp_unsigned
+                            generic map(chargeCorr, "00", "00", REQ)  
+                            port map(cc_triple_i(i,j,k), comp_i_triple(i,j,k)(0));
+                    end generate if_i;
                     out_reg_i : entity work.reg_mux
                         generic map(1, OUT_REG_COMP)  
                         port map(clk, comp_i_triple(i,j,k), comp_r_triple(i,j,k));
@@ -82,9 +84,11 @@ begin
                         in_reg_i : entity work.reg_mux
                             generic map(MUON_CHARGE_WIDTH, IN_REG_COMP)  
                             port map(clk, cc_quad(i,j,k,l), cc_quad_i(i,j,k,l));
-                        comp_i : entity work.comp_unsigned
-                            generic map(chargeCorr, dummy_limit, dummy_limit, REQ)  
-                            port map(cc_quad_i(i,j,k,l), comp_i_quad(i,j,k,l)(0));
+                        if_i: if (j/=i and k/=i and k/=j and l/=i and l/=j and l/=k) generate 
+                            comp_i : entity work.comp_unsigned
+                                generic map(chargeCorr, "00", "00", REQ)  
+                                port map(cc_quad_i(i,j,k,l), comp_i_quad(i,j,k,l)(0));
+                        end generate if_i;
                         out_reg_i : entity work.reg_mux
                             generic map(1, OUT_REG_COMP)  
                             port map(clk, comp_i_quad(i,j,k,l), comp_r_quad(i,j,k,l));
