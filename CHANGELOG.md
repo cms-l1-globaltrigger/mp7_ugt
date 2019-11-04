@@ -8,7 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 Versions of ugt with new GTL structure (v2.0.0 and higher)
 
-### [v2.4.2] - 2019-10-31
+### [v2.4.2] - 2019-11-04
 
 #### Comment
 
@@ -25,6 +25,11 @@ Versions of ugt with new GTL structure (v2.0.0 and higher)
   - ../hdl/data/gtl/muon_charge_correlations.vhd
   - ../hdl/data/gtl/comparators_muon_charge_corr.vhd
   - ../hdl/packages/gt_mp7_core_pkg.vhd
+- simulation do files:
+  - ../sim/scripts/templates/gtl_fdl_wrapper_tpl_questa_v2018.3.do
+  - ../sim/scripts/templates/gtl_fdl_wrapper_tpl_questa_v2019.1.do
+- synthesis dep file:
+  - ../cfg/uGT_algo.dep
 
 ### [v2.4.1] - 2019-10-23
 
