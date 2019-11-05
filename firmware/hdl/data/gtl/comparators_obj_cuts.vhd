@@ -20,7 +20,8 @@ entity comparators_obj_cuts is
         MODE : comp_mode;
         MIN_REQ : std_logic_vector(MAX_OBJ_PARAMETER_WIDTH-1 downto 0) := (others => '0');
         MAX_REQ : std_logic_vector(MAX_OBJ_PARAMETER_WIDTH-1 downto 0) := (others => '0');
-        LUT : std_logic_vector(MAX_LUT_WIDTH-1 downto 0) := (others => '0')
+        LUT : std_logic_vector(MAX_LUT_WIDTH-1 downto 0) := (others => '0');
+        REQ_CHARGE: string(1 to 3)
     );
     port(
         clk : in std_logic;
@@ -58,6 +59,11 @@ begin
                 generic map(MODE, MIN_I, MAX_I)  
                 port map(data_i(i), comp(i));
         end generate if_phi;
+        if_charge: if MODE = CHARGE generate
+            comp(i) <= '1' when data_i(i) = "10" and REQ_CHARGE = "pos" else -- charge sign = '0' => positive
+                       '1' when data_i(i) = "11" and REQ_CHARGE = "neg" else -- charge sign = '1' => negative
+                       '1' when REQ_CHARGE = "ign" else '0';
+        end generate if_charge;
         if_iso_qual: if MODE = ISO or MODE = QUAL generate
             comp(i) <= LUT(CONV_INTEGER(data_i(i)));
         end generate if_iso_qual;
