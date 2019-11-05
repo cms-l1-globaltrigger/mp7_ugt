@@ -21,7 +21,7 @@ entity comparators_obj_cuts is
         MIN_REQ : std_logic_vector(MAX_OBJ_PARAMETER_WIDTH-1 downto 0) := (others => '0');
         MAX_REQ : std_logic_vector(MAX_OBJ_PARAMETER_WIDTH-1 downto 0) := (others => '0');
         LUT : std_logic_vector(MAX_LUT_WIDTH-1 downto 0) := (others => '0');
-        REQ_CHARGE: string(1 to 3)
+        REQ_CHARGE: string(1 to 3) := "ign"
     );
     port(
         clk : in std_logic;
