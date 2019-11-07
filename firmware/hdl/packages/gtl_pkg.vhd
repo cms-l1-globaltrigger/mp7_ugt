@@ -2,6 +2,7 @@
 -- Package for constant and type definitions of GTL firmware in Global Trigger Upgrade system.
 
 -- Version-history:
+-- HB 2019-11-07: Inserted N_MU_OBJECTS.
 -- HB 2019-09-06: Inserted comp_mode_cc.
 -- HB 2019-09-02: Inserted number of objects for esums (N_ETT_OBJECTS, ...).
 -- HB 2019-08-29: Updated record "default_corr_cuts_rec". Added constants for deta, dphi, deltaR and mass vector width).
@@ -59,6 +60,8 @@ package gtl_pkg is
     constant JET_MUON_PHI_HALF_RANGE_BINS : positive := MUON_PHI_HALF_RANGE_BINS;
     constant TAU_MUON_PHI_HALF_RANGE_BINS : positive := MUON_PHI_HALF_RANGE_BINS;
     constant MUON_MUON_PHI_HALF_RANGE_BINS : positive := MUON_PHI_HALF_RANGE_BINS;
+    
+    constant N_MU_OBJECTS :  positive := N_MUON_OBJECTS;
 
     constant PHI_MIN : real := 0.0; -- phi min.: 0.0
     constant PHI_MAX : real := 2.0*PI; -- phi max.: 2*PI
@@ -235,7 +238,9 @@ package gtl_pkg is
     constant TOWERCOUNT_IN_HTT_HIGH : natural := 24;
     constant TOWERCOUNT_COUNT_LOW : natural := 0;
     constant TOWERCOUNT_COUNT_HIGH : natural := 12;
+    constant TOWERCOUNT_COUNT_WIDTH : natural := TOWERCOUNT_COUNT_HIGH-TOWERCOUNT_COUNT_LOW+1;
     constant MAX_TOWERCOUNT_BITS : natural := 16;
+    constant N_TOWERCOUNT_OBJECTS : natural := 1;
 
 -- *******************************************************************************************************
 -- Minimum Bias bits
@@ -252,7 +257,7 @@ package gtl_pkg is
 -- HF- thresh 1 => MBT1HFM
 
     constant MBT0HFP_IN_ETT_HIGH : natural := 31;
-    constant MBT0HFP_IN_ETT_LOW : natural := 28;
+    constant MBT0HFP_IN_ETT_LOW : natural := 28;    
     constant MBT0HFM_IN_HTT_HIGH : natural := 31;
     constant MBT0HFM_IN_HTT_LOW : natural := 28;
     constant MBT1HFP_IN_ETM_HIGH : natural := 31;
@@ -262,6 +267,11 @@ package gtl_pkg is
 
     constant MB_COUNT_LOW : natural := 0;
     constant MB_COUNT_HIGH : natural := 3;
+    constant MB_COUNT_WIDTH : natural := MB_COUNT_HIGH-MB_COUNT_HIGH+1;
+    constant N_MBT0HFP_OBJECTS : natural := 1;
+    constant N_MBT0HFM_OBJECTS : natural := 1;
+    constant N_MBT1HFP_OBJECTS : natural := 1;
+    constant N_MBT1HFM_OBJECTS : natural := 1;
 
 -- *******************************************************************************************************
 -- Asymmetry bits
@@ -287,6 +297,11 @@ package gtl_pkg is
 
     constant ASYM_LOW : natural := 0;
     constant ASYM_HIGH : natural := 7;
+    constant ASYM_WIDTH : natural := ASYM_HIGH-ASYM_LOW+1;
+    constant N_ASYMET_OBJECTS : natural := 1;
+    constant N_ASYMET_OBJECTS : natural := 1;
+    constant N_ASYMETHF_OBJECTS : natural := 1;
+    constant N_ASYMHTHF_OBJECTS : natural := 1;
 
 -- *******************************************************************************************************
 -- Centrality bits
@@ -317,7 +332,7 @@ package gtl_pkg is
     constant EG_TAU_DELTAETA_VECTOR_WIDTH: positive := DETA_DPHI_VECTOR_WIDTH;
     constant JET_JET_DELTAETA_VECTOR_WIDTH: positive := DETA_DPHI_VECTOR_WIDTH;
     constant JET_TAU_DELTAETA_VECTOR_WIDTH: positive := DETA_DPHI_VECTOR_WIDTH;
-    constant TAU_TAU_DELTAETA_VECTOR_WIDTH: positive := DETA_DPHI_VECTOR_WIDTH;
+    constant TAU_TAU_DELTAETA_VECTOR_WIDTH: positive := DtowercountETA_DPHI_VECTOR_WIDTH;
     constant EG_MUON_DELTAETA_VECTOR_WIDTH: positive := DETA_DPHI_VECTOR_WIDTH;
     constant JET_MUON_DELTAETA_VECTOR_WIDTH: positive := DETA_DPHI_VECTOR_WIDTH;
     constant TAU_MUON_DELTAETA_VECTOR_WIDTH: positive := DETA_DPHI_VECTOR_WIDTH;
@@ -705,7 +720,7 @@ package gtl_pkg is
 -- enums
     type obj_type is (muon_t,eg_t,jet_t,tau_t,ett_t,etm_t,htt_t,htm_t,ettem_t,etmhf_t,htmhf_t,towercount_t,mbt1hfp_t,mbt1hfm_t,mbt0hfp_t,mbt0hfm_t,asymet_t,asymht_t,asymethf_t,asymhthf_t);
     type obj_type_array is array (1 to 2) of obj_type;
-    type comp_mode is (GE,EQ,NE,ETA,PHI,CHARGE,ISO,QUAL,deltaEta,deltaPhi,deltaR,mass,twoBodyPt,chargeCorr);
+    type comp_mode is (GE,EQ,NE,ETA,PHI,CHARGE,ISO,QUAL,COUNT,deltaEta,deltaPhi,deltaR,mass,twoBodyPt,chargeCorr);
     type comp_mode_cc is (double,triple,quad);
     type corr_cuts_lut_mode is (deltaEta,deltaPhi,CoshDeltaEta,CosDeltaPhi);
 
