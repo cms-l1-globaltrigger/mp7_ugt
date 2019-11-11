@@ -14,6 +14,10 @@ Versions of ugt with new GTL structure (v2.0.0 and higher)
 
 - mp7_ugt firmware release v2.4.3 (bugs fixed)
 
+#### Added
+- simulation do files:
+  - ../sim/scripts/templates/gtl_fdl_wrapper_tpl_questa_v2019.2.do
+
 #### Changed
 - file name:
   - ../hdl/packages/gtl_pkg.vhd
