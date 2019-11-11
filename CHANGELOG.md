@@ -8,6 +8,18 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 Versions of ugt with new GTL structure (v2.0.0 and higher)
 
+### [v2.4.3] - 2019-11-11
+
+#### Comment
+
+- mp7_ugt firmware release v2.4.3 (bugs fixed)
+
+#### Changed
+- file name:
+  - ../hdl/packages/gtl_pkg.vhd
+- script:
+  - ../scripts/run_compile_simlib.py
+
 ### [v2.4.2] - 2019-11-04
 
 #### Comment

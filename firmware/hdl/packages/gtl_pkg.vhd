@@ -299,7 +299,7 @@ package gtl_pkg is
     constant ASYM_HIGH : natural := 7;
     constant ASYM_WIDTH : natural := ASYM_HIGH-ASYM_LOW+1;
     constant N_ASYMET_OBJECTS : natural := 1;
-    constant N_ASYMET_OBJECTS : natural := 1;
+    constant N_ASYMHT_OBJECTS : natural := 1;
     constant N_ASYMETHF_OBJECTS : natural := 1;
     constant N_ASYMHTHF_OBJECTS : natural := 1;
 
@@ -332,7 +332,7 @@ package gtl_pkg is
     constant EG_TAU_DELTAETA_VECTOR_WIDTH: positive := DETA_DPHI_VECTOR_WIDTH;
     constant JET_JET_DELTAETA_VECTOR_WIDTH: positive := DETA_DPHI_VECTOR_WIDTH;
     constant JET_TAU_DELTAETA_VECTOR_WIDTH: positive := DETA_DPHI_VECTOR_WIDTH;
-    constant TAU_TAU_DELTAETA_VECTOR_WIDTH: positive := DtowercountETA_DPHI_VECTOR_WIDTH;
+    constant TAU_TAU_DELTAETA_VECTOR_WIDTH: positive := DETA_DPHI_VECTOR_WIDTH;
     constant EG_MUON_DELTAETA_VECTOR_WIDTH: positive := DETA_DPHI_VECTOR_WIDTH;
     constant JET_MUON_DELTAETA_VECTOR_WIDTH: positive := DETA_DPHI_VECTOR_WIDTH;
     constant TAU_MUON_DELTAETA_VECTOR_WIDTH: positive := DETA_DPHI_VECTOR_WIDTH;
