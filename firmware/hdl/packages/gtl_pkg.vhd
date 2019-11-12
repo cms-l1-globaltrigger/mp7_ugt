@@ -2,6 +2,7 @@
 -- Package for constant and type definitions of GTL firmware in Global Trigger Upgrade system.
 
 -- Version-history:
+-- HB 2019-11-12: Bug fix in function bx.
 -- HB 2019-11-07: Inserted N_MU_OBJECTS.
 -- HB 2019-09-06: Inserted comp_mode_cc.
 -- HB 2019-09-02: Inserted number of objects for esums (N_ETT_OBJECTS, ...).
@@ -737,7 +738,7 @@ package body gtl_pkg is
 
 -- Function to convert bx values from utm (e.g.: +2 to -2) to array index of bx data (e.g.: 0 to 4)
     function bx(i : integer) return natural is
-        variable conv_val : natural := 0;
+        variable conv_val : integer := 0;
         variable bx_conv : natural := 0;
     begin
         conv_val := (BX_PIPELINE_STAGES/2)-(i*2);
