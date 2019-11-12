@@ -135,10 +135,10 @@ def main():
     mp7fw_ugt = args.mp7tag + mp7fw_ugt_suffix
     
     #ipbb_dir = os.path.join(args.path, project_type, args.mp7tag, args.menuname, args.build)
-    # HB 2019-11-12: inserted mp7_ugt tag and vivado version in directory name
+    # HB 2019-11-12: inserted mp7_ugt tag and vivado version in directory name and changed order
     vivado_version = "vivado_" + args.vivado
-    ipbb_dir = os.path.join(args.path, project_type, args.ugt, vivado_version, args.mp7tag, args.menuname, args.build)
-
+    ipbb_dir = os.path.join(args.path, args.menuname, args.build, project_type, args.ugt, args.mp7tag, vivado_version)
+    
     if os.path.isdir(ipbb_dir):
         raise RuntimeError("build area alredy exists: {}".format(ipbb_dir))
     
@@ -171,7 +171,7 @@ def main():
     logging.info("creating IPBB area ...")
     command = 'bash -c "cd; {cmd_source_ipbb}; {cmd_ipbb_init}; cd {ipbb_dir}; {cmd_ipbb_add_ipb} && {cmd_ipbb_add_mp7} && {cmd_ipbb_add_ugt}"'.format(**locals())
     run_command(command)
-
+    
     logging.info("===========================================================================")
     logging.info("download XML file from L1Menu repository ...")
     xml_name = "{}{}".format(args.menuname, '.xml')
