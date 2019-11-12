@@ -8,7 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 Versions of ugt with new GTL structure (v2.0.0 and higher)
 
-### [v2.4.5] - 2019-11-12
+### [v2.4.5] - 2019-11-13
 
 #### Comment
 
@@ -19,7 +19,7 @@ Versions of ugt with new GTL structure (v2.0.0 and higher)
   - ../hdl/packages/gt_mp7_core_pkg.vhd
 - script:
   - ../scripts/runIpbbSynth.py
-  
+
 ### [v2.4.4] - 2019-11-12
 
 #### Comment

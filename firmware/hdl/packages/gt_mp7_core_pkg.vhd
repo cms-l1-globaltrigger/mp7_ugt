@@ -12,13 +12,14 @@
 -- ===================================================================================
 -- actual versions of ugt:
 -- use "FRAME_VERSION" as mp7_ugt release fw version (used for tag name)
--- mp7_ugt (=FRAME_VERSION): v2.4.3
+-- mp7_ugt (=FRAME_VERSION): v2.4.5
 --
 --  control: v2.0.1
---  gtl: v2.4.2
+--  gtl: v2.4.3
 --  fdl: v1.3.5
 
 -- Version-history of GTL part:
+-- HB 2019-11-11: v2.4.3: bug fixed "function bx" in gtl_pkg.vhd.
 -- HB 2019-11-11: v2.4.2: bug fix in gtl_pkg.vhd.
 -- HB 2019-11-04: v2.4.1: changed muon_charge_correlations.vhd, renamed files.
 -- HB 2019-10-22: v2.4.0: added combinatorial_conditions_ovrm.vhd, updated two-body pt features.
@@ -55,7 +56,7 @@ package gt_mp7_core_pkg is
 -- CONTROL = FRAME version (given by the editor of control.vhd)
     constant FRAME_MAJOR_VERSION : integer range 0 to 255 := 2;
     constant FRAME_MINOR_VERSION : integer range 0 to 255 := 4;
-    constant FRAME_REV_VERSION   : integer range 0 to 255 := 3;
+    constant FRAME_REV_VERSION   : integer range 0 to 255 := 5;
 	constant FRAME_VERSION : std_logic_vector(31 downto 0) := X"00" &
            std_logic_vector(to_unsigned(FRAME_MAJOR_VERSION, 8)) &
            std_logic_vector(to_unsigned(FRAME_MINOR_VERSION, 8)) &
@@ -63,7 +64,7 @@ package gt_mp7_core_pkg is
 -- GTL firmware (fix part) version
     constant GTL_FW_MAJOR_VERSION : integer range 0 to 255 := 2;
     constant GTL_FW_MINOR_VERSION : integer range 0 to 255 := 4;
-    constant GTL_FW_REV_VERSION   : integer range 0 to 255 := 2;
+    constant GTL_FW_REV_VERSION   : integer range 0 to 255 := 3;
 -- FDL firmware version
     constant FDL_FW_MAJOR_VERSION : integer range 0 to 255 := 1;
     constant FDL_FW_MINOR_VERSION : integer range 0 to 255 := 3;
