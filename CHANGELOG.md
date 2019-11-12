@@ -8,6 +8,18 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 Versions of ugt with new GTL structure (v2.0.0 and higher)
 
+Bug fix in function bx
+
+### [v2.4.4] - 2019-11-12
+
+#### Comment
+
+- mp7_ugt firmware release v2.4.4 (bug fixed in "function bx")
+
+#### Changed
+- file name:
+  - ../hdl/packages/gtl_pkg.vhd
+  
 ### [v2.4.3] - 2019-11-11
 
 #### Comment
