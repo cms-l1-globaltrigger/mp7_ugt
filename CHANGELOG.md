@@ -19,6 +19,7 @@ Versions of ugt with new GTL structure (v2.0.0 and higher)
   - ../hdl/packages/gt_mp7_core_pkg.vhd
 - script:
   - ../scripts/runIpbbSynth.py
+  - ../scripts/fwpackerIpbb.py
 
 ### [v2.4.4] - 2019-11-12
 
