@@ -134,7 +134,10 @@ def main():
     # Create MP7 tag name for ugt    
     mp7fw_ugt = args.mp7tag + mp7fw_ugt_suffix
     
-    ipbb_dir = os.path.join(args.path, project_type, args.mp7tag, args.menuname, args.build)
+    #ipbb_dir = os.path.join(args.path, project_type, args.mp7tag, args.menuname, args.build)
+    # HB 2019-11-12: inserted mp7_ugt tag and vivado version in directory name and changed order
+    vivado_version = "vivado_" + args.vivado
+    ipbb_dir = os.path.join(args.path, args.menuname, args.build, project_type, args.ugt, args.mp7tag, vivado_version)
 
     if os.path.isdir(ipbb_dir):
         raise RuntimeError("build area alredy exists: {}".format(ipbb_dir))
@@ -171,15 +174,21 @@ def main():
 
     logging.info("===========================================================================")
     logging.info("download XML file from L1Menu repository ...")
+    logging.info("download XML file from L1Menu repository ...")
     xml_name = "{}{}".format(args.menuname, '.xml')
+    html_name = "{}{}".format(args.menuname, '.html')
     url_menu = "{}/{}".format(args.menuurl, args.menuname)
     #print "url_menu",url_menu
+    # Download XML and HTML files (HTML for buildReporter.py)
     filename = os.path.join(ipbb_dir, 'src', xml_name)
     url = "{url_menu}/xml/{xml_name}".format(**locals())    
     download_file_from_url(url, filename)
-    
     menu = XmlMenu(filename)
-
+    
+    filename = os.path.join(ipbb_dir, 'src', html_name)
+    url = "{url_menu}/doc/{html_name}".format(**locals())    
+    download_file_from_url(url, filename)
+    
     # Fetch menu name from path.
     menu_name = menu.name
 
