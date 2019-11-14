@@ -22,17 +22,17 @@ Top hierarchy module of ugt firmware *[mp7_payload.vhd](firmware/hdl/mp7_payload
     git clone https://gitlab.cern.ch/hbergaue/mp7.git <local path>/mp7
     cd <local path>/mp7
     git checkout mp7fw_v2_4_1_mp7_ugt
-    git clone https://gitlab.cern.ch/hbergaue/ugt.git <local path>/ugt
-    cd <local path>/ugt
+    git clone https://github.com/cms-l1-globaltrigger/mp7_ugt.git <local path>/mp7_ugt
+    cd <local path>/mp7_ugt
     git checkout master
 
     # Run simulation
     cd <local path>/ugt/
-    python mp7_ugt/scripts/run_simulation_questa.py <L1Menu name> --mp7_tag <path local mp7>
+    python scripts/run_simulation_questa_<vivado version>.py <L1Menu name> --mp7_tag <path local mp7>
     
     # Example
-    cd ~/gitlab/hbergaue/ugt/mp7_ugt
-    python mp7_ugt/scripts/run_simulation_questa.py L1Menu_Collisions2018_v2_1_0-d98 --mp7_tag ~/gitlab/hbergaue/mp7
+    cd ~/github/cms-l1-globaltrigger/mp7_ugt
+    python scripts/run_simulation_questa_2019.2.py L1Menu_Collisions2018_v2_1_0-d2 --mp7_tag ~/gitlab/hbergaue/mp7
     
 ## Build mp7_ugt firmware with IPBB ##
 
@@ -64,25 +64,25 @@ into [top.dep](https://gitlab.cern.ch/hbergaue/ugt/blob/master/mp7_ugt/firmware/
     kinit username@CERN.CH
 
     # Make local clone of ugt repositiory
-    git clone https://gitlab.cern.ch/hbergaue/ugt.git <local path>
-    cd <local path>
+    git clone https://github.com/cms-l1-globaltrigger/mp7_ugt.git <local path>/mp7_ugt
+    cd <local path>/mp7_ugt
     
     # Run synthesis script (for all 6 modules)
     [Note: default values for some arguments, see
-    python mp7_ugt/scripts/runIpbbSynth.py -h]
-    python mp7_ugt/scripts/runIpbbSynth.py <L1Menu name> --mp7url <URL MP7 git repo> --mp7tag <MP7 tag> -p <work dir> --build <build version> --ugturl <URL ugt git repo> -u <ugt tag in repo>
+    python scripts/runIpbbSynth.py -h]
+    python scripts/runIpbbSynth.py <L1Menu name> --mp7url <URL MP7 git repo> --mp7tag <MP7 tag> -p <work dir> --build <build version> --ugturl <URL ugt git repo> -ugt <ugt tag in repo> --vivado <vivado version> --tme <tme version>
 
     # Example
-    python mp7_ugt/scripts/runIpbbSynth.py L1Menu_Collisions2018_v2_1_0-d1 --mp7url https://:@gitlab.cern.ch:8443/hbergaue/mp7.git --mp7tag mp7fw_v2_4_1 -p ~/work_ipbb_test --build 0x10fa --ugturl https://:@gitlab.cern.ch:8443/hbergaue/ugt.git --ugt master
+    python scripts/runIpbbSynth.py L1Menu_test_compare_gtl_struct_v4-d3 --mp7url https://:@gitlab.cern.ch:8443/hbergaue/mp7.git --mp7tag mp7fw_v2_4_1 -p ~/work_compare_gtl_struct --build 0x0123 --ugturl https://github.com/cms-l1-globaltrigger/mp7_ugt.git --ugt master --vivado 2019.2 --tme 0.9.0
     
     # Run synthesis script (for all 6 modules) with simulation (Questasim)
     git clone https://gitlab.cern.ch/hbergaue/mp7.git <local MP7 repo path>
-    git clone https://gitlab.cern.ch/hbergaue/ugt.git <local path>
+    git clone https://github.com/cms-l1-globaltrigger/mp7_ugt.git <local path>/mp7_ugt
     cd <local path>
-    python mp7_ugt/scripts/runIpbbSynth.py <L1Menu name> --mp7url <URL MP7 git repo> --mp7tag <MP7 tag> -p <work dir> --build <build version> --ugturl <URL ugt git repo> -u <ugt tag in repo> --sim --simmp7path <local MP7 repo path>
+    python scripts/runIpbbSynth.py <L1Menu name> --mp7url <URL MP7 git repo> --mp7tag <MP7 tag> -p <work dir> --build <build version> --ugturl <URL ugt git repo> -u <ugt tag in repo> --sim --simmp7path <local MP7 repo path>
     
     # Example
-    python mp7_ugt/scripts/runIpbbSynth.py L1Menu_Collisions2018_v2_1_0-d1 --mp7url https://:@gitlab.cern.ch:8443/hbergaue/mp7.git --mp7tag mp7fw_v2_4_1 -p ~/work_ipbb_test --build 0x10fa --ugturl https://:@gitlab.cern.ch:8443/hbergaue/ugt.git --ugt master --sim --simmp7path ~/gitlab/hbergaue/mp7
+    python scripts/runIpbbSynth.py L1Menu_test_compare_gtl_struct_v4-d3 --mp7url https://:@gitlab.cern.ch:8443/hbergaue/mp7.git --mp7tag mp7fw_v2_4_1 -p ~/work_compare_gtl_struct --build 0x0123 --ugturl https://:@gitlab.cern.ch:8443/hbergaue/ugt.git --ugt master --sim --simmp7path ~/gitlab/hbergaue/mp7 --vivado 2019.2 --tme 0.9.0
     
 #### Setup (commands for one module) ####
 
@@ -98,7 +98,7 @@ into [top.dep](https://gitlab.cern.ch/hbergaue/ugt/blob/master/mp7_ugt/firmware/
     cd <build_name>
     ipbb add git https://github.com/ipbus/ipbus-firmware.git -b master
     ipbb add git https://:@gitlab.cern.ch:8443/hbergaue/mp7.git -b mp7fw_v2_4_1_ugt
-    ipbb add git https://github.com/herbberg/ugt.git -b gtl_v2_x_y_ipbb
+    ipbb add git https://github.com/cms-l1-globaltrigger/mp7_ugt.git -b master
 
     # Proposed to create l1menu.vhd and l1menu_pkg.vhd by VHDL Producer and copy
     # to src/../firmware/l1menu directory. Patch top_decl.vhd and copy to 
@@ -108,7 +108,7 @@ into [top.dep](https://gitlab.cern.ch/hbergaue/ugt/blob/master/mp7_ugt/firmware/
     cd <work dir>/mp7_ugt/<mp7fw version>/<menu version>/<build version>/module_<module number>
     ipbb add git https://github.com/ipbus/ipbus-firmware.git -b master
     ipbb add git https://:@gitlab.cern.ch:8443/hbergaue/mp7.git -b mp7fw_v2_4_1_mp7_ugt
-    ipbb add git https://:@gitlab.cern.ch:8443/hbergaue/ugt.git -b <master or branch name or tag name>
+    ipbb add git https://github.com/cms-l1-globaltrigger/mp7_ugt.git -b <master or branch name or tag name>
 
     # Copy VHDL producer output and patched files to mp7_ugt (gtl_module.vhd, gtl_pkg.vhd,
     algo_mapping_rop.vhd and gt_mp7_top_pkg.vhd)
@@ -116,8 +116,8 @@ into [top.dep](https://gitlab.cern.ch/hbergaue/ugt/blob/master/mp7_ugt/firmware/
     # Source Vivado
     
     # Create project 
-    ipbb proj create vivado mp7_ugt_<build_version>_<module_nr> mp7:../ugt/mp7_ugt
-    cd proj/mp7_ugt_<build_version>_<module_nr>
+    ipbb proj create vivado module_<module_nr> mp7:../mp7_ugt
+    cd proj/module_<module_nr>
     ipbb vivado project
 
     # Run implementation, synthesis
