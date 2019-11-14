@@ -19,7 +19,7 @@ Versions of ugt with new GTL structure (v2.0.0 and higher)
 - script files:
   - ../scripts/runIpbbSynth.py
   - ../scripts/buildReport.py
-  
+  - ../scripts/checkIpbbSynth.py
 
 ### [v2.4.5] - 2019-11-13
 
