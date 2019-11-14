@@ -27,12 +27,12 @@ Top hierarchy module of ugt firmware *[mp7_payload.vhd](firmware/hdl/mp7_payload
     git checkout master
 
     # Run simulation
-    cd <local path>/mp7_ugt/firmware/sim
-    python scripts/run_simulation_questa_<vivado version>.py <L1Menu name> --mp7_tag <path local mp7>
+    cd <local path>/mp7_ugt
+    python scripts/run_simulation_questa.py <L1Menu name> --mp7_tag <path local mp7>
     
     # Example
-    cd ~/github/cms-l1-globaltrigger/mp7_ugt/firmware/sim
-    python scripts/run_simulation_questa_2019.2.py L1Menu_test_compare_gtl_struct_v4-d3 --mp7_tag ~/gitlab/hbergaue/mp7
+    cd ~/github/cms-l1-globaltrigger/mp7_ugt
+    python scripts/run_simulation_questa.py L1Menu_test_compare_gtl_struct_v4-d3 --mp7_tag ~/gitlab/hbergaue/mp7
     
 ## Build mp7_ugt firmware with IPBB ##
 
