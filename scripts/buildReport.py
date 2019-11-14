@@ -141,7 +141,7 @@ def main():
         "",
     ]
     print("\nPrepend BITFILES table:\n")
-    print("|_.Menu |_.Build |_.Creator |_.Vivado |_.MP7 tag |_.uGT tag |_.uGT |_.FDL |_.GTL |_.Modules |_.Issue |_.Notes |")
+    print("|_.Menu |_.Build |_.Creator |_.Vivado |_.MP7 tag |_.uGT tag |_.uGT |_.GTL |_.FDL |_.Modules |_.Issue |_.Notes |")
     print("|{0} |".format(" |".join(row)))
 
 if __name__ == '__main__':
