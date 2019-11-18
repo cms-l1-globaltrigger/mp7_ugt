@@ -650,7 +650,18 @@ package gtl_pkg is
     subtype htm_obj_t is std_logic_vector(0 to 0);  
     subtype ettem_obj_t is std_logic_vector(0 to 0);  
     subtype etmhf_obj_t is std_logic_vector(0 to 0);  
-    subtype htmhf_obj_t is std_logic_vector(0 to 0);  
+    subtype htmhf_obj_t is std_logic_vector(0 to 0);
+    
+    subtype asymet_obj_t is std_logic_vector(0 to 0);
+    subtype asymht_obj_t is std_logic_vector(0 to 0);
+    subtype asymethf_obj_t is std_logic_vector(0 to 0);
+    subtype asymhthf_obj_t is std_logic_vector(0 to 0);
+    
+    subtype mbt0hfp_obj_t is std_logic_vector(0 to 0);
+    subtype mbt0hfm_obj_t is std_logic_vector(0 to 0);
+    subtype mbt1hfp_obj_t is std_logic_vector(0 to 0);
+    subtype mbt1hfm_obj_t is std_logic_vector(0 to 0);
+    
     subtype muon_obj_t is std_logic_vector(0 to N_MUON_OBJECTS-1);  
     subtype muon_cc_double_t is muon_cc_double_std_logic_array;  
     subtype muon_cc_triple_t is muon_cc_triple_std_logic_array;  
