@@ -239,7 +239,7 @@ package gtl_pkg is
     constant TOWERCOUNT_IN_HTT_HIGH : natural := 24;
     constant TOWERCOUNT_COUNT_LOW : natural := 0;
     constant TOWERCOUNT_COUNT_HIGH : natural := 12;
-    constant TOWERCOUNT_COUNT_WIDTH : natural := TOWERCOUNT_COUNT_HIGH-TOWERCOUNT_COUNT_LOW+1;
+    constant TOWERCOUNT_COUNT_WIDTH : natural := 13;
     constant MAX_TOWERCOUNT_BITS : natural := 16;
     constant N_TOWERCOUNT_OBJECTS : natural := 1;
 
@@ -268,7 +268,10 @@ package gtl_pkg is
 
     constant MB_COUNT_LOW : natural := 0;
     constant MB_COUNT_HIGH : natural := 3;
-    constant MB_COUNT_WIDTH : natural := MB_COUNT_HIGH-MB_COUNT_HIGH+1;
+    constant MBT0HFP_WIDTH : natural := 4;
+    constant MBT0HFM_WIDTH : natural := 4;
+    constant MBT1HFP_WIDTH : natural := 4;
+    constant MBT1HFM_WIDTH : natural := 4;
     constant N_MBT0HFP_OBJECTS : natural := 1;
     constant N_MBT0HFM_OBJECTS : natural := 1;
     constant N_MBT1HFP_OBJECTS : natural := 1;
@@ -298,7 +301,10 @@ package gtl_pkg is
 
     constant ASYM_LOW : natural := 0;
     constant ASYM_HIGH : natural := 7;
-    constant ASYM_WIDTH : natural := ASYM_HIGH-ASYM_LOW+1;
+    constant ASYMET_WIDTH : natural := 8;
+    constant ASYMHT_WIDTH : natural := 8;
+    constant ASYMETHF_WIDTH : natural := 8;
+    constant ASYMHTHF_WIDTH : natural := 8;
     constant N_ASYMET_OBJECTS : natural := 1;
     constant N_ASYMHT_OBJECTS : natural := 1;
     constant N_ASYMETHF_OBJECTS : natural := 1;
@@ -316,7 +322,7 @@ package gtl_pkg is
     constant CENT_UBITS_LOW : natural := 4;
     constant CENT_UBITS_HIGH: natural := 7;
 
-    constant NR_CENTRALITY_BITS : positive := CENT_UBITS_HIGH-CENT_LBITS_LOW+1;
+    constant NR_CENTRALITY_BITS : positive := 8;
     
 -- *******************************************************************************
 -- Constants for correlation cuts

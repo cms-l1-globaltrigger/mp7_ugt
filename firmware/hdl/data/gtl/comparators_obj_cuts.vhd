@@ -2,6 +2,7 @@
 -- Object cuts comparisons.
 
 -- Version-history:
+-- HB 2019-11-06: Inserted logic for CHARGE.
 -- HB 2019-09-06: Inserted logic of lut comparator for ISO and QUAL.
 -- HB 2019-08-22: Updated for comp_unsigned.
 -- HB 2019-08-21: First design.
