@@ -12,10 +12,11 @@ Versions of ugt with new GTL structure (v2.0.0 and higher)
 
 #### Comment
 
-- mp7_ugt firmware release v2.4.6 (added subtypes to gtl_pkg.vhd)
+- mp7_ugt firmware release v2.4.6
 
 #### Changed
 - source file:
+  - ../hdl/data/gtl/comparators_obj_cuts.vhd
   - ../hdl/packages/gt_mp7_core_pkg.vhd
   - ../hdl/packages/gtl_pkg.vhd
   
