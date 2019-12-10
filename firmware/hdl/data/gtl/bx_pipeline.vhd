@@ -2,9 +2,10 @@
 -- Pipeline for +/-2 bx data.
 
 -- Version-history: 
+-- HB 2019-12-10: Replaces "MUON/muon" by "MU/mu"
 -- HB 2019-06-27: Changed type of conversion outputs.
--- HB 2019-03-07: used records for pipeline and conversion data..
--- HB 2019-02-25: included conversions for eg, jet, tau and muon.
+-- HB 2019-03-07: used records for pipeline and conversion data.
+-- HB 2019-02-25: included conversions for eg, jet, tau and mu.
 -- HB 2019-01-23: included additional delay for centrality and ext_cond (no comparators and conditions)
 
 library ieee;
@@ -44,13 +45,13 @@ begin
 -- BX pipeline
 
     bx_l: for i in 0 to BX_PIPELINE_STAGES-1 generate
-        muon_l: for j in 0 to N_MUON_OBJECTS-1 generate
-            data_pipe_internal.muon(i).pt(j)(data_tmp(i).muon(j).pt'length-1 downto 0) <= data_tmp(i).muon(j).pt;
-            data_pipe_internal.muon(i).eta(j)(data_tmp(i).muon(j).eta'length-1 downto 0) <= data_tmp(i).muon(j).eta;
-            data_pipe_internal.muon(i).phi(j)(data_tmp(i).muon(j).phi'length-1 downto 0) <= data_tmp(i).muon(j).phi;
-            data_pipe_internal.muon(i).iso(j)(data_tmp(i).muon(j).iso'length-1 downto 0) <= data_tmp(i).muon(j).iso;
-            data_pipe_internal.muon(i).qual(j)(data_tmp(i).muon(j).qual'length-1 downto 0) <= data_tmp(i).muon(j).qual;
-            data_pipe_internal.muon(i).charge(j)(data_tmp(i).muon(j).charge'length-1 downto 0) <= data_tmp(i).muon(j).charge;
+        muon_l: for j in 0 to N_MU_OBJECTS-1 generate
+            data_pipe_internal.mu(i).pt(j)(data_tmp(i).mu(j).pt'length-1 downto 0) <= data_tmp(i).mu(j).pt;
+            data_pipe_internal.mu(i).eta(j)(data_tmp(i).mu(j).eta'length-1 downto 0) <= data_tmp(i).mu(j).eta;
+            data_pipe_internal.mu(i).phi(j)(data_tmp(i).mu(j).phi'length-1 downto 0) <= data_tmp(i).mu(j).phi;
+            data_pipe_internal.mu(i).iso(j)(data_tmp(i).mu(j).iso'length-1 downto 0) <= data_tmp(i).mu(j).iso;
+            data_pipe_internal.mu(i).qual(j)(data_tmp(i).mu(j).qual'length-1 downto 0) <= data_tmp(i).mu(j).qual;
+            data_pipe_internal.mu(i).charge(j)(data_tmp(i).mu(j).charge'length-1 downto 0) <= data_tmp(i).mu(j).charge;
         end generate muon_l;
         eg_l: for j in 0 to N_EG_OBJECTS-1 generate            
             data_pipe_internal.eg(i).pt(j)(data_tmp(i).eg(j).pt'length-1 downto 0) <= data_tmp(i).eg(j).pt;
@@ -131,8 +132,8 @@ begin
             port map(
                 pt => data_pipe_internal.eg(i).pt, eta => data_pipe_internal.eg(i).eta, phi => data_pipe_internal.eg(i).phi,
                 pt_vector => conv_o.eg(i).pt_vector, cos_phi => conv_o.eg(i).cos_phi, sin_phi => conv_o.eg(i).sin_phi,
-                conv_mu_cos_phi => conv_o.eg(i).cos_phi_conv_muon, conv_mu_sin_phi => conv_o.eg(i).sin_phi_conv_muon,
-                conv_2_muon_eta_integer => conv_o.eg(i).eta_conv_muon, conv_2_muon_phi_integer => conv_o.eg(i).phi_conv_muon,
+                conv_mu_cos_phi => conv_o.eg(i).cos_phi_conv_mu, conv_mu_sin_phi => conv_o.eg(i).sin_phi_conv_mu,
+                conv_2_mu_eta_integer => conv_o.eg(i).eta_conv_mu, conv_2_mu_phi_integer => conv_o.eg(i).phi_conv_mu,
                 eta_integer => conv_o.eg(i).eta, phi_integer => conv_o.eg(i).phi 
             );
 
@@ -143,8 +144,8 @@ begin
             port map(
                 pt => data_pipe_internal.jet(i).pt, eta => data_pipe_internal.jet(i).eta, phi => data_pipe_internal.jet(i).phi,
                 pt_vector => conv_o.jet(i).pt_vector, cos_phi => conv_o.jet(i).cos_phi, sin_phi => conv_o.jet(i).sin_phi,
-                conv_mu_cos_phi => conv_o.jet(i).cos_phi_conv_muon, conv_mu_sin_phi => conv_o.jet(i).sin_phi_conv_muon,
-                conv_2_muon_eta_integer => conv_o.jet(i).eta_conv_muon, conv_2_muon_phi_integer => conv_o.jet(i).phi_conv_muon,
+                conv_mu_cos_phi => conv_o.jet(i).cos_phi_conv_mu, conv_mu_sin_phi => conv_o.jet(i).sin_phi_conv_mu,
+                conv_2_mu_eta_integer => conv_o.jet(i).eta_conv_mu, conv_2_mu_phi_integer => conv_o.jet(i).phi_conv_mu,
                 eta_integer => conv_o.jet(i).eta, phi_integer => conv_o.jet(i).phi 
             );
             
@@ -155,26 +156,26 @@ begin
             port map(
                 pt => data_pipe_internal.tau(i).pt, eta => data_pipe_internal.tau(i).eta, phi => data_pipe_internal.tau(i).phi,
                 pt_vector => conv_o.tau(i).pt_vector, cos_phi => conv_o.tau(i).cos_phi, sin_phi => conv_o.tau(i).sin_phi,
-                conv_mu_cos_phi => conv_o.tau(i).cos_phi_conv_muon, conv_mu_sin_phi => conv_o.tau(i).sin_phi_conv_muon,
-                conv_2_muon_eta_integer => conv_o.tau(i).eta_conv_muon, conv_2_muon_phi_integer => conv_o.tau(i).phi_conv_muon,
+                conv_mu_cos_phi => conv_o.tau(i).cos_phi_conv_mu, conv_mu_sin_phi => conv_o.tau(i).sin_phi_conv_mu,
+                conv_2_mu_eta_integer => conv_o.tau(i).eta_conv_mu, conv_2_mu_phi_integer => conv_o.tau(i).phi_conv_mu,
                 eta_integer => conv_o.tau(i).eta, phi_integer => conv_o.tau(i).phi 
             );
             
-        muon_conversions_i: entity work.conversions
+        mu_conversions_i: entity work.conversions
             generic map(
-                N_MUON_OBJECTS, muon_t
+                N_MU_OBJECTS, mu_t
             )
             port map(
-                pt => data_pipe_internal.muon(i).pt, eta => data_pipe_internal.muon(i).eta, phi => data_pipe_internal.muon(i).phi,
-                pt_vector => conv_o.muon(i).pt_vector, cos_phi => conv_o.muon(i).cos_phi, sin_phi => conv_o.muon(i).sin_phi,
-                eta_integer => conv_o.muon(i).eta, phi_integer => conv_o.muon(i).phi 
+                pt => data_pipe_internal.mu(i).pt, eta => data_pipe_internal.mu(i).eta, phi => data_pipe_internal.mu(i).phi,
+                pt_vector => conv_o.mu(i).pt_vector, cos_phi => conv_o.mu(i).cos_phi, sin_phi => conv_o.mu(i).sin_phi,
+                eta_integer => conv_o.mu(i).eta, phi_integer => conv_o.mu(i).phi 
             );
             
     end generate bx_l;
     
--- Output bx pipeline object parameters (muon, eg, jet and tau)
+-- Output bx pipeline object parameters (mu, eg, jet and tau)
 
-    data_pipe_o.muon <= data_pipe_internal.muon;
+    data_pipe_o.mu <= data_pipe_internal.mu;
     data_pipe_o.eg <= data_pipe_internal.eg;
     data_pipe_o.jet <= data_pipe_internal.jet;
     data_pipe_o.tau <= data_pipe_internal.tau;

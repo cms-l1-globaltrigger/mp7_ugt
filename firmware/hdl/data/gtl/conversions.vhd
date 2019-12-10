@@ -2,6 +2,7 @@
 -- Conversion logic for object parameters.
 
 -- Version-history:
+-- HB 2019-12-10: Replaces "MUON/muon" by "MU/mu"
 -- HB 2019-09-19: Changed code for eta_integer.
 -- HB 2019-06-27: Changed type of outputs.
 -- HB 2018-11-26: First design.
@@ -32,8 +33,8 @@ entity conversions is
         sin_phi : out conv_integer_array;
         conv_mu_cos_phi : out conv_integer_array;
         conv_mu_sin_phi : out conv_integer_array;
-        conv_2_muon_eta_integer : out conv_integer_array;
-        conv_2_muon_phi_integer : out conv_integer_array;
+        conv_2_mu_eta_integer : out conv_integer_array;
+        conv_2_mu_phi_integer : out conv_integer_array;
         eta_integer : out conv_integer_array;
         phi_integer : out conv_integer_array
     );
@@ -49,7 +50,7 @@ architecture rtl of conversions is
     signal phi_i : phi_i_array := (others => (others => '0'));
     
     type integer_array is array (0 to N_OBJ-1) of integer;
-    signal conv_2_muon_phi_integer_i : integer_array := (others => 0);
+    signal conv_2_mu_phi_integer_i : integer_array := (others => 0);
         
 begin
 
@@ -78,20 +79,20 @@ begin
             end generate tau_i;       
             cos_phi(i) <= CALO_COS_PHI_LUT(CONV_INTEGER(phi_i(i)));
             sin_phi(i) <= CALO_SIN_PHI_LUT(CONV_INTEGER(phi_i(i)));
-            conv_2_muon_phi_integer_i(i) <= CALO_PHI_CONV_2_MUON_PHI_LUT(CONV_INTEGER(phi_i(i)));
-            conv_mu_cos_phi(i) <= MUON_COS_PHI_LUT(conv_2_muon_phi_integer_i(i));
-            conv_mu_sin_phi(i) <= MUON_SIN_PHI_LUT(conv_2_muon_phi_integer_i(i));
-            conv_2_muon_eta_integer(i) <= CALO_ETA_CONV_2_MUON_ETA_LUT(CONV_INTEGER(eta_i(i)));
-            conv_2_muon_phi_integer(i) <= conv_2_muon_phi_integer_i(i);
+            conv_2_mu_phi_integer_i(i) <= CALO_PHI_CONV_2_MU_PHI_LUT(CONV_INTEGER(phi_i(i)));
+            conv_mu_cos_phi(i) <= MU_COS_PHI_LUT(conv_2_mu_phi_integer_i(i));
+            conv_mu_sin_phi(i) <= MU_SIN_PHI_LUT(conv_2_mu_phi_integer_i(i));
+            conv_2_mu_eta_integer(i) <= CALO_ETA_CONV_2_MU_ETA_LUT(CONV_INTEGER(eta_i(i)));
+            conv_2_mu_phi_integer(i) <= conv_2_mu_phi_integer_i(i);
         end generate calo_i;
-        muon_i: if (OBJ_T = muon_t) generate
-            pt_i(i)(MUON_PT_HIGH-MUON_PT_LOW downto 0) <= pt(i)(MUON_PT_HIGH-MUON_PT_LOW downto 0); 
-            eta_i(i)(MUON_ETA_HIGH-MUON_ETA_LOW downto 0) <= eta(i)(MUON_ETA_HIGH-MUON_ETA_LOW downto 0); 
-            phi_i(i)(MUON_PHI_HIGH-MUON_PHI_LOW downto 0) <= phi(i)(MUON_PHI_HIGH-MUON_PHI_LOW downto 0); 
-            pt_vector(i)(MUON_PT_VECTOR_WIDTH-1 downto 0) <= CONV_STD_LOGIC_VECTOR(MUON_PT_LUT(CONV_INTEGER(pt_i(i))), MUON_PT_VECTOR_WIDTH);
-            cos_phi(i) <= MUON_COS_PHI_LUT(CONV_INTEGER(phi_i(i)));
-            sin_phi(i) <= MUON_SIN_PHI_LUT(CONV_INTEGER(phi_i(i)));
-            eta_integer(i) <= CONV_INTEGER(signed(eta_i(i)(MUON_ETA_WIDTH-1 downto 0)));
+        muon_i: if (OBJ_T = mu_t) generate
+            pt_i(i)(MU_PT_HIGH-MU_PT_LOW downto 0) <= pt(i)(MU_PT_HIGH-MU_PT_LOW downto 0); 
+            eta_i(i)(MU_ETA_HIGH-MU_ETA_LOW downto 0) <= eta(i)(MU_ETA_HIGH-MU_ETA_LOW downto 0); 
+            phi_i(i)(MU_PHI_HIGH-MU_PHI_LOW downto 0) <= phi(i)(MU_PHI_HIGH-MU_PHI_LOW downto 0); 
+            pt_vector(i)(MU_PT_VECTOR_WIDTH-1 downto 0) <= CONV_STD_LOGIC_VECTOR(MU_PT_LUT(CONV_INTEGER(pt_i(i))), MU_PT_VECTOR_WIDTH);
+            cos_phi(i) <= MU_COS_PHI_LUT(CONV_INTEGER(phi_i(i)));
+            sin_phi(i) <= MU_SIN_PHI_LUT(CONV_INTEGER(phi_i(i)));
+            eta_integer(i) <= CONV_INTEGER(signed(eta_i(i)(MU_ETA_WIDTH-1 downto 0)));
         end generate muon_i;
 -- outputs for all object types
         phi_integer(i) <= CONV_INTEGER(phi_i(i));

@@ -2,6 +2,7 @@
 -- Package for constant and type definitions of GTL firmware in Global Trigger Upgrade system.
 
 -- Version-history:
+-- HB 2019-12-10: Replaces "MUON/muon" by "MU/mu"
 -- HB 2019-11-12: Bug fix in function bx.
 -- HB 2019-11-07: Inserted N_MU_OBJECTS.
 -- HB 2019-09-06: Inserted comp_mode_cc.
@@ -45,10 +46,10 @@ package gtl_pkg is
     constant PI : real :=  3.15; -- TM used this value for PI
 
     constant CALO_ETA_STEP : real := 0.087/2.0; -- values from scales
-    constant MUON_ETA_STEP : real := 0.087/8.0; -- values from scales
+    constant MU_ETA_STEP : real := 0.087/8.0; -- values from scales
 
     constant CALO_PHI_BINS : positive := 144; -- values from scales
-    constant MUON_PHI_BINS : positive := 576; -- values from scales
+    constant MU_PHI_BINS : positive := 576; -- values from scales
     constant CALO_PHI_HALF_RANGE_BINS : positive := CALO_PHI_BINS/2; -- 144/2, because of phi bin width = 2*PI/144
     constant EG_EG_PHI_HALF_RANGE_BINS : positive := CALO_PHI_HALF_RANGE_BINS;
     constant EG_JET_PHI_HALF_RANGE_BINS : positive := CALO_PHI_HALF_RANGE_BINS;
@@ -56,11 +57,11 @@ package gtl_pkg is
     constant JET_JET_PHI_HALF_RANGE_BINS : positive := CALO_PHI_HALF_RANGE_BINS;
     constant JET_TAU_PHI_HALF_RANGE_BINS : positive := CALO_PHI_HALF_RANGE_BINS;
     constant TAU_TAU_PHI_HALF_RANGE_BINS : positive := CALO_PHI_HALF_RANGE_BINS;
-    constant MUON_PHI_HALF_RANGE_BINS : positive := MUON_PHI_BINS/2; -- 576/2, because of phi bin width = 2*PI/576
-    constant EG_MUON_PHI_HALF_RANGE_BINS : positive := MUON_PHI_HALF_RANGE_BINS;
-    constant JET_MUON_PHI_HALF_RANGE_BINS : positive := MUON_PHI_HALF_RANGE_BINS;
-    constant TAU_MUON_PHI_HALF_RANGE_BINS : positive := MUON_PHI_HALF_RANGE_BINS;
-    constant MUON_MUON_PHI_HALF_RANGE_BINS : positive := MUON_PHI_HALF_RANGE_BINS;
+    constant MU_PHI_HALF_RANGE_BINS : positive := MU_PHI_BINS/2; -- 576/2, because of phi bin width = 2*PI/576
+    constant EG_MU_PHI_HALF_RANGE_BINS : positive := MU_PHI_HALF_RANGE_BINS;
+    constant JET_MU_PHI_HALF_RANGE_BINS : positive := MU_PHI_HALF_RANGE_BINS;
+    constant TAU_MU_PHI_HALF_RANGE_BINS : positive := MU_PHI_HALF_RANGE_BINS;
+    constant MU_MU_PHI_HALF_RANGE_BINS : positive := MU_PHI_HALF_RANGE_BINS;
     
     constant N_MU_OBJECTS :  positive := N_MUON_OBJECTS;
 
@@ -100,35 +101,35 @@ package gtl_pkg is
 -- *******************************************************************************************************
 -- MUON objects parameter definition
 
-    constant MUON_PHI_LOW : natural := 0;
-    constant MUON_PHI_HIGH : natural := 9;
-    constant MUON_PT_LOW : natural := 10;
-    constant MUON_PT_HIGH : natural := 18;
-    constant MUON_QUAL_LOW : natural := 19;
-    constant MUON_QUAL_HIGH : natural := 22;
-    constant MUON_ETA_LOW : natural := 23;
-    constant MUON_ETA_HIGH : natural := 31;
-    constant MUON_ISO_LOW : natural := 32;
-    constant MUON_ISO_HIGH : natural := 33;
-    constant MUON_CHARGE_LOW : natural := 34;
-    constant MUON_CHARGE_HIGH : natural := 35;
+    constant MU_PHI_LOW : natural := 0;
+    constant MU_PHI_HIGH : natural := 9;
+    constant MU_PT_LOW : natural := 10;
+    constant MU_PT_HIGH : natural := 18;
+    constant MU_QUAL_LOW : natural := 19;
+    constant MU_QUAL_HIGH : natural := 22;
+    constant MU_ETA_LOW : natural := 23;
+    constant MU_ETA_HIGH : natural := 31;
+    constant MU_ISO_LOW : natural := 32;
+    constant MU_ISO_HIGH : natural := 33;
+    constant MU_CHARGE_LOW : natural := 34;
+    constant MU_CHARGE_HIGH : natural := 35;
 -- HB 2017-04-11: updated muon structure for "raw" and "extrapolated" phi and eta bits (phi_high, phi_low, eta_high and eta_low => for "extrapolated").
-    constant MUON_IDX_BITS_LOW : natural := 36;
-    constant MUON_IDX_BITS_HIGH : natural := 42;
-    constant MUON_PHI_RAW_LOW : natural := 43;
-    constant MUON_PHI_RAW_HIGH : natural := 52;
-    constant MUON_ETA_RAW_LOW : natural := 53;
-    constant MUON_ETA_RAW_HIGH : natural := 61;
-    constant MUON_PHI_WIDTH: positive := MUON_PHI_HIGH-MUON_PHI_LOW+1;
-    constant MUON_PT_WIDTH: positive := MUON_PT_HIGH-MUON_PT_LOW+1;
-    constant MUON_QUAL_WIDTH: positive := MUON_QUAL_HIGH-MUON_QUAL_LOW+1;
-    constant MUON_ETA_WIDTH: positive := MUON_ETA_HIGH-MUON_ETA_LOW+1;
-    constant MUON_ISO_WIDTH: positive := MUON_ISO_HIGH-MUON_ISO_LOW+1;
-    constant MUON_CHARGE_WIDTH: positive := MUON_CHARGE_HIGH-MUON_CHARGE_LOW+1;
-    constant MUON_IDX_BITS_WIDTH: positive := MUON_IDX_BITS_HIGH-MUON_IDX_BITS_LOW+1;
-    constant MUON_PHI_RAW_WIDTH: positive := MUON_PHI_RAW_HIGH-MUON_PHI_RAW_LOW+1;
-    constant MUON_ETA_RAW_WIDTH: positive := MUON_ETA_RAW_HIGH-MUON_ETA_RAW_LOW+1;
-    constant MUON_PT_VECTOR_WIDTH: positive := 12; -- max. value 255.5 GeV => 2555 (255.5 * 10**MUON_INV_MASS_PT_PRECISION) => 0x9FB
+    constant MU_IDX_BITS_LOW : natural := 36;
+    constant MU_IDX_BITS_HIGH : natural := 42;
+    constant MU_PHI_RAW_LOW : natural := 43;
+    constant MU_PHI_RAW_HIGH : natural := 52;
+    constant MU_ETA_RAW_LOW : natural := 53;
+    constant MU_ETA_RAW_HIGH : natural := 61;
+    constant MU_PHI_WIDTH: positive := MU_PHI_HIGH-MU_PHI_LOW+1;
+    constant MU_PT_WIDTH: positive := MU_PT_HIGH-MU_PT_LOW+1;
+    constant MU_QUAL_WIDTH: positive := MU_QUAL_HIGH-MU_QUAL_LOW+1;
+    constant MU_ETA_WIDTH: positive := MU_ETA_HIGH-MU_ETA_LOW+1;
+    constant MU_ISO_WIDTH: positive := MU_ISO_HIGH-MU_ISO_LOW+1;
+    constant MU_CHARGE_WIDTH: positive := MU_CHARGE_HIGH-MU_CHARGE_LOW+1;
+    constant MU_IDX_BITS_WIDTH: positive := MU_IDX_BITS_HIGH-MU_IDX_BITS_LOW+1;
+    constant MU_PHI_RAW_WIDTH: positive := MU_PHI_RAW_HIGH-MU_PHI_RAW_LOW+1;
+    constant MU_ETA_RAW_WIDTH: positive := MU_ETA_RAW_HIGH-MU_ETA_RAW_LOW+1;
+    constant MU_PT_VECTOR_WIDTH: positive := 12; -- max. value 255.5 GeV => 2555 (255.5 * 10**MUON_INV_MASS_PT_PRECISION) => 0x9FB
 
 -- *******************************************************************************************************
 -- CALO objects parameter definition
@@ -340,10 +341,10 @@ package gtl_pkg is
     constant JET_JET_DELTAETA_VECTOR_WIDTH: positive := DETA_DPHI_VECTOR_WIDTH;
     constant JET_TAU_DELTAETA_VECTOR_WIDTH: positive := DETA_DPHI_VECTOR_WIDTH;
     constant TAU_TAU_DELTAETA_VECTOR_WIDTH: positive := DETA_DPHI_VECTOR_WIDTH;
-    constant EG_MUON_DELTAETA_VECTOR_WIDTH: positive := DETA_DPHI_VECTOR_WIDTH;
-    constant JET_MUON_DELTAETA_VECTOR_WIDTH: positive := DETA_DPHI_VECTOR_WIDTH;
-    constant TAU_MUON_DELTAETA_VECTOR_WIDTH: positive := DETA_DPHI_VECTOR_WIDTH;
-    constant MUON_MUON_DELTAETA_VECTOR_WIDTH: positive := DETA_DPHI_VECTOR_WIDTH;
+    constant EG_MU_DELTAETA_VECTOR_WIDTH: positive := DETA_DPHI_VECTOR_WIDTH;
+    constant JET_MU_DELTAETA_VECTOR_WIDTH: positive := DETA_DPHI_VECTOR_WIDTH;
+    constant TAU_MU_DELTAETA_VECTOR_WIDTH: positive := DETA_DPHI_VECTOR_WIDTH;
+    constant MU_MU_DELTAETA_VECTOR_WIDTH: positive := DETA_DPHI_VECTOR_WIDTH;
 
     constant EG_EG_DELTAPHI_VECTOR_WIDTH: positive := DETA_DPHI_VECTOR_WIDTH;
     constant EG_JET_DELTAPHI_VECTOR_WIDTH: positive := DETA_DPHI_VECTOR_WIDTH;
@@ -351,10 +352,10 @@ package gtl_pkg is
     constant JET_JET_DELTAPHI_VECTOR_WIDTH: positive := DETA_DPHI_VECTOR_WIDTH;
     constant JET_TAU_DELTAPHI_VECTOR_WIDTH: positive := DETA_DPHI_VECTOR_WIDTH;
     constant TAU_TAU_DELTAPHI_VECTOR_WIDTH: positive := DETA_DPHI_VECTOR_WIDTH;
-    constant EG_MUON_DELTAPHI_VECTOR_WIDTH: positive := DETA_DPHI_VECTOR_WIDTH;
-    constant JET_MUON_DELTAPHI_VECTOR_WIDTH: positive := DETA_DPHI_VECTOR_WIDTH;
-    constant TAU_MUON_DELTAPHI_VECTOR_WIDTH: positive := DETA_DPHI_VECTOR_WIDTH;
-    constant MUON_MUON_DELTAPHI_VECTOR_WIDTH: positive := DETA_DPHI_VECTOR_WIDTH;
+    constant EG_MU_DELTAPHI_VECTOR_WIDTH: positive := DETA_DPHI_VECTOR_WIDTH;
+    constant JET_MU_DELTAPHI_VECTOR_WIDTH: positive := DETA_DPHI_VECTOR_WIDTH;
+    constant TAU_MU_DELTAPHI_VECTOR_WIDTH: positive := DETA_DPHI_VECTOR_WIDTH;
+    constant MU_MU_DELTAPHI_VECTOR_WIDTH: positive := DETA_DPHI_VECTOR_WIDTH;
     constant EG_ETM_DELTAPHI_VECTOR_WIDTH: positive := DETA_DPHI_VECTOR_WIDTH;
     constant EG_HTM_DELTAPHI_VECTOR_WIDTH: positive := DETA_DPHI_VECTOR_WIDTH;
     constant EG_ETMHF_DELTAPHI_VECTOR_WIDTH: positive := DETA_DPHI_VECTOR_WIDTH;
@@ -367,10 +368,10 @@ package gtl_pkg is
     constant TAU_HTM_DELTAPHI_VECTOR_WIDTH: positive := DETA_DPHI_VECTOR_WIDTH;
     constant TAU_ETMHF_DELTAPHI_VECTOR_WIDTH: positive := DETA_DPHI_VECTOR_WIDTH;
     constant TAU_HTMHF_DELTAPHI_VECTOR_WIDTH: positive := DETA_DPHI_VECTOR_WIDTH;
-    constant MUON_ETM_DELTAPHI_VECTOR_WIDTH: positive := DETA_DPHI_VECTOR_WIDTH;
-    constant MUON_HTM_DELTAPHI_VECTOR_WIDTH: positive := DETA_DPHI_VECTOR_WIDTH;
-    constant MUON_ETMHF_DELTAPHI_VECTOR_WIDTH: positive := DETA_DPHI_VECTOR_WIDTH;
-    constant MUON_HTMHF_DELTAPHI_VECTOR_WIDTH: positive := DETA_DPHI_VECTOR_WIDTH;
+    constant MU_ETM_DELTAPHI_VECTOR_WIDTH: positive := DETA_DPHI_VECTOR_WIDTH;
+    constant MU_HTM_DELTAPHI_VECTOR_WIDTH: positive := DETA_DPHI_VECTOR_WIDTH;
+    constant MU_ETMHF_DELTAPHI_VECTOR_WIDTH: positive := DETA_DPHI_VECTOR_WIDTH;
+    constant MU_HTMHF_DELTAPHI_VECTOR_WIDTH: positive := DETA_DPHI_VECTOR_WIDTH;
 
     constant EG_EG_DELTAR_VECTOR_WIDTH: positive := 2*DETA_DPHI_VECTOR_WIDTH;
     constant EG_JET_DELTAR_VECTOR_WIDTH: positive := 2*DETA_DPHI_VECTOR_WIDTH;
@@ -378,15 +379,15 @@ package gtl_pkg is
     constant JET_JET_DELTAR_VECTOR_WIDTH: positive := 2*DETA_DPHI_VECTOR_WIDTH;
     constant JET_TAU_DELTAR_VECTOR_WIDTH: positive := 2*DETA_DPHI_VECTOR_WIDTH;
     constant TAU_TAU_DELTAR_VECTOR_WIDTH: positive := 2*DETA_DPHI_VECTOR_WIDTH;
-    constant EG_MUON_DELTAR_VECTOR_WIDTH: positive := 2*DETA_DPHI_VECTOR_WIDTH;
-    constant JET_MUON_DELTAR_VECTOR_WIDTH: positive := 2*DETA_DPHI_VECTOR_WIDTH;
-    constant TAU_MUON_DELTAR_VECTOR_WIDTH: positive := 2*DETA_DPHI_VECTOR_WIDTH;
-    constant MUON_MUON_DELTAR_VECTOR_WIDTH: positive := 2*DETA_DPHI_VECTOR_WIDTH;
+    constant EG_MU_DELTAR_VECTOR_WIDTH: positive := 2*DETA_DPHI_VECTOR_WIDTH;
+    constant JET_MU_DELTAR_VECTOR_WIDTH: positive := 2*DETA_DPHI_VECTOR_WIDTH;
+    constant TAU_MU_DELTAR_VECTOR_WIDTH: positive := 2*DETA_DPHI_VECTOR_WIDTH;
+    constant MU_MU_DELTAR_VECTOR_WIDTH: positive := 2*DETA_DPHI_VECTOR_WIDTH;
 
     -- Mass
     constant CALO_CALO_COSH_COS_VECTOR_WIDTH: positive := 24; -- max. value cosh_deta-cos_dphi => [10597282-(-1000)]=10598282 => 0xA1B78A
-    constant CALO_MUON_COSH_COS_VECTOR_WIDTH: positive := 27; -- max. value cosh_deta-cos_dphi => [109487199-(-10000)]=109497199 => 0x686CB6F
-    constant MUON_MUON_COSH_COS_VECTOR_WIDTH: positive := 20; -- max. value cosh_deta-cos_dphi => [667303-(-10000)]=677303 => 0xA55B7
+    constant CALO_MU_COSH_COS_VECTOR_WIDTH: positive := 27; -- max. value cosh_deta-cos_dphi => [109487199-(-10000)]=109497199 => 0x686CB6F
+    constant MU_MU_COSH_COS_VECTOR_WIDTH: positive := 20; -- max. value cosh_deta-cos_dphi => [667303-(-10000)]=677303 => 0xA55B7
     constant EG_EG_COSH_COS_VECTOR_WIDTH: positive := CALO_CALO_COSH_COS_VECTOR_WIDTH;
     constant EG_JET_COSH_COS_VECTOR_WIDTH: positive := CALO_CALO_COSH_COS_VECTOR_WIDTH;
     constant EG_TAU_COSH_COS_VECTOR_WIDTH: positive := CALO_CALO_COSH_COS_VECTOR_WIDTH;
@@ -405,13 +406,13 @@ package gtl_pkg is
     constant TAU_HTM_COSH_COS_VECTOR_WIDTH: positive := CALO_CALO_COSH_COS_VECTOR_WIDTH;
     constant TAU_ETMHF_COSH_COS_VECTOR_WIDTH: positive := CALO_CALO_COSH_COS_VECTOR_WIDTH;
     constant TAU_HTMHF_COSH_COS_VECTOR_WIDTH: positive := CALO_CALO_COSH_COS_VECTOR_WIDTH;
-    constant EG_MUON_COSH_COS_VECTOR_WIDTH: positive := CALO_MUON_COSH_COS_VECTOR_WIDTH;
-    constant JET_MUON_COSH_COS_VECTOR_WIDTH: positive := CALO_MUON_COSH_COS_VECTOR_WIDTH;
-    constant TAU_MUON_COSH_COS_VECTOR_WIDTH: positive := CALO_MUON_COSH_COS_VECTOR_WIDTH;
-    constant MUON_ETM_COSH_COS_VECTOR_WIDTH: positive := CALO_MUON_COSH_COS_VECTOR_WIDTH;
-    constant MUON_HTM_COSH_COS_VECTOR_WIDTH: positive := CALO_MUON_COSH_COS_VECTOR_WIDTH;
-    constant MUON_ETMHF_COSH_COS_VECTOR_WIDTH: positive := CALO_MUON_COSH_COS_VECTOR_WIDTH;
-    constant MUON_HTMHF_COSH_COS_VECTOR_WIDTH: positive := CALO_MUON_COSH_COS_VECTOR_WIDTH;
+    constant EG_MU_COSH_COS_VECTOR_WIDTH: positive := CALO_MU_COSH_COS_VECTOR_WIDTH;
+    constant JET_MU_COSH_COS_VECTOR_WIDTH: positive := CALO_MU_COSH_COS_VECTOR_WIDTH;
+    constant TAU_MU_COSH_COS_VECTOR_WIDTH: positive := CALO_MU_COSH_COS_VECTOR_WIDTH;
+    constant MU_ETM_COSH_COS_VECTOR_WIDTH: positive := CALO_MU_COSH_COS_VECTOR_WIDTH;
+    constant MU_HTM_COSH_COS_VECTOR_WIDTH: positive := CALO_MU_COSH_COS_VECTOR_WIDTH;
+    constant MU_ETMHF_COSH_COS_VECTOR_WIDTH: positive := CALO_MU_COSH_COS_VECTOR_WIDTH;
+    constant MU_HTMHF_COSH_COS_VECTOR_WIDTH: positive := CALO_MU_COSH_COS_VECTOR_WIDTH;
     
     -- Invariant mass
     constant EG_EG_MASS_VECTOR_WIDTH: positive := EG_PT_VECTOR_WIDTH+EG_PT_VECTOR_WIDTH+CALO_CALO_COSH_COS_VECTOR_WIDTH;
@@ -420,10 +421,10 @@ package gtl_pkg is
     constant JET_JET_MASS_VECTOR_WIDTH: positive := JET_PT_VECTOR_WIDTH+JET_PT_VECTOR_WIDTH+CALO_CALO_COSH_COS_VECTOR_WIDTH;
     constant JET_TAU_MASS_VECTOR_WIDTH: positive := JET_PT_VECTOR_WIDTH+TAU_PT_VECTOR_WIDTH+CALO_CALO_COSH_COS_VECTOR_WIDTH;
     constant TAU_TAU_MASS_VECTOR_WIDTH: positive := TAU_PT_VECTOR_WIDTH+TAU_PT_VECTOR_WIDTH+CALO_CALO_COSH_COS_VECTOR_WIDTH;
-    constant EG_MUON_MASS_VECTOR_WIDTH: positive := EG_PT_VECTOR_WIDTH+MUON_PT_VECTOR_WIDTH+CALO_MUON_COSH_COS_VECTOR_WIDTH;
-    constant JET_MUON_MASS_VECTOR_WIDTH: positive := JET_PT_VECTOR_WIDTH+MUON_PT_VECTOR_WIDTH+CALO_MUON_COSH_COS_VECTOR_WIDTH;
-    constant TAU_MUON_MASS_VECTOR_WIDTH: positive := TAU_PT_VECTOR_WIDTH+MUON_PT_VECTOR_WIDTH+CALO_MUON_COSH_COS_VECTOR_WIDTH;
-    constant MUON_MUON_MASS_VECTOR_WIDTH: positive := MUON_PT_VECTOR_WIDTH+MUON_PT_VECTOR_WIDTH+MUON_MUON_COSH_COS_VECTOR_WIDTH;
+    constant EG_MU_MASS_VECTOR_WIDTH: positive := EG_PT_VECTOR_WIDTH+MU_PT_VECTOR_WIDTH+CALO_MU_COSH_COS_VECTOR_WIDTH;
+    constant JET_MU_MASS_VECTOR_WIDTH: positive := JET_PT_VECTOR_WIDTH+MU_PT_VECTOR_WIDTH+CALO_MU_COSH_COS_VECTOR_WIDTH;
+    constant TAU_MU_MASS_VECTOR_WIDTH: positive := TAU_PT_VECTOR_WIDTH+MU_PT_VECTOR_WIDTH+CALO_MU_COSH_COS_VECTOR_WIDTH;
+    constant MU_MU_MASS_VECTOR_WIDTH: positive := MU_PT_VECTOR_WIDTH+MU_PT_VECTOR_WIDTH+MU_MU_COSH_COS_VECTOR_WIDTH;
 
     -- Transverse mass
     constant EG_ETM_MASS_VECTOR_WIDTH: positive := EG_PT_VECTOR_WIDTH+ETM_PT_VECTOR_WIDTH+CALO_CALO_COSH_COS_VECTOR_WIDTH;
@@ -438,10 +439,10 @@ package gtl_pkg is
     constant TAU_HTM_MASS_VECTOR_WIDTH: positive := TAU_PT_VECTOR_WIDTH+HTM_PT_VECTOR_WIDTH+CALO_CALO_COSH_COS_VECTOR_WIDTH;
     constant TAU_ETMHF_MASS_VECTOR_WIDTH: positive := TAU_PT_VECTOR_WIDTH+ETMHF_PT_VECTOR_WIDTH+CALO_CALO_COSH_COS_VECTOR_WIDTH;
     constant TAU_HTMHF_MASS_VECTOR_WIDTH: positive := TAU_PT_VECTOR_WIDTH+HTMHF_PT_VECTOR_WIDTH+CALO_CALO_COSH_COS_VECTOR_WIDTH;
-    constant MUON_ETM_MASS_VECTOR_WIDTH: positive := MUON_PT_VECTOR_WIDTH+ETM_PT_VECTOR_WIDTH+CALO_MUON_COSH_COS_VECTOR_WIDTH;
-    constant MUON_HTM_MASS_VECTOR_WIDTH: positive := MUON_PT_VECTOR_WIDTH+HTM_PT_VECTOR_WIDTH+CALO_MUON_COSH_COS_VECTOR_WIDTH;
-    constant MUON_ETMHF_MASS_VECTOR_WIDTH: positive := MUON_PT_VECTOR_WIDTH+ETMHF_PT_VECTOR_WIDTH+CALO_MUON_COSH_COS_VECTOR_WIDTH;
-    constant MUON_HTMHF_MASS_VECTOR_WIDTH: positive := MUON_PT_VECTOR_WIDTH+HTMHF_PT_VECTOR_WIDTH+CALO_MUON_COSH_COS_VECTOR_WIDTH;
+    constant MU_ETM_MASS_VECTOR_WIDTH: positive := MU_PT_VECTOR_WIDTH+ETM_PT_VECTOR_WIDTH+CALO_MU_COSH_COS_VECTOR_WIDTH;
+    constant MU_HTM_MASS_VECTOR_WIDTH: positive := MU_PT_VECTOR_WIDTH+HTM_PT_VECTOR_WIDTH+CALO_MU_COSH_COS_VECTOR_WIDTH;
+    constant MU_ETMHF_MASS_VECTOR_WIDTH: positive := MU_PT_VECTOR_WIDTH+ETMHF_PT_VECTOR_WIDTH+CALO_MU_COSH_COS_VECTOR_WIDTH;
+    constant MU_HTMHF_MASS_VECTOR_WIDTH: positive := MU_PT_VECTOR_WIDTH+HTMHF_PT_VECTOR_WIDTH+CALO_MU_COSH_COS_VECTOR_WIDTH;
     
     -- Two-body Pt
     constant EG_EG_TBPT_VECTOR_WIDTH: positive := 2+EG_PT_VECTOR_WIDTH+EG_PT_VECTOR_WIDTH+2*MAX_SIN_COS_WIDTH;
@@ -450,10 +451,10 @@ package gtl_pkg is
     constant JET_JET_TBPT_VECTOR_WIDTH: positive := 2+JET_PT_VECTOR_WIDTH+JET_PT_VECTOR_WIDTH+2*MAX_SIN_COS_WIDTH;
     constant JET_TAU_TBPT_VECTOR_WIDTH: positive := 2+JET_PT_VECTOR_WIDTH+TAU_PT_VECTOR_WIDTH+2*MAX_SIN_COS_WIDTH;
     constant TAU_TAU_TBPT_VECTOR_WIDTH: positive := 2+TAU_PT_VECTOR_WIDTH+TAU_PT_VECTOR_WIDTH+2*MAX_SIN_COS_WIDTH;
-    constant EG_MUON_TBPT_VECTOR_WIDTH: positive := 2+EG_PT_VECTOR_WIDTH+MUON_PT_VECTOR_WIDTH+2*MAX_SIN_COS_WIDTH;
-    constant JET_MUON_TBPT_VECTOR_WIDTH: positive := 2+JET_PT_VECTOR_WIDTH+MUON_PT_VECTOR_WIDTH+2*MAX_SIN_COS_WIDTH;
-    constant TAU_MUON_TBPT_VECTOR_WIDTH: positive := 2+TAU_PT_VECTOR_WIDTH+MUON_PT_VECTOR_WIDTH+2*MAX_SIN_COS_WIDTH;
-    constant MUON_MUON_TBPT_VECTOR_WIDTH: positive := 2+MUON_PT_VECTOR_WIDTH+MUON_PT_VECTOR_WIDTH+2*MAX_SIN_COS_WIDTH;
+    constant EG_MU_TBPT_VECTOR_WIDTH: positive := 2+EG_PT_VECTOR_WIDTH+MU_PT_VECTOR_WIDTH+2*MAX_SIN_COS_WIDTH;
+    constant JET_MU_TBPT_VECTOR_WIDTH: positive := 2+JET_PT_VECTOR_WIDTH+MU_PT_VECTOR_WIDTH+2*MAX_SIN_COS_WIDTH;
+    constant TAU_MU_TBPT_VECTOR_WIDTH: positive := 2+TAU_PT_VECTOR_WIDTH+MU_PT_VECTOR_WIDTH+2*MAX_SIN_COS_WIDTH;
+    constant MU_MU_TBPT_VECTOR_WIDTH: positive := 2+MU_PT_VECTOR_WIDTH+MU_PT_VECTOR_WIDTH+2*MAX_SIN_COS_WIDTH;
     constant EG_ETM_TBPT_VECTOR_WIDTH: positive := 2+EG_PT_VECTOR_WIDTH+ETM_PT_VECTOR_WIDTH+2*MAX_SIN_COS_WIDTH;
     constant EG_HTM_TBPT_VECTOR_WIDTH: positive := 2+EG_PT_VECTOR_WIDTH+HTM_PT_VECTOR_WIDTH+2*MAX_SIN_COS_WIDTH;
     constant EG_ETMHF_TBPT_VECTOR_WIDTH: positive := 2+EG_PT_VECTOR_WIDTH+ETMHF_PT_VECTOR_WIDTH+2*MAX_SIN_COS_WIDTH;
@@ -466,10 +467,10 @@ package gtl_pkg is
     constant TAU_HTM_TBPT_VECTOR_WIDTH: positive := 2+TAU_PT_VECTOR_WIDTH+HTM_PT_VECTOR_WIDTH+2*MAX_SIN_COS_WIDTH;
     constant TAU_ETMHF_TBPT_VECTOR_WIDTH: positive := 2+TAU_PT_VECTOR_WIDTH+ETMHF_PT_VECTOR_WIDTH+2*MAX_SIN_COS_WIDTH;
     constant TAU_HTMHF_TBPT_VECTOR_WIDTH: positive := 2+TAU_PT_VECTOR_WIDTH+HTMHF_PT_VECTOR_WIDTH+2*MAX_SIN_COS_WIDTH;
-    constant MUON_ETM_TBPT_VECTOR_WIDTH: positive := 2+MUON_PT_VECTOR_WIDTH+ETM_PT_VECTOR_WIDTH+2*MAX_SIN_COS_WIDTH;
-    constant MUON_HTM_TBPT_VECTOR_WIDTH: positive := 2+MUON_PT_VECTOR_WIDTH+HTM_PT_VECTOR_WIDTH+2*MAX_SIN_COS_WIDTH;
-    constant MUON_ETMHF_TBPT_VECTOR_WIDTH: positive := 2+MUON_PT_VECTOR_WIDTH+ETMHF_PT_VECTOR_WIDTH+2*MAX_SIN_COS_WIDTH;
-    constant MUON_HTMHF_TBPT_VECTOR_WIDTH: positive := 2+MUON_PT_VECTOR_WIDTH+HTMHF_PT_VECTOR_WIDTH+2*MAX_SIN_COS_WIDTH;
+    constant MU_ETM_TBPT_VECTOR_WIDTH: positive := 2+MU_PT_VECTOR_WIDTH+ETM_PT_VECTOR_WIDTH+2*MAX_SIN_COS_WIDTH;
+    constant MU_HTM_TBPT_VECTOR_WIDTH: positive := 2+MU_PT_VECTOR_WIDTH+HTM_PT_VECTOR_WIDTH+2*MAX_SIN_COS_WIDTH;
+    constant MU_ETMHF_TBPT_VECTOR_WIDTH: positive := 2+MU_PT_VECTOR_WIDTH+ETMHF_PT_VECTOR_WIDTH+2*MAX_SIN_COS_WIDTH;
+    constant MU_HTMHF_TBPT_VECTOR_WIDTH: positive := 2+MU_PT_VECTOR_WIDTH+HTMHF_PT_VECTOR_WIDTH+2*MAX_SIN_COS_WIDTH;
 
 -- *******************************************************************************
 -- Record declarations
@@ -500,12 +501,12 @@ package gtl_pkg is
     type tau_record_array is array (natural range <>) of tau_record;
 
     type muon_record is record
-        pt : std_logic_vector(MUON_PT_HIGH-MUON_PT_LOW downto 0);
-        eta : std_logic_vector(MUON_ETA_HIGH-MUON_ETA_LOW downto 0);
-        phi : std_logic_vector(MUON_PHI_HIGH-MUON_PHI_LOW downto 0);
-        iso : std_logic_vector(MUON_ISO_HIGH-MUON_ISO_LOW downto 0);
-        qual : std_logic_vector(MUON_QUAL_HIGH-MUON_QUAL_LOW downto 0);
-        charge : std_logic_vector(MUON_CHARGE_HIGH-MUON_CHARGE_LOW downto 0);
+        pt : std_logic_vector(MU_PT_HIGH-MU_PT_LOW downto 0);
+        eta : std_logic_vector(MU_ETA_HIGH-MU_ETA_LOW downto 0);
+        phi : std_logic_vector(MU_PHI_HIGH-MU_PHI_LOW downto 0);
+        iso : std_logic_vector(MU_ISO_HIGH-MU_ISO_LOW downto 0);
+        qual : std_logic_vector(MU_QUAL_HIGH-MU_QUAL_LOW downto 0);
+        charge : std_logic_vector(MU_CHARGE_HIGH-MU_CHARGE_LOW downto 0);
     end record muon_record;
     
     type muon_record_array is array (natural range <>) of muon_record;
@@ -555,7 +556,7 @@ package gtl_pkg is
     end record asym_record;
     
     type gtl_data_record is record
-        muon : muon_record_array(0 to N_MUON_OBJECTS-1);
+        mu : muon_record_array(0 to N_MU_OBJECTS-1);
         eg : eg_record_array(0 to N_EG_OBJECTS-1);
         jet : jet_record_array(0 to N_JET_OBJECTS-1);
         tau : tau_record_array(0 to N_TAU_OBJECTS-1);
@@ -584,7 +585,7 @@ package gtl_pkg is
     type ext_cond_array is array (0 to BX_PIPELINE_STAGES-1) of std_logic_vector(EXTERNAL_CONDITIONS_DATA_WIDTH-1 downto 0); -- used for ext_cond outputs of bx_pipeline module 
     
     type data_pipeline_record is record
-        muon, eg, jet, tau,
+        mu, eg, jet, tau,
         ett, etm, htt, htm, ettem, etmhf, htmhf,
         towercount,
         mbt1hfp, mbt1hfm, mbt0hfp, mbt0hfm,
@@ -600,20 +601,20 @@ package gtl_pkg is
     type conv_bx_record is record
         pt_vector : conv_pt_vector_array;
         cos_phi, sin_phi,
-        cos_phi_conv_muon, sin_phi_conv_muon,
-        eta_conv_muon, phi_conv_muon,
+        cos_phi_conv_mu, sin_phi_conv_mu,
+        eta_conv_mu, phi_conv_mu,
         eta, phi : conv_integer_array;
     end record conv_bx_record;
     
     type array_conv_bx_record is array (0 to BX_PIPELINE_STAGES-1) of conv_bx_record; -- used for outputs of bx_pipeline module  
 
     type conv_pipeline_record is record
-        muon, eg, jet, tau : array_conv_bx_record; 
+        mu, eg, jet, tau : array_conv_bx_record; 
     end record conv_pipeline_record;
     
-    type max_eta_range_array is array (0 to MAX_N_OBJECTS-1, 0 to MAX_N_OBJECTS-1) of integer range 0 to integer(ETA_RANGE_REAL/MUON_ETA_STEP)-1; -- 10.0/0.010875 = 919.54 => rounded(919.54) = 920 - number of bins with muon bin width for full (calo) eta range
+    type max_eta_range_array is array (0 to MAX_N_OBJECTS-1, 0 to MAX_N_OBJECTS-1) of integer range 0 to integer(ETA_RANGE_REAL/MU_ETA_STEP)-1; -- 10.0/0.010875 = 919.54 => rounded(919.54) = 920 - number of bins with muon bin width for full (calo) eta range
     type obj_bx_max_eta_range_array is array (0 to BX_PIPELINE_STAGES-1, 0 to BX_PIPELINE_STAGES-1) of max_eta_range_array;
-    type max_phi_range_array is array (0 to MAX_N_OBJECTS-1, 0 to MAX_N_OBJECTS-1) of integer range 0 to max(MUON_PHI_BINS, CALO_PHI_BINS)-1; -- number of bins with muon bin width (=576)
+    type max_phi_range_array is array (0 to MAX_N_OBJECTS-1, 0 to MAX_N_OBJECTS-1) of integer range 0 to max(MU_PHI_BINS, CALO_PHI_BINS)-1; -- number of bins with muon bin width (=576)
     type obj_bx_max_phi_range_array is array (0 to BX_PIPELINE_STAGES-1, 0 to BX_PIPELINE_STAGES-1) of max_phi_range_array;
     
     type deta_dphi_vector_array is array (0 to MAX_N_OBJECTS-1, 0 to MAX_N_OBJECTS-1) of std_logic_vector(DETA_DPHI_VECTOR_WIDTH-1 downto 0);
@@ -631,19 +632,19 @@ package gtl_pkg is
     type obj_bx_sin_cos_vector_array is array (0 to BX_PIPELINE_STAGES-1, 0 to BX_PIPELINE_STAGES-1) of sin_cos_vector_array;
     
 -- MUON charge
-    type muon_charge_bits_array is array (0 to N_MUON_OBJECTS-1) of std_logic_vector(MUON_CHARGE_WIDTH-1 downto 0);
-    type muon_cc_double_array is array (0 to N_MUON_OBJECTS-1, 0 to N_MUON_OBJECTS-1) of std_logic_vector(MUON_CHARGE_WIDTH-1 downto 0);
+    type muon_charge_bits_array is array (0 to N_MU_OBJECTS-1) of std_logic_vector(MU_CHARGE_WIDTH-1 downto 0);
+    type muon_cc_double_array is array (0 to N_MU_OBJECTS-1, 0 to N_MU_OBJECTS-1) of std_logic_vector(MU_CHARGE_WIDTH-1 downto 0);
     type obj_bx_muon_cc_double_array is array (0 to BX_PIPELINE_STAGES-1, 0 to BX_PIPELINE_STAGES-1) of muon_cc_double_array;
-    type muon_cc_triple_array is array (0 to N_MUON_OBJECTS-1, 0 to N_MUON_OBJECTS-1, 0 to N_MUON_OBJECTS-1) of std_logic_vector(MUON_CHARGE_WIDTH-1 downto 0);
+    type muon_cc_triple_array is array (0 to N_MU_OBJECTS-1, 0 to N_MU_OBJECTS-1, 0 to N_MU_OBJECTS-1) of std_logic_vector(MU_CHARGE_WIDTH-1 downto 0);
     type obj_bx_muon_cc_triple_array is array (0 to BX_PIPELINE_STAGES-1, 0 to BX_PIPELINE_STAGES-1) of muon_cc_triple_array;
-    type muon_cc_quad_array is array (0 to N_MUON_OBJECTS-1, 0 to N_MUON_OBJECTS-1, 0 to N_MUON_OBJECTS-1, 0 to N_MUON_OBJECTS-1) of std_logic_vector(MUON_CHARGE_WIDTH-1 downto 0);
+    type muon_cc_quad_array is array (0 to N_MU_OBJECTS-1, 0 to N_MU_OBJECTS-1, 0 to N_MU_OBJECTS-1, 0 to N_MU_OBJECTS-1) of std_logic_vector(MU_CHARGE_WIDTH-1 downto 0);
     type obj_bx_muon_cc_quad_array is array (0 to BX_PIPELINE_STAGES-1, 0 to BX_PIPELINE_STAGES-1) of muon_cc_quad_array;
-    constant CC_NOT_VALID : std_logic_vector(MUON_CHARGE_WIDTH-1 downto 0) := "00"; 
-    constant CC_LS : std_logic_vector(MUON_CHARGE_WIDTH-1 downto 0) := "01"; 
-    constant CC_OS : std_logic_vector(MUON_CHARGE_WIDTH-1 downto 0) := "10"; 
-    type muon_cc_double_std_logic_array is array (0 to N_MUON_OBJECTS-1, 0 to N_MUON_OBJECTS-1) of std_logic;
-    type muon_cc_triple_std_logic_array is array (0 to N_MUON_OBJECTS-1, 0 to N_MUON_OBJECTS-1, 0 to N_MUON_OBJECTS-1) of std_logic;
-    type muon_cc_quad_std_logic_array is array (0 to N_MUON_OBJECTS-1, 0 to N_MUON_OBJECTS-1, 0 to N_MUON_OBJECTS-1, 0 to N_MUON_OBJECTS-1) of std_logic;
+    constant CC_NOT_VALID : std_logic_vector(MU_CHARGE_WIDTH-1 downto 0) := "00"; 
+    constant CC_LS : std_logic_vector(MU_CHARGE_WIDTH-1 downto 0) := "01"; 
+    constant CC_OS : std_logic_vector(MU_CHARGE_WIDTH-1 downto 0) := "10"; 
+    type muon_cc_double_std_logic_array is array (0 to N_MU_OBJECTS-1, 0 to N_MU_OBJECTS-1) of std_logic;
+    type muon_cc_triple_std_logic_array is array (0 to N_MU_OBJECTS-1, 0 to N_MU_OBJECTS-1, 0 to N_MU_OBJECTS-1) of std_logic;
+    type muon_cc_quad_std_logic_array is array (0 to N_MU_OBJECTS-1, 0 to N_MU_OBJECTS-1, 0 to N_MU_OBJECTS-1, 0 to N_MU_OBJECTS-1) of std_logic;
 
 -- HB 2019-07-02: subtypes for l1menu.vhd signals
 
@@ -668,20 +669,20 @@ package gtl_pkg is
     subtype mbt1hfp_obj_t is std_logic_vector(0 to 0);
     subtype mbt1hfm_obj_t is std_logic_vector(0 to 0);
     
-    subtype muon_obj_t is std_logic_vector(0 to N_MUON_OBJECTS-1);  
-    subtype muon_cc_double_t is muon_cc_double_std_logic_array;  
-    subtype muon_cc_triple_t is muon_cc_triple_std_logic_array;  
-    subtype muon_cc_quad_t is muon_cc_quad_std_logic_array;  
+    subtype mu_obj_t is std_logic_vector(0 to N_MU_OBJECTS-1);  
+    subtype mu_cc_double_t is muon_cc_double_std_logic_array;  
+    subtype mu_cc_triple_t is muon_cc_triple_std_logic_array;  
+    subtype mu_cc_quad_t is muon_cc_quad_std_logic_array;  
     subtype eg_eg_t is corr_cuts_array(0 to N_EG_OBJECTS-1, 0 to N_EG_OBJECTS-1);
     subtype eg_jet_t is corr_cuts_array(0 to N_EG_OBJECTS-1, 0 to N_JET_OBJECTS-1);
     subtype eg_tau_t is corr_cuts_array(0 to N_EG_OBJECTS-1, 0 to N_TAU_OBJECTS-1);
-    subtype eg_muon_t is corr_cuts_array(0 to N_EG_OBJECTS-1, 0 to N_MUON_OBJECTS-1);
+    subtype eg_mu_t is corr_cuts_array(0 to N_EG_OBJECTS-1, 0 to N_MU_OBJECTS-1);
     subtype jet_jet_t is corr_cuts_array(0 to N_JET_OBJECTS-1, 0 to N_JET_OBJECTS-1);
     subtype jet_tau_t is corr_cuts_array(0 to N_JET_OBJECTS-1, 0 to N_TAU_OBJECTS-1);
-    subtype jet_muon_t is corr_cuts_array(0 to N_JET_OBJECTS-1, 0 to N_MUON_OBJECTS-1);
+    subtype jet_mu_t is corr_cuts_array(0 to N_JET_OBJECTS-1, 0 to N_MU_OBJECTS-1);
     subtype tau_tau_t is corr_cuts_array(0 to N_TAU_OBJECTS-1, 0 to N_TAU_OBJECTS-1);
-    subtype tau_muon_t is corr_cuts_array(0 to N_TAU_OBJECTS-1, 0 to N_MUON_OBJECTS-1);
-    subtype muon_muon_t is corr_cuts_array(0 to N_MUON_OBJECTS-1, 0 to N_MUON_OBJECTS-1);
+    subtype tau_mu_t is corr_cuts_array(0 to N_TAU_OBJECTS-1, 0 to N_MU_OBJECTS-1);
+    subtype mu_mu_t is corr_cuts_array(0 to N_MU_OBJECTS-1, 0 to N_MU_OBJECTS-1);
     subtype eg_etm_t is corr_cuts_array(0 to N_EG_OBJECTS-1, 0 to 0);
     subtype eg_htm_t is corr_cuts_array(0 to N_EG_OBJECTS-1, 0 to 0);
     subtype eg_etmhf_t is corr_cuts_array(0 to N_EG_OBJECTS-1, 0 to 0);
@@ -694,38 +695,38 @@ package gtl_pkg is
     subtype tau_htm_t is corr_cuts_array(0 to N_TAU_OBJECTS-1, 0 to 0);
     subtype tau_etmhf_t is corr_cuts_array(0 to N_TAU_OBJECTS-1, 0 to 0);
     subtype tau_htmhf_t is corr_cuts_array(0 to N_TAU_OBJECTS-1, 0 to 0);
-    subtype muon_etm_t is corr_cuts_array(0 to N_MUON_OBJECTS-1, 0 to 0);
-    subtype muon_htm_t is corr_cuts_array(0 to N_MUON_OBJECTS-1, 0 to 0);
-    subtype muon_etmhf_t is corr_cuts_array(0 to N_MUON_OBJECTS-1, 0 to 0);
-    subtype muon_htmhf_t is corr_cuts_array(0 to N_MUON_OBJECTS-1, 0 to 0);
+    subtype mu_etm_t is corr_cuts_array(0 to N_MU_OBJECTS-1, 0 to 0);
+    subtype mu_htm_t is corr_cuts_array(0 to N_MU_OBJECTS-1, 0 to 0);
+    subtype mu_etmhf_t is corr_cuts_array(0 to N_MU_OBJECTS-1, 0 to 0);
+    subtype mu_htmhf_t is corr_cuts_array(0 to N_MU_OBJECTS-1, 0 to 0);
   
     type default_corr_cuts_rec is record
         eg_eg : eg_eg_t;
         eg_jet : eg_jet_t;
         eg_tau : eg_tau_t;
-        eg_muon : eg_muon_t;
+        eg_mu : eg_mu_t;
         eg_etm : eg_etm_t;
         eg_htm : eg_htm_t;
         eg_etmhf : eg_etmhf_t;
         eg_htmhf : eg_htmhf_t;
         jet_jet : jet_jet_t;
         jet_tau : jet_tau_t;
-        jet_muon : jet_muon_t;
+        jet_mu : jet_mu_t;
         jet_etm : jet_etm_t;
         jet_htm : jet_htm_t;
         jet_etmhf : jet_etmhf_t;
         jet_htmhf : jet_htmhf_t;
         tau_tau : tau_tau_t;
-        tau_muon : tau_muon_t;
+        tau_mu : tau_mu_t;
         tau_etm : tau_etm_t;
         tau_htm : tau_htm_t;
         tau_etmhf : tau_etmhf_t;
         tau_htmhf : tau_htmhf_t;
-        muon_muon : muon_muon_t;
-        muon_etm : muon_etm_t;
-        muon_htm : muon_htm_t;
-        muon_etmhf : muon_etmhf_t;
-        muon_htmhf : muon_htmhf_t;
+        mu_mu : mu_mu_t;
+        mu_etm : mu_etm_t;
+        mu_htm : mu_htm_t;
+        mu_etmhf : mu_etmhf_t;
+        mu_htmhf : mu_htmhf_t;
         cc_double : muon_cc_double_std_logic_array;
         cc_triple : muon_cc_triple_std_logic_array;
         cc_quad : muon_cc_quad_std_logic_array;
@@ -736,7 +737,7 @@ package gtl_pkg is
     type pt_array is array (natural range <>) of std_logic_vector((MAX_PT_WIDTH)-1 downto 0);
     
 -- enums
-    type obj_type is (muon_t,eg_t,jet_t,tau_t,ett_t,etm_t,htt_t,htm_t,ettem_t,etmhf_t,htmhf_t,towercount_t,mbt1hfp_t,mbt1hfm_t,mbt0hfp_t,mbt0hfm_t,asymet_t,asymht_t,asymethf_t,asymhthf_t);
+    type obj_type is (mu_t,eg_t,jet_t,tau_t,ett_t,etm_t,htt_t,htm_t,ettem_t,etmhf_t,htmhf_t,towercount_t,mbt1hfp_t,mbt1hfm_t,mbt0hfp_t,mbt0hfm_t,asymet_t,asymht_t,asymethf_t,asymhthf_t);
     type obj_type_array is array (1 to 2) of obj_type;
     type comp_mode is (GE,EQ,NE,ETA,PHI,CHARGE,ISO,QUAL,COUNT,deltaEta,deltaPhi,deltaR,mass,twoBodyPt,chargeCorr);
     type comp_mode_cc is (double,triple,quad);
