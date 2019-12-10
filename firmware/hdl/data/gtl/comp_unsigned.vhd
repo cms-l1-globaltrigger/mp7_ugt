@@ -2,6 +2,7 @@
 -- Unsigned comparator.
 
 -- Version-history:
+-- HB 2019-12-10: Replaced "MUON" by "MU".
 -- HB 2019-08-22: Inserted case chargeCorr.
 -- HB 2019-08-21: First design.
 
@@ -16,7 +17,7 @@ entity comp_unsigned is
         MODE: comp_mode;
         limit_l: std_logic_vector;
         limit_h: std_logic_vector;
-        CC_REQ: std_logic_vector(MUON_CHARGE_WIDTH-1 downto 0) := (others => '0')
+        CC_REQ: std_logic_vector(MU_CHARGE_WIDTH-1 downto 0) := (others => '0')
     );
     port(
         data: in std_logic_vector;
