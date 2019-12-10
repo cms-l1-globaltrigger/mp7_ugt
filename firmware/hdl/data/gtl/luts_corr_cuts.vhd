@@ -2,6 +2,7 @@
 -- Object cuts lut comparisons.
 
 -- Version-history:
+-- HB 2019-12-10: Replaces "MUON/muon" by "MU/mu"
 -- HB 2019-08-20: First design.
 
 library ieee;
@@ -37,12 +38,12 @@ begin
             end if;
         end if;
         calo_muon_1: if OBJ(1) = eg_t or OBJ(1) = jet_t or OBJ(1) = tau_t then
-            calo_muon_2: if OBJ(2) = muon_t then
+            calo_muon_2: if OBJ(2) = mu_t then
                 calo_muon := true;
             end if;
         end if;
-        muon_muon_1: if OBJ(1) = muon_t then
-            muon_muon_2: if OBJ(2) = muon_t then
+        muon_muon_1: if OBJ(1) = mu_t then
+            muon_muon_2: if OBJ(2) = mu_t then
                 muon_muon := true;
             end if;
         end if;
@@ -51,7 +52,7 @@ begin
                 calo_esum := true;
             end if;
         end if;
-        muon_esum_1: if OBJ(1) = muon_t then
+        muon_esum_1: if OBJ(1) = mu_t then
             muon_esum_2: if OBJ(2) = etm_t or OBJ(2) = htm_t or OBJ(2) = etmhf_t or OBJ(2) = htmhf_t then
                 muon_esum := true;
             end if;
@@ -73,26 +74,26 @@ begin
         calo_muon_i: if calo_muon or muon_esum then
             case MODE is
                 when deltaEta =>
-                    lut_o(DETA_DPHI_VECTOR_WIDTH-1 downto 0) <= CONV_STD_LOGIC_VECTOR(CALO_MUON_DIFF_ETA_LUT(lut_in), DETA_DPHI_VECTOR_WIDTH);
+                    lut_o(DETA_DPHI_VECTOR_WIDTH-1 downto 0) <= CONV_STD_LOGIC_VECTOR(CALO_MU_DIFF_ETA_LUT(lut_in), DETA_DPHI_VECTOR_WIDTH);
                 when deltaPhi =>
-                    lut_o(DETA_DPHI_VECTOR_WIDTH-1 downto 0) <= CONV_STD_LOGIC_VECTOR(CALO_MUON_DIFF_PHI_LUT(lut_in), DETA_DPHI_VECTOR_WIDTH);
+                    lut_o(DETA_DPHI_VECTOR_WIDTH-1 downto 0) <= CONV_STD_LOGIC_VECTOR(CALO_MU_DIFF_PHI_LUT(lut_in), DETA_DPHI_VECTOR_WIDTH);
                 when CoshDeltaEta =>
-                    lut_o(CALO_MUON_COSH_COS_VECTOR_WIDTH-1 downto 0) <= CONV_STD_LOGIC_VECTOR(CALO_MUON_COSH_DETA_LUT(lut_in), CALO_MUON_COSH_COS_VECTOR_WIDTH);
+                    lut_o(CALO_MU_COSH_COS_VECTOR_WIDTH-1 downto 0) <= CONV_STD_LOGIC_VECTOR(CALO_MU_COSH_DETA_LUT(lut_in), CALO_MU_COSH_COS_VECTOR_WIDTH);
                 when CosDeltaPhi =>
-                    lut_o(CALO_MUON_COSH_COS_VECTOR_WIDTH-1 downto 0) <= CONV_STD_LOGIC_VECTOR(CALO_MUON_COS_DPHI_LUT(lut_in), CALO_MUON_COSH_COS_VECTOR_WIDTH);
+                    lut_o(CALO_MU_COSH_COS_VECTOR_WIDTH-1 downto 0) <= CONV_STD_LOGIC_VECTOR(CALO_MU_COS_DPHI_LUT(lut_in), CALO_MU_COSH_COS_VECTOR_WIDTH);
             end case;
         end if;
         
         muon_muon_i: if muon_muon then
             case MODE is
                 when deltaEta =>
-                    lut_o(DETA_DPHI_VECTOR_WIDTH-1 downto 0) <= CONV_STD_LOGIC_VECTOR(MUON_MUON_DIFF_ETA_LUT(lut_in), DETA_DPHI_VECTOR_WIDTH);
+                    lut_o(DETA_DPHI_VECTOR_WIDTH-1 downto 0) <= CONV_STD_LOGIC_VECTOR(MU_MU_DIFF_ETA_LUT(lut_in), DETA_DPHI_VECTOR_WIDTH);
                 when deltaPhi =>
-                    lut_o(DETA_DPHI_VECTOR_WIDTH-1 downto 0) <= CONV_STD_LOGIC_VECTOR(MUON_MUON_DIFF_PHI_LUT(lut_in), DETA_DPHI_VECTOR_WIDTH);
+                    lut_o(DETA_DPHI_VECTOR_WIDTH-1 downto 0) <= CONV_STD_LOGIC_VECTOR(MU_MU_DIFF_PHI_LUT(lut_in), DETA_DPHI_VECTOR_WIDTH);
                 when CoshDeltaEta =>
-                    lut_o(MUON_MUON_COSH_COS_VECTOR_WIDTH-1 downto 0) <= CONV_STD_LOGIC_VECTOR(MUON_MUON_COSH_DETA_LUT(lut_in), MUON_MUON_COSH_COS_VECTOR_WIDTH);
+                    lut_o(MU_MU_COSH_COS_VECTOR_WIDTH-1 downto 0) <= CONV_STD_LOGIC_VECTOR(MU_MU_COSH_DETA_LUT(lut_in), MU_MU_COSH_COS_VECTOR_WIDTH);
                 when CosDeltaPhi =>
-                    lut_o(MUON_MUON_COSH_COS_VECTOR_WIDTH-1 downto 0) <= CONV_STD_LOGIC_VECTOR(MUON_MUON_COS_DPHI_LUT(lut_in), MUON_MUON_COSH_COS_VECTOR_WIDTH);
+                    lut_o(MU_MU_COSH_COS_VECTOR_WIDTH-1 downto 0) <= CONV_STD_LOGIC_VECTOR(MU_MU_COS_DPHI_LUT(lut_in), MU_MU_COSH_COS_VECTOR_WIDTH);
             end case;
         end if;
         

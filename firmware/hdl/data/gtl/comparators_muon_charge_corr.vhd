@@ -20,7 +20,7 @@ use work.gtl_pkg.all;
 entity comparators_muon_charge_corr is
     generic(
         MODE : comp_mode_cc; -- double, triple or quad
-        REQ : std_logic_vector(MUON_CHARGE_WIDTH-1 downto 0)
+        REQ : std_logic_vector(MU_CHARGE_WIDTH-1 downto 0)
     );
     port(
         clk : in std_logic;
