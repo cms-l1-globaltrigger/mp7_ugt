@@ -144,10 +144,6 @@ constant MU_MU_COSH_COS_PRECISION : positive := 4; -- 4 digits after decimal poi
 constant MU_ETM_COSH_COS_PRECISION : positive := 4; -- 4 digits after decimal point (after roundimg to the 5th digit)
 constant MU_ETMHF_COSH_COS_PRECISION : positive := 4; -- 4 digits after decimal point (after roundimg to the 5th digit)
 constant MU_HTM_COSH_COS_PRECISION : positive := 4; -- 4 digits after decimal point (after roundimg to the 5th digit)
-constant MU_MU_COSH_COS_PRECISION : positive := MU_MU_COSH_COS_PRECISION; -- 4 digits after decimal point (after roundimg to the 5th digit)
-constant MU_ETM_COSH_COS_PRECISION : positive := MU_ETM_COSH_COS_PRECISION;
-constant MU_ETMHF_COSH_COS_PRECISION : positive := MU_ETMHF_COSH_COS_PRECISION;
-constant MU_HTM_COSH_COS_PRECISION : positive := MU_HTM_COSH_COS_PRECISION;
 
 -- calo-muon-correlation
 -- constant CALO_MU_INV_MASS_PT_PRECISION : positive := 1; -- 1 digit after decimal point
@@ -155,9 +151,6 @@ constant MU_HTM_COSH_COS_PRECISION : positive := MU_HTM_COSH_COS_PRECISION;
 constant EG_MU_COSH_COS_PRECISION : positive := 4;
 constant JET_MU_COSH_COS_PRECISION : positive := 4;
 constant TAU_MU_COSH_COS_PRECISION : positive := 4;
-constant EG_MU_COSH_COS_PRECISION : positive := EG_MU_COSH_COS_PRECISION;
-constant JET_MU_COSH_COS_PRECISION : positive := JET_MU_COSH_COS_PRECISION;
-constant TAU_MU_COSH_COS_PRECISION : positive := TAU_MU_COSH_COS_PRECISION;
 
 constant EG_MU_COSH_COS_VECTOR_WIDTH: positive := log2c(109487199-(-10000));
 constant JET_MU_COSH_COS_VECTOR_WIDTH: positive := log2c(109487199-(-10000));
@@ -165,12 +158,6 @@ constant TAU_MU_COSH_COS_VECTOR_WIDTH: positive := log2c(109487199-(-10000));
 constant MU_ETM_COSH_COS_VECTOR_WIDTH: positive := log2c(109487199-(-10000));
 constant MU_ETMHF_COSH_COS_VECTOR_WIDTH: positive := log2c(109487199-(-10000));
 constant MU_HTM_COSH_COS_VECTOR_WIDTH: positive := log2c(109487199-(-10000));
-constant EG_MU_COSH_COS_VECTOR_WIDTH: positive := EG_MU_COSH_COS_VECTOR_WIDTH;
-constant JET_MU_COSH_COS_VECTOR_WIDTH: positive := JET_MU_COSH_COS_VECTOR_WIDTH;
-constant TAU_MU_COSH_COS_VECTOR_WIDTH: positive := TAU_MU_COSH_COS_VECTOR_WIDTH;
-constant MU_ETM_COSH_COS_VECTOR_WIDTH: positive := MU_ETM_COSH_COS_VECTOR_WIDTH;
-constant MU_ETMHF_COSH_COS_VECTOR_WIDTH: positive := MU_ETMHF_COSH_COS_VECTOR_WIDTH;
-constant MU_HTM_COSH_COS_VECTOR_WIDTH: positive := MU_HTM_COSH_COS_VECTOR_WIDTH;
 
 -- HB 2017-03-29: Muon -> type definition for twobody-pt calculation in mass_cuts.vhd
 constant MU_ETM_PT_PRECISION : positive := 1;
