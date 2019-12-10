@@ -2,6 +2,7 @@
 -- Comparators for muon charge correlations.
 
 -- Version-history:
+-- HB 2019-12-10: Replaces "MUON/muon" by "MU/mu"
 -- HB 2019-10-31: Reduced instances of comp_unsigned with additional if-statements for triple and quad, cleaned up code.
 -- HB 2019-10-30: Changed entity name.
 -- HB 2019-06-28: Changed types.
@@ -38,9 +39,9 @@ architecture rtl of comparators_muon_charge_corr is
     signal cc_triple_i :muon_cc_triple_array;
     signal cc_quad_i :muon_cc_quad_array;
     
-    type comp_i_double_array is array (0 to N_MUON_OBJECTS-1, 0 to N_MUON_OBJECTS-1) of std_logic_vector(0 downto 0);
-    type comp_i_triple_array is array (0 to N_MUON_OBJECTS-1, 0 to N_MUON_OBJECTS-1, 0 to N_MUON_OBJECTS-1) of std_logic_vector(0 downto 0);
-    type comp_i_quad_array is array (0 to N_MUON_OBJECTS-1, 0 to N_MUON_OBJECTS-1, 0 to N_MUON_OBJECTS-1, 0 to N_MUON_OBJECTS-1) of std_logic_vector(0 downto 0);
+    type comp_i_double_array is array (0 to N_MU_OBJECTS-1, 0 to N_MU_OBJECTS-1) of std_logic_vector(0 downto 0);
+    type comp_i_triple_array is array (0 to N_MU_OBJECTS-1, 0 to N_MU_OBJECTS-1, 0 to N_MU_OBJECTS-1) of std_logic_vector(0 downto 0);
+    type comp_i_quad_array is array (0 to N_MU_OBJECTS-1, 0 to N_MU_OBJECTS-1, 0 to N_MU_OBJECTS-1, 0 to N_MU_OBJECTS-1) of std_logic_vector(0 downto 0);
     signal comp_i_double : comp_i_double_array := (others => (others => (others => '0')));
     signal comp_r_double : comp_i_double_array;
     signal comp_i_triple : comp_i_triple_array := (others => (others => (others => (others => '0'))));
@@ -50,11 +51,11 @@ architecture rtl of comparators_muon_charge_corr is
 
 begin
     
-    l1: for i in 0 to N_MUON_OBJECTS-1 generate
-        l2: for j in 0 to N_MUON_OBJECTS-1 generate
+    l1: for i in 0 to N_MU_OBJECTS-1 generate
+        l2: for j in 0 to N_MU_OBJECTS-1 generate
             double_i: if MODE = double generate
                 in_reg_i : entity work.reg_mux
-                    generic map(MUON_CHARGE_WIDTH, IN_REG_COMP)  
+                    generic map(MU_CHARGE_WIDTH, IN_REG_COMP)  
                     port map(clk, cc_double(i,j), cc_double_i(i,j));
                 comp_i : entity work.comp_unsigned
                     generic map(chargeCorr, "00", "00", REQ)  
@@ -64,10 +65,10 @@ begin
                     port map(clk, comp_i_double(i,j), comp_r_double(i,j));
                 comp_o_double(i,j) <= comp_r_double(i,j)(0);
             end generate double_i;
-            l3: for k in 0 to N_MUON_OBJECTS-1 generate
+            l3: for k in 0 to N_MU_OBJECTS-1 generate
                 triple_i: if MODE = triple generate
                     in_reg_i : entity work.reg_mux
-                        generic map(MUON_CHARGE_WIDTH, IN_REG_COMP)  
+                        generic map(MU_CHARGE_WIDTH, IN_REG_COMP)  
                         port map(clk, cc_triple(i,j,k), cc_triple_i(i,j,k));
                     if_i: if (j/=i and k/=i and k/=j) generate 
                         comp_i : entity work.comp_unsigned
@@ -79,10 +80,10 @@ begin
                         port map(clk, comp_i_triple(i,j,k), comp_r_triple(i,j,k));
                     comp_o_triple(i,j,k) <= comp_r_triple(i,j,k)(0);
                 end generate triple_i;
-                l4: for l in 0 to N_MUON_OBJECTS-1 generate
+                l4: for l in 0 to N_MU_OBJECTS-1 generate
                     quad_i: if MODE = quad generate
                         in_reg_i : entity work.reg_mux
-                            generic map(MUON_CHARGE_WIDTH, IN_REG_COMP)  
+                            generic map(MU_CHARGE_WIDTH, IN_REG_COMP)  
                             port map(clk, cc_quad(i,j,k,l), cc_quad_i(i,j,k,l));
                         if_i: if (j/=i and k/=i and k/=j and l/=i and l/=j and l/=k) generate 
                             comp_i : entity work.comp_unsigned
