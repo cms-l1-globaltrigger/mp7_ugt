@@ -15,10 +15,11 @@
 -- mp7_ugt (=FRAME_VERSION): v2.4.6
 --
 --  control: v2.0.1
---  gtl: v2.4.4
+--  gtl: v2.4.5
 --  fdl: v1.3.5
 
 -- Version-history of GTL part:
+-- HB 2019-12-11: v2.4.5: replaced "MUON/muon" by "MU/mu".
 -- HB 2019-11-20: v2.4.4: added subtypes (for asymmetry and minimum-bias) and bug fixed in gtl_pkg.vhd. Inserted Logic for charge in comparators_obj_cuts.vhd.
 -- HB 2019-11-12: v2.4.3: bug fixed "function bx" in gtl_pkg.vhd.
 -- HB 2019-11-11: v2.4.2: bug fix in gtl_pkg.vhd.
@@ -65,7 +66,7 @@ package gt_mp7_core_pkg is
 -- GTL firmware (fix part) version
     constant GTL_FW_MAJOR_VERSION : integer range 0 to 255 := 2;
     constant GTL_FW_MINOR_VERSION : integer range 0 to 255 := 4;
-    constant GTL_FW_REV_VERSION   : integer range 0 to 255 := 4;
+    constant GTL_FW_REV_VERSION   : integer range 0 to 255 := 5;
 -- FDL firmware version
     constant FDL_FW_MAJOR_VERSION : integer range 0 to 255 := 1;
     constant FDL_FW_MINOR_VERSION : integer range 0 to 255 := 3;
