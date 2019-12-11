@@ -8,7 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 Versions of ugt with new GTL structure (v2.0.0 and higher)
 
-### [v2.4.6] - 2019-11-18
+### [v2.4.6] - 2019-12-11
 
 #### Comment
 
@@ -18,8 +18,17 @@ Versions of ugt with new GTL structure (v2.0.0 and higher)
 - source file:
   - ../hdl/data/gtl/comparators_obj_cuts.vhd
   - ../hdl/packages/gt_mp7_core_pkg.vhd
+- source file (replacing MUON/muon by MU/mu):
+  - ../hdl/data/gtl/gtl_fdl_wrapper.vhd
+  - ../hdl/data/gtl/bx_pipeline.vhd
+  - ../hdl/data/gtl/comp_unsigned.vhd
+  - ../hdl/data/gtl/comparators_muon_charge_corr.vhd
+  - ../hdl/data/gtl/conversions.vhd
+  - ../hdl/data/gtl/luts_corr_cuts.vhd
+  - ../hdl/data/gtl/muon_charge_correlations.vhd
   - ../hdl/packages/gtl_pkg.vhd
-  
+  - ../hdl/packages/lut_pkg.vhd
+
 ### [v2.4.5] - 2019-11-14
 
 #### Comment
