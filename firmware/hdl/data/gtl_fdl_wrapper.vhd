@@ -2,6 +2,7 @@
 -- Wrapper for GTL and FDL
 
 -- Version-history:
+-- HB 2019-12-11: Replaces "MUON/muon" by "MU/mu"
 -- HB 2019-07-03: inserted use clause fdl_pkg.
 -- HB 2018-08-08: changed names for internal signals.
 -- HB 2018-08-06: inserted signals for "Asymmetry" and "Centrality" (included in esums data structure).
@@ -91,13 +92,13 @@ begin
        data.tau(i).iso <= lhc_data.tau(i)(TAU_ISO_HIGH downto TAU_ISO_LOW);
     end generate tau_data_l;
 
-    muon_data_l: for i in 0 to N_MUON_OBJECTS-1 generate
-       data.muon(i).pt <= lhc_data.muon(i)(MUON_PT_HIGH downto MUON_PT_LOW);
-       data.muon(i).eta <= lhc_data.muon(i)(MUON_ETA_HIGH downto MUON_ETA_LOW);
-       data.muon(i).phi <= lhc_data.muon(i)(MUON_PHI_HIGH downto MUON_PHI_LOW);
-       data.muon(i).iso <= lhc_data.muon(i)(MUON_ISO_HIGH downto MUON_ISO_LOW);
-       data.muon(i).qual <= lhc_data.muon(i)(MUON_QUAL_HIGH downto MUON_QUAL_LOW);
-       data.muon(i).charge <= lhc_data.muon(i)(MUON_CHARGE_HIGH downto MUON_CHARGE_LOW);
+    muon_data_l: for i in 0 to N_MU_OBJECTS-1 generate
+       data.mu(i).pt <= lhc_data.muon(i)(MU_PT_HIGH downto MU_PT_LOW);
+       data.mu(i).eta <= lhc_data.muon(i)(MU_ETA_HIGH downto MU_ETA_LOW);
+       data.mu(i).phi <= lhc_data.muon(i)(MU_PHI_HIGH downto MU_PHI_LOW);
+       data.mu(i).iso <= lhc_data.muon(i)(MU_ISO_HIGH downto MU_ISO_LOW);
+       data.mu(i).qual <= lhc_data.muon(i)(MU_QUAL_HIGH downto MU_QUAL_LOW);
+       data.mu(i).charge <= lhc_data.muon(i)(MU_CHARGE_HIGH downto MU_CHARGE_LOW);
     end generate muon_data_l;
 
 -- ****************************************************************************************
