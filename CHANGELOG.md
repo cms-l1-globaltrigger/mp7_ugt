@@ -28,6 +28,9 @@ Versions of ugt with new GTL structure (v2.0.0 and higher)
   - ../hdl/data/gtl/muon_charge_correlations.vhd
   - ../hdl/packages/gtl_pkg.vhd
   - ../hdl/packages/lut_pkg.vhd
+- script:
+  - ../scripts/runIpbbSynth.py
+
 
 ### [v2.4.5] - 2019-11-14
 
@@ -38,7 +41,7 @@ Versions of ugt with new GTL structure (v2.0.0 and higher)
 #### Changed
 - source file:
   - ../hdl/packages/gt_mp7_core_pkg.vhd
-- script:
+- scripts:
   - ../scripts/runIpbbSynth.py
   - ../scripts/fwpackerIpbb.py
   - ../scripts/buildReport.py
