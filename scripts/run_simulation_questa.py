@@ -37,6 +37,8 @@ vhdl_files_names = ['l1menu', 'l1menu_pkg']
 
 url_menu_default = 'https://raw.githubusercontent.com/herbberg/l1menus_gtl_v2_x_y/master'
 
+local_menu_path = os.path.join(os.environ['HOME'], 'github', 'herbberg', 'l1menus_gtl_v2_x_y')
+
 DO_FILE = 'gtl_fdl_wrapper.do'
 TB_FILE_TPL = 'testbench/templates/gtl_fdl_wrapper_tb_tpl.vhd'
 TB_FILE = 'testbench/gtl_fdl_wrapper_tb.vhd'
@@ -218,7 +220,7 @@ def download_file_from_url(url, filename):
     with open(filename, 'wb') as fp:
         fp.write(d)
 
-def run_simulation_questa(a_mp7_tag, a_menu, a_vivado, a_questasim, a_questasimlibs, a_output, a_view_wave, a_wlf, a_verbose):
+def run_simulation_questa(a_mp7_tag, a_menu, a_vivado, a_questasim, a_questasimlibs, a_output, a_view_wave, a_wlf, a_verbose, a_local_repo):
     """preparing simulation with Questa"""
     # Check Questa sim version
     if a_questasim == '10.6a':
@@ -269,9 +271,14 @@ def run_simulation_questa(a_mp7_tag, a_menu, a_vivado, a_questasim, a_questasiml
     # Remove "distribution number" from a_menu for testvector file name
     tv_name = "TestVector_{}{}".format((re.split("-", a_menu)[0]), '.txt') 
     testvector_filepath = os.path.join(temp_dir, tv_name)
-    url = "{}/testvectors/{}".format(url_menu, tv_name)
-    
-    download_file_from_url(url, testvector_filepath)
+## Testvector file from URL
+    if not a_local_repo:
+        url = "{}/testvectors/{}".format(url_menu, tv_name)
+        download_file_from_url(url, testvector_filepath)
+# Using local repo for tests
+    else:    
+        tv_file_local = "{}/{}/testvectors/{}".format(local_menu_path, a_menu, tv_name)
+        shutil.copy(tv_file_local,testvector_filepath)
     
     timestamp = time.time()#creates timestamp
     _time = datetime.datetime.fromtimestamp(timestamp).strftime('%Y-%m-%dT%H-%M-%S')#changes time apperance
@@ -283,7 +290,7 @@ def run_simulation_questa(a_mp7_tag, a_menu, a_vivado, a_questasim, a_questasiml
     for _id in range(menu.n_modules):#makes list for each module
         modules.append(Module(menu ,_id, base_dir))
 
-    # Get VHDL snippets from menu URL
+    # Get VHDL files from menu URL
     for module in modules:
         vhdl_src_path = "vhdl/module_{}/src".format(module._id)
         temp_dir_module = os.path.join(temp_dir, vhdl_src_path)
@@ -294,14 +301,15 @@ def run_simulation_questa(a_mp7_tag, a_menu, a_vivado, a_questasim, a_questasiml
             vhdl_file_local_path = os.path.join(temp_dir_module, vhdl_name_ext)
             #print "vhdl_file_local_path: ", vhdl_file_local_path
             vhdl_file_path = os.path.join(vhdl_src_path, vhdl_name_ext)
-            #url = "{}/{}".format(url_menu, vhdl_file_path)    
-            ##print "url: ", url
-            #download_file_from_url(url, vhdl_file_local_path)
-            
-        # Using local repo for tests (l1menu.vhd and l1menu_pkg.vhd)
-        vhdl_local_src = "/home/bergauer/github/herbberg/l1menus_gtl_v2_x_y/{}/{}".format(a_menu, vhdl_src_path)
-        #print "vhdl_local_src: ", vhdl_local_src
-        copy_tree(vhdl_local_src, temp_dir_module)    
+# VHDL files (l1menu.vhd and l1menu_pkg.vhd) from URL
+            if not a_local_repo:
+                url = "{}/{}".format(url_menu, vhdl_file_path)    
+                #print "url: ", url
+                download_file_from_url(url, vhdl_file_local_path)
+# Using local repo for tests (l1menu.vhd and l1menu_pkg.vhd)
+            else:    
+                vhdl_file_local = "{}/{}/{}".format(local_menu_path, a_menu, vhdl_file_path)
+                shutil.copy(vhdl_file_local,vhdl_file_local_path)
             
     if not os.path.exists(menu_filepath):#checks for menu
         raise RuntimeError('Missing %s File' % menu_filepath)#help
@@ -474,6 +482,7 @@ def parse():
     parser.add_argument('--view-wave', action = 'store_true', help = "shows the waveform")
     parser.add_argument('--wlf', action = 'store_true', help = "no console transcript info, warning and error messages (transcript output to vsim.wlf)")
     parser.add_argument('-v', '--verbose', action = 'store_const', const = logging.DEBUG, help = "enables debug prints to console", default = logging.INFO)
+    parser.add_argument('--local_repo', action = 'store_true', help = "VHDL and testvector file from local repo")
     return parser.parse_args()
 
 def main():
@@ -482,7 +491,7 @@ def main():
     # Setup console logging
     logging.basicConfig(format = '%(levelname)s: %(message)s', level = logging.INFO)
     
-    run_simulation_questa(args.mp7_tag, args.menu, args.vivado, args.questasim, args.questasimlibs, args.output, args.view_wave, args.wlf, args.verbose)
+    run_simulation_questa(args.mp7_tag, args.menu, args.vivado, args.questasim, args.questasimlibs, args.output, args.view_wave, args.wlf, args.verbose, args.local_repo)
 
     #with open('')
 if __name__ == '__main__':
