@@ -57,11 +57,27 @@ package gtl_pkg is
     constant JET_JET_PHI_HALF_RANGE_BINS : positive := CALO_PHI_HALF_RANGE_BINS;
     constant JET_TAU_PHI_HALF_RANGE_BINS : positive := CALO_PHI_HALF_RANGE_BINS;
     constant TAU_TAU_PHI_HALF_RANGE_BINS : positive := CALO_PHI_HALF_RANGE_BINS;
+    constant EG_ETM_PHI_HALF_RANGE_BINS : positive := CALO_PHI_HALF_RANGE_BINS;
+    constant EG_ETMHF_PHI_HALF_RANGE_BINS : positive := CALO_PHI_HALF_RANGE_BINS;
+    constant EG_HTM_PHI_HALF_RANGE_BINS : positive := CALO_PHI_HALF_RANGE_BINS;
+    constant EG_HTMHF_PHI_HALF_RANGE_BINS : positive := CALO_PHI_HALF_RANGE_BINS;
+    constant JET_ETM_PHI_HALF_RANGE_BINS : positive := CALO_PHI_HALF_RANGE_BINS;
+    constant JET_ETMHF_PHI_HALF_RANGE_BINS : positive := CALO_PHI_HALF_RANGE_BINS;
+    constant JET_HTM_PHI_HALF_RANGE_BINS : positive := CALO_PHI_HALF_RANGE_BINS;
+    constant JET_HTMHF_PHI_HALF_RANGE_BINS : positive := CALO_PHI_HALF_RANGE_BINS;
+    constant TAU_ETM_PHI_HALF_RANGE_BINS : positive := CALO_PHI_HALF_RANGE_BINS;
+    constant TAU_ETMHF_PHI_HALF_RANGE_BINS : positive := CALO_PHI_HALF_RANGE_BINS;
+    constant TAU_HTM_PHI_HALF_RANGE_BINS : positive := CALO_PHI_HALF_RANGE_BINS;
+    constant TAU_HTMHF_PHI_HALF_RANGE_BINS : positive := CALO_PHI_HALF_RANGE_BINS;
     constant MU_PHI_HALF_RANGE_BINS : positive := MU_PHI_BINS/2; -- 576/2, because of phi bin width = 2*PI/576
     constant EG_MU_PHI_HALF_RANGE_BINS : positive := MU_PHI_HALF_RANGE_BINS;
     constant JET_MU_PHI_HALF_RANGE_BINS : positive := MU_PHI_HALF_RANGE_BINS;
     constant TAU_MU_PHI_HALF_RANGE_BINS : positive := MU_PHI_HALF_RANGE_BINS;
     constant MU_MU_PHI_HALF_RANGE_BINS : positive := MU_PHI_HALF_RANGE_BINS;
+    constant MU_ETM_PHI_HALF_RANGE_BINS : positive := CALO_PHI_HALF_RANGE_BINS;
+    constant MU_ETMHF_PHI_HALF_RANGE_BINS : positive := CALO_PHI_HALF_RANGE_BINS;
+    constant MU_HTM_PHI_HALF_RANGE_BINS : positive := CALO_PHI_HALF_RANGE_BINS;
+    constant MU_HTMHF_PHI_HALF_RANGE_BINS : positive := CALO_PHI_HALF_RANGE_BINS;
     
     constant N_MU_OBJECTS :  positive := N_MUON_OBJECTS;
 
@@ -80,7 +96,7 @@ package gtl_pkg is
     constant MAX_OBJ_BITS : positive := 64; -- muon
 
     constant MAX_OBJ_PARAMETER_WIDTH : positive := 16; -- used 16 for hex notation of requirements - max. parameter width of objects: towercount = 13
-    constant MAX_CORR_CUTS_WIDTH : positive := 52; -- max inv mass width (2*MAX_PT_WIDTH+MAX_COSH_COS_WIDTH = 51) - used 52 for hex notation !
+    constant MAX_CORR_CUTS_WIDTH : positive := 56; -- max inv mass width (2*MAX_PT_WIDTH+MAX_COSH_COS_WIDTH = 51) - used 52 for hex notation !
     constant MAX_COSH_COS_WIDTH : positive := 27; -- CALO_MUON_COSH_COS_VECTOR_WIDTH 
     constant MAX_PT_WIDTH : positive := 12; -- max. pt width (esums pt = 12)
     constant MAX_ETA_WIDTH : positive := 9; -- max. eta width(muon eta = 9)
@@ -609,7 +625,7 @@ package gtl_pkg is
     type array_conv_bx_record is array (0 to BX_PIPELINE_STAGES-1) of conv_bx_record; -- used for outputs of bx_pipeline module  
 
     type conv_pipeline_record is record
-        mu, eg, jet, tau : array_conv_bx_record; 
+        mu, eg, jet, tau, etm : array_conv_bx_record; 
     end record conv_pipeline_record;
     
     type max_eta_range_array is array (0 to MAX_N_OBJECTS-1, 0 to MAX_N_OBJECTS-1) of integer range 0 to integer(ETA_RANGE_REAL/MU_ETA_STEP)-1; -- 10.0/0.010875 = 919.54 => rounded(919.54) = 920 - number of bins with muon bin width for full (calo) eta range

@@ -161,6 +161,18 @@ begin
                 eta_integer => conv_o.tau(i).eta, phi_integer => conv_o.tau(i).phi 
             );
             
+        etm_conversions_i: entity work.conversions
+            generic map(
+                N_ETM_OBJECTS, etm_t
+            )
+            port map(
+                pt => data_pipe_internal.etm(i).pt, phi => data_pipe_internal.etm(i).phi,
+                pt_vector => conv_o.etm(i).pt_vector, cos_phi => conv_o.etm(i).cos_phi, sin_phi => conv_o.etm(i).sin_phi,
+                conv_mu_cos_phi => conv_o.etm(i).cos_phi_conv_mu, conv_mu_sin_phi => conv_o.etm(i).sin_phi_conv_mu,
+                conv_2_mu_phi_integer => conv_o.etm(i).phi_conv_mu,
+                phi_integer => conv_o.etm(i).phi 
+            );
+            
         mu_conversions_i: entity work.conversions
             generic map(
                 N_MU_OBJECTS, mu_t

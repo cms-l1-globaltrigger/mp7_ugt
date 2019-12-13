@@ -26,7 +26,7 @@ entity conversions is
     );
     port(
         pt : in obj_parameter_array;
-        eta : in obj_parameter_array;
+        eta : in obj_parameter_array := (others => (others => '0'));
         phi : in obj_parameter_array;
         pt_vector : out conv_pt_vector_array;
         cos_phi : out conv_integer_array;
@@ -35,7 +35,7 @@ entity conversions is
         conv_mu_sin_phi : out conv_integer_array;
         conv_2_mu_eta_integer : out conv_integer_array;
         conv_2_mu_phi_integer : out conv_integer_array;
-        eta_integer : out conv_integer_array;
+        eta_integer : out conv_integer_array := (others => 0);
         phi_integer : out conv_integer_array
     );
 end conversions;
@@ -77,6 +77,11 @@ begin
                 pt_vector(i)(TAU_PT_VECTOR_WIDTH-1 downto 0) <= CONV_STD_LOGIC_VECTOR(TAU_PT_LUT(CONV_INTEGER(pt_i(i))), TAU_PT_VECTOR_WIDTH);
                 eta_integer(i) <= CONV_INTEGER(signed(eta_i(i)(TAU_ETA_WIDTH-1 downto 0)));
             end generate tau_i;       
+            etm_i: if (OBJ_T = etm_t) generate
+                pt_i(i)(ETM_PT_HIGH-ETM_PT_LOW downto 0) <= pt(i)(ETM_PT_HIGH-ETM_PT_LOW downto 0); 
+                phi_i(i)(ETM_PHI_HIGH-ETM_PHI_LOW downto 0) <= phi(i)(ETM_PHI_HIGH-ETM_PHI_LOW downto 0); 
+                pt_vector(i)(ETM_PT_VECTOR_WIDTH-1 downto 0) <= CONV_STD_LOGIC_VECTOR(ETM_PT_LUT(CONV_INTEGER(pt_i(i))), ETM_PT_VECTOR_WIDTH);
+            end generate etm_i;       
             cos_phi(i) <= CALO_COS_PHI_LUT(CONV_INTEGER(phi_i(i)));
             sin_phi(i) <= CALO_SIN_PHI_LUT(CONV_INTEGER(phi_i(i)));
             conv_2_mu_phi_integer_i(i) <= CALO_PHI_CONV_2_MU_PHI_LUT(CONV_INTEGER(phi_i(i)));
