@@ -27,16 +27,16 @@ entity conversions is
     port(
         pt : in obj_parameter_array;
         eta : in obj_parameter_array := (others => (others => '0'));
-        phi : in obj_parameter_array;
-        pt_vector : out conv_pt_vector_array;
-        cos_phi : out conv_integer_array;
-        sin_phi : out conv_integer_array;
-        conv_mu_cos_phi : out conv_integer_array;
-        conv_mu_sin_phi : out conv_integer_array;
-        conv_2_mu_eta_integer : out conv_integer_array;
-        conv_2_mu_phi_integer : out conv_integer_array;
+        phi : in obj_parameter_array := (others => (others => '0'));
+        pt_vector : out conv_pt_vector_array := (others => (others => '0'));
+        cos_phi : out conv_integer_array := (others => 0);
+        sin_phi : out conv_integer_array := (others => 0);
+        conv_mu_cos_phi : out conv_integer_array := (others => 0);
+        conv_mu_sin_phi : out conv_integer_array := (others => 0);
+        conv_2_mu_eta_integer : out conv_integer_array := (others => 0);
+        conv_2_mu_phi_integer : out conv_integer_array := (others => 0);
         eta_integer : out conv_integer_array := (others => 0);
-        phi_integer : out conv_integer_array
+        phi_integer : out conv_integer_array := (others => 0)
     );
 end conversions;
 
@@ -90,6 +90,12 @@ begin
             conv_2_mu_eta_integer(i) <= CALO_ETA_CONV_2_MU_ETA_LUT(CONV_INTEGER(eta_i(i)));
             conv_2_mu_phi_integer(i) <= conv_2_mu_phi_integer_i(i);
         end generate calo_i;
+        etm_i: if (OBJ_T = etm_t) generate
+            pt_i(i)(ETM_PT_HIGH-ETM_PT_LOW downto 0) <= pt(i)(ETM_PT_HIGH-ETM_PT_LOW downto 0); 
+            phi_i(i)(ETM_PHI_HIGH-ETM_PHI_LOW downto 0) <= phi(i)(ETM_PHI_HIGH-ETM_PHI_LOW downto 0); 
+            pt_vector(i)(ETM_PT_VECTOR_WIDTH-1 downto 0) <= CONV_STD_LOGIC_VECTOR(ETM_PT_LUT(CONV_INTEGER(pt_i(i))), ETM_PT_VECTOR_WIDTH);
+            conv_2_mu_phi_integer(i) <= CALO_PHI_CONV_2_MU_PHI_LUT(CONV_INTEGER(phi_i(i)));
+        end generate etm_i;       
         muon_i: if (OBJ_T = mu_t) generate
             pt_i(i)(MU_PT_HIGH-MU_PT_LOW downto 0) <= pt(i)(MU_PT_HIGH-MU_PT_LOW downto 0); 
             eta_i(i)(MU_ETA_HIGH-MU_ETA_LOW downto 0) <= eta(i)(MU_ETA_HIGH-MU_ETA_LOW downto 0); 

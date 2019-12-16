@@ -83,6 +83,7 @@ vcom -93 -work work $HDL_DIR/data/gtl/delta_r_calc.vhd
 vcom -93 -work work $HDL_DIR/data/gtl/delta_r.vhd
 vcom -93 -work work $HDL_DIR/data/gtl/inv_mass_calc.vhd
 vcom -93 -work work $HDL_DIR/data/gtl/invariant_mass.vhd
+vcom -93 -work work $HDL_DIR/data/gtl/trans_mass_calc.vhd
 vcom -93 -work work $HDL_DIR/data/gtl/transverse_mass.vhd
 vcom -93 -work work $HDL_DIR/data/gtl/twobody_pt_calc.vhd
 vcom -93 -work work $HDL_DIR/data/gtl/twobody_pt.vhd

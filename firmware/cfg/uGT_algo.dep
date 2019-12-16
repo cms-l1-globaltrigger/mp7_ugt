@@ -54,6 +54,7 @@ src data/gtl/delta_r_calc.vhd
 src data/gtl/delta_r.vhd
 src data/gtl/inv_mass_calc.vhd
 src data/gtl/invariant_mass.vhd
+src data/gtl/trans_mass_calc.vhd
 src data/gtl/transverse_mass.vhd
 src data/gtl/twobody_pt_calc.vhd
 src data/gtl/twobody_pt.vhd
