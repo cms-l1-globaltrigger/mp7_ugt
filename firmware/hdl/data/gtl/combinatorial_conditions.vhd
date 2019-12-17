@@ -41,12 +41,15 @@ architecture rtl of combinatorial_conditions is
     constant N_SLICE_3 : positive := SLICES(3)(1) - SLICES(3)(0) + 1;
     constant N_SLICE_4 : positive := SLICES(4)(1) - SLICES(4)(0) + 1;
     
-    type double_array is array (0 to N_OBJ-1, 0 to N_OBJ-1) of std_logic;
-    type triple_array is array (0 to N_OBJ-1, 0 to N_OBJ-1, 0 to N_OBJ-1) of std_logic;
-    type quad_array is array (0 to N_OBJ-1, 0 to N_OBJ-1, 0 to N_OBJ-1, 0 to N_OBJ-1) of std_logic;
-    signal cc_double_i : double_array := (others => (others => '1'));
-    signal cc_triple_i : triple_array := (others => (others => (others => '1')));
-    signal cc_quad_i : quad_array := (others => (others => (others => (others => '1'))));
+--     type double_array is array (0 to N_OBJ-1, 0 to N_OBJ-1) of std_logic;
+--     type triple_array is array (0 to N_OBJ-1, 0 to N_OBJ-1, 0 to N_OBJ-1) of std_logic;
+--     type quad_array is array (0 to N_OBJ-1, 0 to N_OBJ-1, 0 to N_OBJ-1, 0 to N_OBJ-1) of std_logic;
+--     signal cc_double_i : double_array := (others => (others => '1'));
+--     signal cc_triple_i : triple_array := (others => (others => (others => '1')));
+--     signal cc_quad_i : quad_array := (others => (others => (others => (others => '1'))));
+    signal cc_double_i : muon_cc_double_std_logic_array := (others => (others => '1'));
+    signal cc_triple_i : muon_cc_triple_std_logic_array := (others => (others => (others => '1')));
+    signal cc_quad_i : muon_cc_quad_std_logic_array := (others => (others => (others => (others => '1'))));
     signal cond_and_or, cond_o_v : std_logic_vector(0 to 0);
 
 begin
@@ -83,17 +86,29 @@ begin
             for j in SLICES(2)(0) to SLICES(2)(1) loop
                 if N_REQ = 2 and (j/=i) then
                     index := index + 1;
-                    and_vec(index) := comb_1(i) and comb_2(j) and cc_double_i(i,j) and tbpt(i,j);
+                    if CHARGE_CORR_SEL then
+                        and_vec(index) := comb_1(i) and comb_2(j) and cc_double_i(i,j) and tbpt(i,j);
+                    else
+                        and_vec(index) := comb_1(i) and comb_2(j) and tbpt(i,j);
+                    end if;
                 end if;
                 for k in SLICES(3)(0) to SLICES(3)(1) loop
                     if N_REQ = 3 and (j/=i and k/=i and k/=j) then
                         index := index + 1;
-                        and_vec(index) := comb_1(i) and comb_2(j) and comb_3(k) and cc_triple_i(i,j,k);
+                        if CHARGE_CORR_SEL then
+                            and_vec(index) := comb_1(i) and comb_2(j) and comb_3(k) and cc_triple_i(i,j,k);
+                        else
+                            and_vec(index) := comb_1(i) and comb_2(j) and comb_3(k);
+                        end if;
                     end if;
                     for l in SLICES(4)(0) to SLICES(4)(1) loop
                         if N_REQ = 4 and (j/=i and k/=i and k/=j and l/=i and l/=j and l/=k) then
                             index := index + 1;
-                            and_vec(index) := comb_1(i) and comb_2(j) and comb_3(k) and comb_4(l) and cc_quad_i(i,j,k,l);
+                            if CHARGE_CORR_SEL then
+                                and_vec(index) := comb_1(i) and comb_2(j) and comb_3(k) and comb_4(l) and cc_quad_i(i,j,k,l);
+                            else
+                                and_vec(index) := comb_1(i) and comb_2(j) and comb_3(k) and comb_4(l);
+                            end if;
                         end if;
                     end loop;
                 end loop;

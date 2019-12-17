@@ -39,7 +39,7 @@ architecture rtl of correlation_conditions is
 
     constant N_SLICE_1 : positive := SLICES(1)(1) - SLICES(1)(0) + 1;
     constant N_SLICE_2 : positive := SLICES(2)(1) - SLICES(2)(0) + 1;
-    signal cc_double_i : corr_cuts_array(0 to N_OBJ_1-1, 0 to N_OBJ_2-1) := (others => (others => '1'));
+    signal cc_double_i : muon_cc_double_std_logic_array := (others => (others => '1'));
     signal cond_and_or, cond_o_v : std_logic_vector(0 to 0);
 
 begin
@@ -65,8 +65,13 @@ begin
         for i in SLICES(1)(0) to SLICES(1)(1) loop
             for j in SLICES(2)(0) to SLICES(2)(1) loop
                 index := index + 1;
-                and_vec(index) := in_1(i) and in_2(j) and deta(i,j) and dphi(i,j) and delta_r(i,j) and 
-                    inv_mass(i,j) and trans_mass(i,j) and tbpt(i,j) and cc_double_i(i,j);
+                if CHARGE_CORR_SEL then
+                    and_vec(index) := in_1(i) and in_2(j) and deta(i,j) and dphi(i,j) and delta_r(i,j) and 
+                        inv_mass(i,j) and trans_mass(i,j) and tbpt(i,j) and cc_double_i(i,j);
+                else
+                    and_vec(index) := in_1(i) and in_2(j) and deta(i,j) and dphi(i,j) and delta_r(i,j) and 
+                        inv_mass(i,j) and trans_mass(i,j) and tbpt(i,j);
+                end if;
             end loop;
         end loop;
         for i in 1 to index loop

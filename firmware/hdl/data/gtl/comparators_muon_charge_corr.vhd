@@ -2,6 +2,7 @@
 -- Comparators for muon charge correlations.
 
 -- Version-history:
+-- HB 2019-12-17: Inserted "if-generate" at "double_i"
 -- HB 2019-12-10: Replaces "MUON/muon" by "MU/mu"
 -- HB 2019-10-31: Reduced instances of comp_unsigned with additional if-statements for triple and quad, cleaned up code.
 -- HB 2019-10-30: Changed entity name.
@@ -57,9 +58,11 @@ begin
                 in_reg_i : entity work.reg_mux
                     generic map(MU_CHARGE_WIDTH, IN_REG_COMP)  
                     port map(clk, cc_double(i,j), cc_double_i(i,j));
-                comp_i : entity work.comp_unsigned
-                    generic map(chargeCorr, "00", "00", REQ)  
-                    port map(cc_double_i(i,j), comp_i_double(i,j)(0));
+                if_i: if (j/=i) generate 
+                    comp_i : entity work.comp_unsigned
+                        generic map(chargeCorr, "00", "00", REQ)  
+                        port map(cc_double_i(i,j), comp_i_double(i,j)(0));
+                end generate if_i;
                 out_reg_i : entity work.reg_mux
                     generic map(1, OUT_REG_COMP)  
                     port map(clk, comp_i_double(i,j), comp_r_double(i,j));
