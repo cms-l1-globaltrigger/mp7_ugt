@@ -35,11 +35,11 @@ begin
     process(clk, data_in)
     begin
         data_tmp(0) <= data_in;
-        for i in 0 to (BX_PIPELINE_STAGES-1)-1 loop
-            if (clk'event and clk = '1') then
+        if (clk'event and clk = '1') then
+            for i in 0 to (BX_PIPELINE_STAGES-1)-1 loop
                 data_tmp(i+1) <= data_tmp(i);
-            end if;
-        end loop;
+            end loop;
+        end if;
     end process;
     
 -- BX pipeline
@@ -171,6 +171,30 @@ begin
                 conv_mu_cos_phi => conv_o.etm(i).cos_phi_conv_mu, conv_mu_sin_phi => conv_o.etm(i).sin_phi_conv_mu,
                 conv_2_mu_phi_integer => conv_o.etm(i).phi_conv_mu,
                 phi_integer => conv_o.etm(i).phi 
+            );
+            
+        htm_conversions_i: entity work.conversions
+            generic map(
+                N_HTM_OBJECTS, htm_t
+            )
+            port map(
+                pt => data_pipe_internal.htm(i).pt, phi => data_pipe_internal.htm(i).phi,
+                pt_vector => conv_o.htm(i).pt_vector, cos_phi => conv_o.htm(i).cos_phi, sin_phi => conv_o.htm(i).sin_phi,
+                conv_mu_cos_phi => conv_o.htm(i).cos_phi_conv_mu, conv_mu_sin_phi => conv_o.htm(i).sin_phi_conv_mu,
+                conv_2_mu_phi_integer => conv_o.htm(i).phi_conv_mu,
+                phi_integer => conv_o.htm(i).phi 
+            );
+            
+        etmhf_conversions_i: entity work.conversions
+            generic map(
+                N_ETMHF_OBJECTS, etmhf_t
+            )
+            port map(
+                pt => data_pipe_internal.etmhf(i).pt, phi => data_pipe_internal.etmhf(i).phi,
+                pt_vector => conv_o.etmhf(i).pt_vector, cos_phi => conv_o.etmhf(i).cos_phi, sin_phi => conv_o.etmhf(i).sin_phi,
+                conv_mu_cos_phi => conv_o.etmhf(i).cos_phi_conv_mu, conv_mu_sin_phi => conv_o.etmhf(i).sin_phi_conv_mu,
+                conv_2_mu_phi_integer => conv_o.etmhf(i).phi_conv_mu,
+                phi_integer => conv_o.etmhf(i).phi 
             );
             
         mu_conversions_i: entity work.conversions

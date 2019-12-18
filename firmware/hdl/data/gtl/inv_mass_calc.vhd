@@ -46,7 +46,4 @@ begin
     cosh_cos <= cosh_deta - cos_dphi;
     inv_mass_sq_div2 <= pt1 * pt2 * cosh_cos;
            
--- -- HB 2015-10-01: calculation of invariant mass with formular M**2/2=pt1*pt2*(cosh(eta1-eta2)-cos(phi1-phi2))
---     inv_mass_sq_div2 <= pt1 * pt2 * (cosh_deta - cos_dphi);
-
 end architecture rtl;

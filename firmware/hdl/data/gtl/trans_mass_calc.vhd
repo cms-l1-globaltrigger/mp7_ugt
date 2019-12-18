@@ -42,10 +42,7 @@ begin
 
 -- HB 2016-12-12: calculation of transverse mass with formular M**2/2=pt1*pt2*(1-cos(phi1-phi2))
 --                "conv_std_logic_vector((10**COSH_COS_PREC), COSH_COS_WIDTH)" means 1 multiplied with 10**COSH_COS_PREC, converted to std_logic_vector with COSH_COS_WIDTH
-    one_minus_cos <= CONV_STD_LOGIC_VECTOR((10**COSH_COS_PREC), COSH_COS_WIDTH) - cos_dphi;
+    one_minus_cos <= (CONV_STD_LOGIC_VECTOR((10**COSH_COS_PREC), COSH_COS_WIDTH)) - cos_dphi;
     trans_mass_sq_div2 <= pt1 * pt2 * one_minus_cos;
     
--- -- HB 2015-10-01: calculation of invariant mass with formular M**2/2=pt1*pt2*(cosh(eta1-eta2)-cos(phi1-phi2))
---     trans_mass_sq_div2 <= pt1 * pt2 * (1 - cos_dphi);
-
 end architecture rtl;

@@ -625,7 +625,7 @@ package gtl_pkg is
     type array_conv_bx_record is array (0 to BX_PIPELINE_STAGES-1) of conv_bx_record; -- used for outputs of bx_pipeline module  
 
     type conv_pipeline_record is record
-        mu, eg, jet, tau, etm : array_conv_bx_record; 
+        mu, eg, jet, tau, etm, htm, etmhf : array_conv_bx_record; 
     end record conv_pipeline_record;
     
     type max_eta_range_array is array (0 to MAX_N_OBJECTS-1, 0 to MAX_N_OBJECTS-1) of integer range 0 to integer(ETA_RANGE_REAL/MU_ETA_STEP)-1; -- 10.0/0.010875 = 919.54 => rounded(919.54) = 920 - number of bins with muon bin width for full (calo) eta range

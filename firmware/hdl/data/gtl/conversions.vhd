@@ -96,6 +96,18 @@ begin
             pt_vector(i)(ETM_PT_VECTOR_WIDTH-1 downto 0) <= CONV_STD_LOGIC_VECTOR(ETM_PT_LUT(CONV_INTEGER(pt_i(i))), ETM_PT_VECTOR_WIDTH);
             conv_2_mu_phi_integer(i) <= CALO_PHI_CONV_2_MU_PHI_LUT(CONV_INTEGER(phi_i(i)));
         end generate etm_i;       
+        htm_i: if (OBJ_T = htm_t) generate
+            pt_i(i)(HTM_PT_HIGH-HTM_PT_LOW downto 0) <= pt(i)(HTM_PT_HIGH-HTM_PT_LOW downto 0); 
+            phi_i(i)(HTM_PHI_HIGH-HTM_PHI_LOW downto 0) <= phi(i)(HTM_PHI_HIGH-HTM_PHI_LOW downto 0); 
+            pt_vector(i)(HTM_PT_VECTOR_WIDTH-1 downto 0) <= CONV_STD_LOGIC_VECTOR(HTM_PT_LUT(CONV_INTEGER(pt_i(i))), HTM_PT_VECTOR_WIDTH);
+            conv_2_mu_phi_integer(i) <= CALO_PHI_CONV_2_MU_PHI_LUT(CONV_INTEGER(phi_i(i)));
+        end generate htm_i;       
+        etmhf_i: if (OBJ_T = etmhf_t) generate
+            pt_i(i)(ETMHF_PT_HIGH-ETMHF_PT_LOW downto 0) <= pt(i)(ETMHF_PT_HIGH-ETMHF_PT_LOW downto 0); 
+            phi_i(i)(ETMHF_PHI_HIGH-ETMHF_PHI_LOW downto 0) <= phi(i)(ETMHF_PHI_HIGH-ETMHF_PHI_LOW downto 0); 
+            pt_vector(i)(ETMHF_PT_VECTOR_WIDTH-1 downto 0) <= CONV_STD_LOGIC_VECTOR(ETMHF_PT_LUT(CONV_INTEGER(pt_i(i))), ETMHF_PT_VECTOR_WIDTH);
+            conv_2_mu_phi_integer(i) <= CALO_PHI_CONV_2_MU_PHI_LUT(CONV_INTEGER(phi_i(i)));
+        end generate etmhf_i;       
         muon_i: if (OBJ_T = mu_t) generate
             pt_i(i)(MU_PT_HIGH-MU_PT_LOW downto 0) <= pt(i)(MU_PT_HIGH-MU_PT_LOW downto 0); 
             eta_i(i)(MU_ETA_HIGH-MU_ETA_LOW downto 0) <= eta(i)(MU_ETA_HIGH-MU_ETA_LOW downto 0); 
