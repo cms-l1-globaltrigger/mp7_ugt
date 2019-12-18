@@ -2,6 +2,7 @@
 -- Correlation conditions
 
 -- Version-history:
+-- HB 2019-12-18: Improved logic.
 -- HB 2019-08-29: Removed unused generics.
 -- HB 2019-07-16: Cleaned up.
 -- HB 2019-06-28: Changed types, inserted use clause.
@@ -39,22 +40,12 @@ architecture rtl of correlation_conditions is
 
     constant N_SLICE_1 : positive := SLICES(1)(1) - SLICES(1)(0) + 1;
     constant N_SLICE_2 : positive := SLICES(2)(1) - SLICES(2)(0) + 1;
-    signal cc_double_i : muon_cc_double_std_logic_array := (others => (others => '1'));
     signal cond_and_or, cond_o_v : std_logic_vector(0 to 0);
 
 begin
 
--- Creating internal charge correlations for muon objects
-    cc_i: if CHARGE_CORR_SEL generate
-        l1: for i in 0 to N_MUON_OBJECTS-1 generate
-            l2: for j in 0 to N_MUON_OBJECTS-1 generate
-                cc_double_i(i,j) <= charge_corr_double(i,j);
-             end generate;    
-        end generate;    
-    end generate;    
-
 -- AND-OR matrix
-    and_or_p: process(in_1, in_2, deta, dphi, delta_r, inv_mass, trans_mass, tbpt, cc_double_i)
+    and_or_p: process(in_1, in_2, deta, dphi, delta_r, inv_mass, trans_mass, tbpt, charge_corr_double)
         variable index : integer := 0;
         variable and_vec : std_logic_vector((N_SLICE_1*N_SLICE_2) downto 1) := (others => '0');
         variable tmp : std_logic := '0';
@@ -67,7 +58,7 @@ begin
                 index := index + 1;
                 if CHARGE_CORR_SEL then
                     and_vec(index) := in_1(i) and in_2(j) and deta(i,j) and dphi(i,j) and delta_r(i,j) and 
-                        inv_mass(i,j) and trans_mass(i,j) and tbpt(i,j) and cc_double_i(i,j);
+                        inv_mass(i,j) and trans_mass(i,j) and tbpt(i,j) and charge_corr_double(i,j);
                 else
                     and_vec(index) := in_1(i) and in_2(j) and deta(i,j) and dphi(i,j) and delta_r(i,j) and 
                         inv_mass(i,j) and trans_mass(i,j) and tbpt(i,j);

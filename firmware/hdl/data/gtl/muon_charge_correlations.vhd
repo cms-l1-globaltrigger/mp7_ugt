@@ -2,7 +2,8 @@
 -- Calculation of charge correlations for muon conditions.
 
 -- Version history:
--- HB 2019-12-10: Replaces "MUON/muon" by "MU/mu"
+-- HB 2019-12-18: Improved logic.
+-- HB 2019-12-10: Replaces "MUON/muon" by "MU/mu".
 -- HB 2019-10-31: Added comments: table of charge correlations.
 -- HB 2018-11-26: First design.
 
@@ -25,6 +26,7 @@ end muon_charge_correlations;
 
 architecture rtl of muon_charge_correlations is
     
+    signal charge_bits1, charge_bits2 : muon_charge_bits_array;
 begin
 
 -- *********************************************************
@@ -35,7 +37,7 @@ begin
 -- charge_sign = '0' => positive muon
 -- charge_sign = '1' => negative muon
 -- *********************************************************
--- "like sign" (LS) = 1, "opposite sign" (OS) = 2, "not valid charge" = 0
+-- "like sign" (CC_LS) = "01", "opposite sign" (CC_OS) = "10", "not valid charge" (CC_NOT_VALID) = "00"
 -- *********************************************************
 
 -- cc_double:
@@ -74,57 +76,47 @@ begin
  
 -- *********************************************************
  
-    charge_corr_p: process(in_1, in_2)
-        variable charge_bits_obj_1, charge_bits_obj_2 : muon_charge_bits_array;
-    begin
-        for i in N_MU_OBJECTS-1 downto 0 loop
-            for j in N_MU_OBJECTS-1 downto 0 loop
--- HB 2019-10-31: charge correlation for different Bx needed for muon muon correlation conditions, therefore in_2 used for cc_double.
-                charge_bits_obj_1(i) := in_1(i)(MU_CHARGE_WIDTH-1 downto 0);
-                charge_bits_obj_2(i) := in_2(i)(MU_CHARGE_WIDTH-1 downto 0);
-                if (charge_bits_obj_1(i)(1)='1' and charge_bits_obj_2(j)(1)='1') then
-                    if charge_bits_obj_1(i)(0)='1' and charge_bits_obj_2(j)(0)='1' then
-                        cc_double(i,j) <= CC_LS;
-                    elsif charge_bits_obj_1(i)(0)='0' and charge_bits_obj_2(j)(0)='0' then
-                        cc_double(i,j) <= CC_LS;
-                    else
-                        cc_double(i,j) <= CC_OS;                        
-                    end if;
-                else
-                    cc_double(i,j) <= CC_NOT_VALID;                                            
-                end if;
-                for k in N_MU_OBJECTS-1 downto 0 loop
-                    if (j/=i and k/=i and k/=j) then
-                        if charge_bits_obj_1(i)(1)='1' and charge_bits_obj_1(j)(1)='1' and charge_bits_obj_1(k)(1)='1' then
-                            if charge_bits_obj_1(i)(0)='1' and charge_bits_obj_1(j)(0)='1' and charge_bits_obj_1(k)(0)='1' then
-                                cc_triple(i,j,k) <= CC_LS;
-                            elsif charge_bits_obj_1(i)(0)='0' and charge_bits_obj_1(j)(0)='0' and charge_bits_obj_1(k)(0)='0' then
-                                cc_triple(i,j,k) <= CC_LS;
-                            else
-                                cc_triple(i,j,k) <= CC_OS;                        
-                            end if;
-                        else
-                            cc_triple(i,j,k) <= CC_NOT_VALID;                                            
-                        end if;
-                    end if;
-                    for l in N_MU_OBJECTS-1 downto 0 loop
-                        if (j/=i and k/=i and k/=j and l/=i and l/=j and l/=k) then
-                            if charge_bits_obj_1(i)(1)='1' and charge_bits_obj_1(j)(1)='1' and charge_bits_obj_1(k)(1)='1' and charge_bits_obj_1(l)(1)='1' then
-                                if charge_bits_obj_1(i)(0)='1' and charge_bits_obj_1(j)(0)='1' and charge_bits_obj_1(k)(0)='1' and charge_bits_obj_1(l)(0)='1' then
-                                    cc_quad(i,j,k,l) <= CC_LS;
-                                elsif charge_bits_obj_1(i)(0)='0' and charge_bits_obj_1(j)(0)='0' and charge_bits_obj_1(k)(0)='0' and charge_bits_obj_1(l)(0)='0' then
-                                    cc_quad(i,j,k,l) <= CC_LS;
-                                else
-                                    cc_quad(i,j,k,l) <= CC_OS;                        
-                                end if;
-                            else
-                                cc_quad(i,j,k,l) <= CC_NOT_VALID;                                            
-                            end if;
-                        end if;
-                    end loop;
-                end loop;
-            end loop;
-        end loop;
-    end process charge_corr_p;
+    charge_bits_l: for i in 0 to N_MU_OBJECTS-1 generate 
+        charge_bits1(i) <= in_1(i)(MU_CHARGE_WIDTH-1 downto 0);
+        charge_bits2(i) <= in_2(i)(MU_CHARGE_WIDTH-1 downto 0);
+    end generate charge_bits_l;
+    
+    loop_2_1: for i in 0 to N_MU_OBJECTS-1 generate 
+        loop_2_2: for j in 0 to N_MU_OBJECTS-1 generate
+-- HB 2015-11-20: charge correlation for different Bx needed for muon muon correlation conditions, therefore removed "if j/=i generate"
+            cc_double(i,j) <= CC_NOT_VALID when charge_bits1(i)(MU_CHARGE_WIDTH-1) = '0' or charge_bits2(j)(MU_CHARGE_WIDTH-1) = '0' else -- : not valid
+                              CC_LS when charge_bits1(i) = "10" and charge_bits2(j) = "10" else -- + + : LS both positive muons
+                              CC_LS when charge_bits1(i) = "11" and charge_bits2(j) = "11" else -- - - : LS both negative muons
+                              CC_OS;
+        end generate loop_2_2;
+    end generate loop_2_1;
+    
+    loop_3_1: for i in 0 to N_MU_OBJECTS-1 generate 
+        loop_3_2: for j in 0 to N_MU_OBJECTS-1 generate 
+            loop_3_3: for k in 0 to N_MU_OBJECTS-1 generate 
+                if_3: if (j/=i and k/=i and k/=j) generate
+                    cc_triple(i,j,k) <= CC_NOT_VALID when charge_bits1(i)(MU_CHARGE_WIDTH-1) = '0' else -- : not valid
+                                        CC_LS when charge_bits1(i) = "10" and charge_bits1(j) = "10" and charge_bits1(k) = "10" else -- + + + : LS three muons of positive charge
+                                        CC_LS when charge_bits1(i) = "11" and charge_bits1(j) = "11" and charge_bits1(k) = "11" else -- - - - : LS three muons of negative charge
+                                        CC_OS;
+                end generate if_3;
+            end generate loop_3_3;
+        end generate loop_3_2;
+    end generate loop_3_1;
+    
+    loop_4_1: for i in 0 to N_MU_OBJECTS-1 generate 
+        loop_4_2: for j in 0 to N_MU_OBJECTS-1 generate 
+            loop_4_3: for k in 0 to N_MU_OBJECTS-1 generate 
+                loop_4_4: for l in 0 to N_MU_OBJECTS-1 generate 
+                    if_4: if (j/=i and k/=i and k/=j and l/=i and l/=j and l/=k) generate
+                        cc_quad(i,j,k,l) <= CC_NOT_VALID when charge_bits1(i)(MU_CHARGE_WIDTH-1) = '0' else -- : not valid
+                                            CC_LS when charge_bits1(i) = "10" and charge_bits1(j) = "10" and charge_bits1(k) = "10" and charge_bits1(l) = "10" else -- + + + + : LS four muons of positive charge
+                                            CC_LS when charge_bits1(i) = "11" and charge_bits1(j) = "11" and charge_bits1(k) = "11" and charge_bits1(l) = "11" else -- - - - - : LS four muons of negative charge
+                                        CC_OS;
+                    end generate if_4;
+                end generate loop_4_4;
+            end generate loop_4_3;
+        end generate loop_4_2;
+    end generate loop_4_1;
     
 end architecture rtl;
