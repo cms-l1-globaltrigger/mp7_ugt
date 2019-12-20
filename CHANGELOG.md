@@ -8,11 +8,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 Versions of ugt with new GTL structure (v2.0.0 and higher)
 
-### [v2.4.6] - 2019-12-11
+### [v2.4.6] - 2019-12-20
 
 #### Comment
 
-- mp7_ugt firmware release v2.4.6
+- mp7_ugt firmware release v2.4.6 (replacing MUON/muon by MU/mu, bug fix bx function, added esums to bx pipeline, updated use of charge correlation in conditions, updated transverse mass calculation)
 
 #### Changed
 - source file:
