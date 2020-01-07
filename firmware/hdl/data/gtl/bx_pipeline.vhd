@@ -2,6 +2,7 @@
 -- Pipeline for +/-2 bx data.
 
 -- Version-history: 
+-- HB 2020-01-07: Bug fix for esums
 -- HB 2019-12-10: Replaces "MUON/muon" by "MU/mu"
 -- HB 2019-06-27: Changed type of conversion outputs.
 -- HB 2019-03-07: used records for pipeline and conversion data.
@@ -77,16 +78,16 @@ begin
         
         data_pipe_o.ettem(i).pt(0)(data_tmp(i).ettem.pt'length-1 downto 0) <= data_tmp(i).ettem.pt;
         
-        data_pipe_o.etm(i).pt(0)(data_tmp(i).etm.pt'length-1 downto 0) <= data_tmp(i).etm.pt;
-        data_pipe_o.etm(i).phi(0)(data_tmp(i).etm.phi'length-1 downto 0) <= data_tmp(i).etm.phi;
+        data_pipe_internal.etm(i).pt(0)(data_tmp(i).etm.pt'length-1 downto 0) <= data_tmp(i).etm.pt;
+        data_pipe_internal.etm(i).phi(0)(data_tmp(i).etm.phi'length-1 downto 0) <= data_tmp(i).etm.phi;
         
         data_pipe_o.htt(i).pt(0)(data_tmp(i).htt.pt'length-1 downto 0) <= data_tmp(i).htt.pt;
         
-        data_pipe_o.htm(i).pt(0)(data_tmp(i).htm.pt'length-1 downto 0) <= data_tmp(i).htm.pt;
-        data_pipe_o.htm(i).phi(0)(data_tmp(i).htm.phi'length-1 downto 0) <= data_tmp(i).htm.phi;
+        data_pipe_internal.htm(i).pt(0)(data_tmp(i).htm.pt'length-1 downto 0) <= data_tmp(i).htm.pt;
+        data_pipe_internal.htm(i).phi(0)(data_tmp(i).htm.phi'length-1 downto 0) <= data_tmp(i).htm.phi;
         
-        data_pipe_o.etmhf(i).pt(0)(data_tmp(i).etmhf.pt'length-1 downto 0) <= data_tmp(i).etmhf.pt;
-        data_pipe_o.etmhf(i).phi(0)(data_tmp(i).etmhf.phi'length-1 downto 0) <= data_tmp(i).etmhf.phi;
+        data_pipe_internal.etmhf(i).pt(0)(data_tmp(i).etmhf.pt'length-1 downto 0) <= data_tmp(i).etmhf.pt;
+        data_pipe_internal.etmhf(i).phi(0)(data_tmp(i).etmhf.phi'length-1 downto 0) <= data_tmp(i).etmhf.phi;
         
         data_pipe_o.htmhf(i).pt(0)(data_tmp(i).htmhf.pt'length-1 downto 0) <= data_tmp(i).htmhf.pt;
         data_pipe_o.htmhf(i).phi(0)(data_tmp(i).htmhf.phi'length-1 downto 0) <= data_tmp(i).htmhf.phi;
@@ -209,11 +210,14 @@ begin
             
     end generate bx_l;
     
--- Output bx pipeline object parameters (mu, eg, jet and tau)
+-- Output bx pipeline object parameters (mu, eg, jet, tau and esums)
 
     data_pipe_o.mu <= data_pipe_internal.mu;
     data_pipe_o.eg <= data_pipe_internal.eg;
     data_pipe_o.jet <= data_pipe_internal.jet;
     data_pipe_o.tau <= data_pipe_internal.tau;
+    data_pipe_o.etm <= data_pipe_internal.etm;
+    data_pipe_o.htm <= data_pipe_internal.htm;
+    data_pipe_o.etmhf <= data_pipe_internal.etmhf;
 
 end architecture rtl;

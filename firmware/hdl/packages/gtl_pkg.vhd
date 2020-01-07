@@ -2,7 +2,8 @@
 -- Package for constant and type definitions of GTL firmware in Global Trigger Upgrade system.
 
 -- Version-history:
--- HB 2019-12-10: Replaces "MUON/muon" by "MU/mu"
+-- HB 2019-12-20: Bug fix in function bx.
+-- HB 2019-12-10: Replaces "MUON/muon" by "MU/mu".
 -- HB 2019-11-12: Bug fix in function bx.
 -- HB 2019-11-07: Inserted N_MU_OBJECTS.
 -- HB 2019-09-06: Inserted comp_mode_cc.
