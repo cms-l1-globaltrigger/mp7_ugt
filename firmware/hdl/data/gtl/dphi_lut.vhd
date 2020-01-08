@@ -2,6 +2,7 @@
 -- Differences in phi (for dphi and deltaR).
 
 -- Version-history:
+-- HB 2020-01-08: Full matrix for diff_phi_i.
 -- HB 2019-10-31: Changed name.
 -- HB 2019-08-27: Cases for "same objects" and "different objects" (less resources for "same objects").
 -- HB 2019-08-22: Updated instance luts_corr_cuts.
@@ -30,16 +31,19 @@ end dphi_lut;
 architecture rtl of dphi_lut is
 
     type diff_phi_i_array is array (0 to N_OBJ_1-1, 0 to N_OBJ_2-1) of std_logic_vector(MAX_COSH_COS_WIDTH-1 downto 0);
-    signal diff_phi_i : diff_phi_i_array := (others => (others => (others => '0')));
+    signal diff_phi_temp, diff_phi_i : diff_phi_i_array := (others => (others => (others => '0')));
 
 begin
 
     l_1: for i in 0 to N_OBJ_1-1 generate
         l_2: for j in 0 to N_OBJ_2-1 generate
             same_obj_t: if (OBJ(1) = OBJ(2)) and j>i generate
+-- less resources
                 lut_i : entity work.luts_corr_cuts
                     generic map(OBJ, deltaPhi)  
-                    port map(sub_phi(i,j), diff_phi_i(i,j));
+                    port map(sub_phi(i,j), diff_phi_temp(i,j));
+                    diff_phi_i(i,j) <= diff_phi_temp(i,j);
+                    diff_phi_i(j,1) <= diff_phi_temp(i,j);
             end generate same_obj_t;    
             diff_obj_t: if (OBJ(1) /= OBJ(2)) generate
                 lut_i : entity work.luts_corr_cuts

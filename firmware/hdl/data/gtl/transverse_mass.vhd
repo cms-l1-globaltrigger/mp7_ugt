@@ -2,6 +2,7 @@
 -- Calculation of transverse mass based on LUTs.
 
 -- Version history:
+-- HB 2020-01-08: Full matrix for transverse_mass_sq_div.
 -- HB 2019-11-16: Inserted trans_mass_calc, updated and cleaned code.
 -- HB 2019-08-20: Changed types.
 -- HB 2019-01-14: No output register.
@@ -35,7 +36,7 @@ architecture rtl of transverse_mass is
 
     constant MASS_WIDTH : positive := PT1_WIDTH+PT2_WIDTH+COSH_COS_WIDTH;
     type mass_vector_i_array is array (0 to N_OBJ_1-1, 0 to N_OBJ_2-1) of std_logic_vector(MASS_WIDTH-1 downto 0);
-    signal transverse_mass_sq_div2 : mass_vector_i_array := (others => (others => (others => '0')));
+    signal transverse_mass_sq_div2_temp, transverse_mass_sq_div2 : mass_vector_i_array := (others => (others => (others => '0')));
     signal cos_dphi_i : cosh_cos_vector_array;
     
 begin
@@ -47,13 +48,16 @@ begin
                 cos_dphi_i(i,j)(k) <= cos_dphi(i,j,k);
             end generate conv_i;
             same_obj_t: if (OBJ(1) = OBJ(2)) and j>i generate
+-- less resources
                 mass_calc_i : entity work.trans_mass_calc
                     generic map(PT1_WIDTH, PT2_WIDTH, COSH_COS_WIDTH, COSH_COS_PREC, MASS_WIDTH)  
                     port map(
                         pt1(i)(PT1_WIDTH-1 downto 0), pt2(j)(PT2_WIDTH-1 downto 0),
                         cos_dphi_i(i,j)(COSH_COS_WIDTH-1 downto 0),
-                        transverse_mass_sq_div2(i,j)
+                        transverse_mass_sq_div2_temp(i,j)
                     );
+                    transverse_mass_sq_div2(i,j) <= transverse_mass_sq_div2_temp(i,j); 
+                    transverse_mass_sq_div2(j,i) <= transverse_mass_sq_div2_temp(i,j); 
             end generate same_obj_t;    
             diff_obj_t: if (OBJ(1) /= OBJ(2)) generate
                 mass_calc_i : entity work.trans_mass_calc

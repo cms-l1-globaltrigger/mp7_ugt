@@ -2,6 +2,7 @@
 -- Comparators for correlation cuts comparisons.
 
 -- Version-history:
+-- HB 2020-01-08: Full matrix for comp.
 -- HB 2019-08-27: Cases for "same objects" and "different objects" (less resources for "same objects").
 -- HB 2019-08-22: Updated for comp_unsigned.
 -- HB 2019-06-27: Changed type of inputs.
@@ -36,7 +37,7 @@ architecture rtl of comparators_corr_cuts is
     type data_vec_array is array(0 to N_OBJ_1-1, 0 to N_OBJ_2-1) of std_logic_vector(DATA_WIDTH-1 downto 0);
     signal data_vec, data_vec_i : data_vec_array;
     type comp_array is array (0 to N_OBJ_1-1, 0 to N_OBJ_2-1) of std_logic;
-    signal comp : comp_array := (others => (others => '0'));
+    signal comp_temp, comp : comp_array := (others => (others => '0'));
     type comp_i_array is array (0 to N_OBJ_1, 0 to N_OBJ_2-1) of std_logic_vector(0 downto 0);
     signal comp_i : comp_i_array;
     signal comp_r : comp_i_array;
@@ -52,9 +53,12 @@ begin
                 generic map(DATA_WIDTH, IN_REG_COMP)  
                 port map(clk, data_vec(i,j), data_vec_i(i,j));                
             same_obj_t: if (OBJ(1) = OBJ(2)) and j>i generate
+-- less resources
                 comp_unsigned_i: entity work.comp_unsigned
                     generic map(MODE, MIN_I, MAX_I)  
-                    port map(data_vec_i(i,j), comp(i,j));
+                    port map(data_vec_i(i,j), comp_temp(i,j));
+                    comp(i,j) <= comp_temp(i,j);
+                    comp(j,i) <= comp_temp(i,j);
             end generate same_obj_t;    
             diff_obj_t: if (OBJ(1) /= OBJ(2)) generate
                 comp_unsigned_i: entity work.comp_unsigned
