@@ -17,6 +17,7 @@ entity dphi_calc is
         N_OBJ_1 : positive;
         N_OBJ_2 : positive;
         OBJ : obj_type_array;
+        BX : bx_array;
         PHI_HALF_RANGE : positive
     );
     port(
@@ -35,11 +36,11 @@ begin
 -- HB 2019-08-27: REMARK - using module sub_phi_calc.vhd needs more resources!
     loop_1: for i in 0 to N_OBJ_1-1 generate
         loop_2: for j in 0 to N_OBJ_2-1 generate
-            same_obj_t: if (OBJ(1) = OBJ(2)) and j>i generate
+            same_obj_t: if (OBJ(1) = OBJ(2)) and (BX(1) = BX(2)) and j>i generate
                 sub_temp(i,j) <= abs(phi_1(i) - phi_2(j));
                 sub_phi_o(i,j) <= sub_temp(i,j) when (sub_temp(i,j) < PHI_HALF_RANGE) else (PHI_HALF_RANGE*2-sub_temp(i,j));
             end generate same_obj_t;    
-            diff_obj_t: if (OBJ(1) /= OBJ(2)) generate
+            diff_obj_t: if (OBJ(1) /= OBJ(2)) or ((OBJ(1) = OBJ(2)) and (BX(1) /= BX(2))) generate
                 sub_temp(i,j) <= abs(phi_1(i) - phi_2(j));
                 sub_phi_o(i,j) <= sub_temp(i,j) when (sub_temp(i,j) < PHI_HALF_RANGE) else (PHI_HALF_RANGE*2-sub_temp(i,j));
             end generate diff_obj_t;    

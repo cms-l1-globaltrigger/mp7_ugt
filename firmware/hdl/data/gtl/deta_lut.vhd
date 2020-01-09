@@ -20,7 +20,8 @@ entity deta_lut is
     generic(
         N_OBJ_1 : positive;
         N_OBJ_2 : positive;
-        OBJ : obj_type_array
+        OBJ : obj_type_array;
+        BX : bx_array
     );
     port(
         sub_eta : in max_eta_range_array;
@@ -37,7 +38,7 @@ begin
 
     l_1: for i in 0 to N_OBJ_1-1 generate
         l_2: for j in 0 to N_OBJ_2-1 generate
-            same_obj_t: if (OBJ(1) = OBJ(2)) and j>i generate
+            same_obj_t: if (OBJ(1) = OBJ(2)) and (BX(1) = BX(2)) and j>i generate
 -- less resources
                 lut_i : entity work.luts_corr_cuts
                     generic map(OBJ, deltaEta)  
@@ -45,7 +46,7 @@ begin
                     diff_eta_i(i,j) <= diff_eta_temp(i,j);
                     diff_eta_i(j,1) <= diff_eta_temp(i,j);
             end generate same_obj_t;    
-            diff_obj_t: if (OBJ(1) /= OBJ(2)) generate
+            diff_obj_t: if (OBJ(1) /= OBJ(2)) or ((OBJ(1) = OBJ(2)) and (BX(1) /= BX(2))) generate
                 lut_i : entity work.luts_corr_cuts
                     generic map(OBJ, deltaEta)  
                     port map(sub_eta(i,j), diff_eta_i(i,j));

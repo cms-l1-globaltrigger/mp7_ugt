@@ -8,17 +8,26 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 Versions of ugt with new GTL structure (v2.0.0 and higher)
 
-### [v2.4.6] - 2020-01-07
+### [v2.4.6] - 2020-01-09
 
 #### Comment
 
-- mp7_ugt firmware release v2.4.6 (replacing MUON/muon by MU/mu, bug fix bx function, added esums to bx pipeline, updated use of charge correlation in conditions, updated transverse mass calculation)
+- mp7_ugt firmware release v2.4.6 (replacing MUON/muon by MU/mu, bug fix in bx function, added esums to bx pipeline, updated use of charge correlation in conditions, updated transverse mass calculation, inserted bx-bx combination for correlations)
 
 #### Changed
 - source file:
   - ../hdl/data/gtl/comparators_obj_cuts.vhd
   - ../hdl/packages/gt_mp7_core_pkg.vhd
   - ../hdl/data/gtl/bx_pipeline.vhd
+  - ../hdl/data/gtl/cos_dphi_lut.vhd
+  - ../hdl/data/gtl/cosh_deta_lut.vhd
+  - ../hdl/data/gtl/delta_r.vhd
+  - ../hdl/data/gtl/deta_calc.vhd
+  - ../hdl/data/gtl/deta_lut.vhd
+  - ../hdl/data/gtl/dphi_calc.vhd
+  - ../hdl/data/gtl/dphi_lut.vhd
+  - ../hdl/data/gtl/invariant_mass.vhd
+  - ../hdl/data/gtl/transverse_mass.vhd
 - source file (replacing MUON/muon by MU/mu):
   - ../hdl/data/gtl/gtl_fdl_wrapper.vhd
   - ../hdl/data/gtl/comp_unsigned.vhd
@@ -30,6 +39,7 @@ Versions of ugt with new GTL structure (v2.0.0 and higher)
   - ../hdl/packages/lut_pkg.vhd
 - script:
   - ../scripts/runIpbbSynth.py
+  - ../scripts/run_simulation_questa.py
 
 ### [v2.4.5] - 2019-11-14
 

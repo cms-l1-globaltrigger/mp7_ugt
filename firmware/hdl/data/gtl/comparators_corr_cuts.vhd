@@ -18,6 +18,7 @@ entity comparators_corr_cuts is
         N_OBJ_1 : positive;
         N_OBJ_2 : positive;
         OBJ : obj_type_array;
+        BX : bx_array;
         DATA_WIDTH : positive;
         MODE : comp_mode;
         MIN_REQ : std_logic_vector(MAX_CORR_CUTS_WIDTH-1 downto 0) := (others => '0');
@@ -52,7 +53,7 @@ begin
             in_reg_i : entity work.reg_mux
                 generic map(DATA_WIDTH, IN_REG_COMP)  
                 port map(clk, data_vec(i,j), data_vec_i(i,j));                
-            same_obj_t: if (OBJ(1) = OBJ(2)) and j>i generate
+            same_obj_t: if (OBJ(1) = OBJ(2)) and (BX(1) = BX(2)) and j>i generate
 -- less resources
                 comp_unsigned_i: entity work.comp_unsigned
                     generic map(MODE, MIN_I, MAX_I)  
@@ -60,7 +61,7 @@ begin
                     comp(i,j) <= comp_temp(i,j);
                     comp(j,i) <= comp_temp(i,j);
             end generate same_obj_t;    
-            diff_obj_t: if (OBJ(1) /= OBJ(2)) generate
+            diff_obj_t: if (OBJ(1) /= OBJ(2)) or ((OBJ(1) = OBJ(2)) and (BX(1) /= BX(2))) generate
                 comp_unsigned_i: entity work.comp_unsigned
                     generic map(MODE, MIN_I, MAX_I)  
                     port map(data_vec_i(i,j), comp(i,j));

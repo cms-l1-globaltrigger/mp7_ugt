@@ -19,7 +19,8 @@ entity delta_r is
     generic(
         N_OBJ_1 : positive;
         N_OBJ_2 : positive;
-        OBJ : obj_type_array
+        OBJ : obj_type_array;
+        BX : bx_array
     );
     port(
         diff_eta : in corr_cuts_std_logic_array;
@@ -53,7 +54,7 @@ begin
                 diff_eta_i(i,j)(k) <= diff_eta(i,j,k);
                 diff_phi_i(i,j)(k) <= diff_phi(i,j,k);
             end generate l_3;            
-            same_obj_t: if (OBJ(1) = OBJ(2)) and j>i generate
+            same_obj_t: if (OBJ(1) = OBJ(2)) and (BX(1) = BX(2)) and j>i generate
 -- less resources
                 delta_r_calc_i : entity work.delta_r_calc
                     port map(
@@ -62,7 +63,7 @@ begin
                     dr_squared(i,j) <= dr_squared_temp(i,j);
                     dr_squared(j,i) <= dr_squared_temp(i,j);
             end generate same_obj_t;    
-            diff_obj_t: if (OBJ(1) /= OBJ(2)) generate
+            diff_obj_t: if (OBJ(1) /= OBJ(2)) or ((OBJ(1) = OBJ(2)) and (BX(1) /= BX(2))) generate
                 delta_r_calc_i : entity work.delta_r_calc
                     port map(
                         diff_eta_i(i,j), diff_phi_i(i,j), dr_squared(i,j)

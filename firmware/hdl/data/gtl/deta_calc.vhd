@@ -19,7 +19,8 @@ entity deta_calc is
     generic(
         N_OBJ_1 : positive;
         N_OBJ_2 : positive;
-        OBJ : obj_type_array
+        OBJ : obj_type_array;
+        BX : bx_array
     );
     port(
         eta_1 : in conv_integer_array;
@@ -36,10 +37,10 @@ begin
     loop_1: for i in 0 to N_OBJ_1-1 generate
         loop_2: for j in 0 to N_OBJ_2-1 generate
 -- only positive difference in eta
-            same_obj_t: if (OBJ(1) = OBJ(2)) and j>i generate
+            same_obj_t: if (OBJ(1) = OBJ(2)) and (BX(1) = BX(2)) and j>i generate
                 sub_eta_o(i,j) <= abs(eta_1(i) - eta_2(j));
             end generate same_obj_t;    
-            diff_obj_t: if (OBJ(1) /= OBJ(2)) generate
+            diff_obj_t: if (OBJ(1) /= OBJ(2)) or ((OBJ(1) = OBJ(2)) and (BX(1) /= BX(2))) generate
                 sub_eta_o(i,j) <= abs(eta_1(i) - eta_2(j));
             end generate diff_obj_t;    
         end generate loop_2;

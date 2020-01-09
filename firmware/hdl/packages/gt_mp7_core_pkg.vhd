@@ -19,7 +19,7 @@
 --  fdl: v1.3.5
 
 -- Version-history of GTL part:
--- HB 2019-12-11: v2.4.5: replaced "MUON/muon" by "MU/mu".
+-- HB 2019-12-11: v2.4.5: replaced "MUON/muon" by "MU/mu", bug fix in bx function, added esums to bx pipeline, updated use of charge correlation in conditions, updated transverse mass --                        calculation, inserted bx-bx combination for correlations.
 -- HB 2019-11-20: v2.4.4: added subtypes (for asymmetry and minimum-bias) and bug fixed in gtl_pkg.vhd. Inserted Logic for charge in comparators_obj_cuts.vhd.
 -- HB 2019-11-12: v2.4.3: bug fixed "function bx" in gtl_pkg.vhd.
 -- HB 2019-11-11: v2.4.2: bug fix in gtl_pkg.vhd.

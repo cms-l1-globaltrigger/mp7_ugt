@@ -19,6 +19,7 @@ entity invariant_mass is
         N_OBJ_1 : positive;
         N_OBJ_2 : positive;
         OBJ : obj_type_array;
+        BX : bx_array;
         PT1_WIDTH : positive;
         PT2_WIDTH : positive;
         COSH_COS_WIDTH : positive
@@ -49,7 +50,7 @@ begin
                 cosh_deta_i(i,j)(k) <= cosh_deta(i,j,k);
                 cos_dphi_i(i,j)(k) <= cos_dphi(i,j,k);
             end generate conv_i;
-            same_obj_t: if (OBJ(1) = OBJ(2)) and j>i generate
+            same_obj_t: if (OBJ(1) = OBJ(2)) and (BX(1) = BX(2)) and j>i generate
 -- less resources
                 mass_calc_i : entity work.inv_mass_calc
                     generic map(PT1_WIDTH, PT2_WIDTH, COSH_COS_WIDTH, MASS_WIDTH)  
@@ -62,7 +63,7 @@ begin
                     invariant_mass_sq_div2(i,j) <= invariant_mass_sq_div2_temp(i,j);
                     invariant_mass_sq_div2(j,i) <= invariant_mass_sq_div2_temp(i,j);
             end generate same_obj_t;    
-            diff_obj_t: if (OBJ(1) /= OBJ(2)) generate
+            diff_obj_t: if (OBJ(1) /= OBJ(2)) or ((OBJ(1) = OBJ(2)) and (BX(1) /= BX(2))) generate
                 mass_calc_i : entity work.inv_mass_calc
                     generic map(PT1_WIDTH, PT2_WIDTH, COSH_COS_WIDTH, MASS_WIDTH)  
                     port map(

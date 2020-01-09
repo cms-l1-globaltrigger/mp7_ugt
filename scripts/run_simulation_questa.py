@@ -55,6 +55,8 @@ algonum = 512#numbers of bits
 IGNORED_ALGOS = [
   'L1_FirstBunchInTrain',
   'L1_SecondBunchInTrain',
+  'L1_SecondLastBunchInTrain',
+  'L1_LastBunchInTrain',
   ]
 
 def read_file(filename):
