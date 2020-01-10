@@ -2,6 +2,7 @@
 -- Differences in eta (for deta and deltaR).
 
 -- Version-history:
+-- HB 2020-01-10: Bug fix.
 -- HB 2020-01-08: Full matrix for diff_eta_i.
 -- HB 2019-10-31: Changed name.
 -- HB 2019-08-27: Cases for "same objects" and "different objects" (less resources for "same objects").
@@ -44,7 +45,7 @@ begin
                     generic map(OBJ, deltaEta)  
                     port map(sub_eta(i,j), diff_eta_temp(i,j));
                     diff_eta_i(i,j) <= diff_eta_temp(i,j);
-                    diff_eta_i(j,1) <= diff_eta_temp(i,j);
+                    diff_eta_i(j,i) <= diff_eta_temp(i,j);
             end generate same_obj_t;    
             diff_obj_t: if (OBJ(1) /= OBJ(2)) or ((OBJ(1) = OBJ(2)) and (BX(1) /= BX(2))) generate
                 lut_i : entity work.luts_corr_cuts
