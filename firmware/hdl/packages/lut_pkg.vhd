@@ -2,6 +2,7 @@
 -- Package for LUTs of GTL firmware.
 
 -- Version history:
+-- HB 2020-01-14: Removed constants, which are defined in gtl_pkg.vhd, too.
 -- HB 2019-12-10: Replaces "MUON" by "MU"
 -- HB 2019-10-08: Changed some values in LUTs MUON_COS_PHI_LUT and MUON_SIN_PHI_LUT according to LUTs from emulator (given by Len)
 -- HB 2019-08-22: Changed lut name.
@@ -151,13 +152,6 @@ constant MU_HTM_COSH_COS_PRECISION : positive := 4; -- 4 digits after decimal po
 constant EG_MU_COSH_COS_PRECISION : positive := 4;
 constant JET_MU_COSH_COS_PRECISION : positive := 4;
 constant TAU_MU_COSH_COS_PRECISION : positive := 4;
-
-constant EG_MU_COSH_COS_VECTOR_WIDTH: positive := log2c(109487199-(-10000));
-constant JET_MU_COSH_COS_VECTOR_WIDTH: positive := log2c(109487199-(-10000));
-constant TAU_MU_COSH_COS_VECTOR_WIDTH: positive := log2c(109487199-(-10000));
-constant MU_ETM_COSH_COS_VECTOR_WIDTH: positive := log2c(109487199-(-10000));
-constant MU_ETMHF_COSH_COS_VECTOR_WIDTH: positive := log2c(109487199-(-10000));
-constant MU_HTM_COSH_COS_VECTOR_WIDTH: positive := log2c(109487199-(-10000));
 
 -- HB 2017-03-29: Muon -> type definition for twobody-pt calculation in mass_cuts.vhd
 constant MU_ETM_PT_PRECISION : positive := 1;
