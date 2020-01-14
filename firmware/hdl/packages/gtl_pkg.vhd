@@ -2,6 +2,7 @@
 -- Package for constant and type definitions of GTL firmware in Global Trigger Upgrade system.
 
 -- Version-history:
+-- HB 2020-01-14: Inserted subtypes for correlation cut with orm (eg: tau_jet_t).
 -- HB 2019-12-20: Bug fix in function bx.
 -- HB 2019-12-10: Replaces "MUON/muon" by "MU/mu".
 -- HB 2019-11-12: Bug fix in function bx.
@@ -694,9 +695,12 @@ package gtl_pkg is
     subtype eg_jet_t is corr_cuts_array(0 to N_EG_OBJECTS-1, 0 to N_JET_OBJECTS-1);
     subtype eg_tau_t is corr_cuts_array(0 to N_EG_OBJECTS-1, 0 to N_TAU_OBJECTS-1);
     subtype eg_mu_t is corr_cuts_array(0 to N_EG_OBJECTS-1, 0 to N_MU_OBJECTS-1);
+    subtype jet_eg_t is corr_cuts_array(0 to N_JET_OBJECTS-1, 0 to N_EG_OBJECTS-1);
     subtype jet_jet_t is corr_cuts_array(0 to N_JET_OBJECTS-1, 0 to N_JET_OBJECTS-1);
     subtype jet_tau_t is corr_cuts_array(0 to N_JET_OBJECTS-1, 0 to N_TAU_OBJECTS-1);
     subtype jet_mu_t is corr_cuts_array(0 to N_JET_OBJECTS-1, 0 to N_MU_OBJECTS-1);
+    subtype tau_eg_t is corr_cuts_array(0 to N_TAU_OBJECTS-1, 0 to N_EG_OBJECTS-1);
+    subtype tau_jet_t is corr_cuts_array(0 to N_TAU_OBJECTS-1, 0 to N_JET_OBJECTS-1);
     subtype tau_tau_t is corr_cuts_array(0 to N_TAU_OBJECTS-1, 0 to N_TAU_OBJECTS-1);
     subtype tau_mu_t is corr_cuts_array(0 to N_TAU_OBJECTS-1, 0 to N_MU_OBJECTS-1);
     subtype mu_mu_t is corr_cuts_array(0 to N_MU_OBJECTS-1, 0 to N_MU_OBJECTS-1);
