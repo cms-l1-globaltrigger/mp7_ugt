@@ -2,7 +2,8 @@
 -- Package for constant and type definitions of GTL firmware in Global Trigger Upgrade system.
 
 -- Version-history:
--- HB 2020-01-14: Inserted subtypes for correlation cut with orm (eg: tau_jet_t).
+-- HB 2020-01-15: Inserted additional constants for orm correlation cuts (eg: TAU_EG_DELTAETA_VECTOR_WIDTH).
+-- HB 2020-01-14: Inserted additional subtypes for correlation cut with orm (eg: tau_jet_t).
 -- HB 2019-12-20: Bug fix in function bx.
 -- HB 2019-12-10: Replaces "MUON/muon" by "MU/mu".
 -- HB 2019-11-12: Bug fix in function bx.
@@ -56,8 +57,11 @@ package gtl_pkg is
     constant EG_EG_PHI_HALF_RANGE_BINS : positive := CALO_PHI_HALF_RANGE_BINS;
     constant EG_JET_PHI_HALF_RANGE_BINS : positive := CALO_PHI_HALF_RANGE_BINS;
     constant EG_TAU_PHI_HALF_RANGE_BINS : positive := CALO_PHI_HALF_RANGE_BINS;
+    constant JET_EG_PHI_HALF_RANGE_BINS : positive := CALO_PHI_HALF_RANGE_BINS;
     constant JET_JET_PHI_HALF_RANGE_BINS : positive := CALO_PHI_HALF_RANGE_BINS;
     constant JET_TAU_PHI_HALF_RANGE_BINS : positive := CALO_PHI_HALF_RANGE_BINS;
+    constant TAU_EG_PHI_HALF_RANGE_BINS : positive := CALO_PHI_HALF_RANGE_BINS;
+    constant TAU_JET_PHI_HALF_RANGE_BINS : positive := CALO_PHI_HALF_RANGE_BINS;
     constant TAU_TAU_PHI_HALF_RANGE_BINS : positive := CALO_PHI_HALF_RANGE_BINS;
     constant EG_ETM_PHI_HALF_RANGE_BINS : positive := CALO_PHI_HALF_RANGE_BINS;
     constant EG_ETMHF_PHI_HALF_RANGE_BINS : positive := CALO_PHI_HALF_RANGE_BINS;
@@ -356,8 +360,11 @@ package gtl_pkg is
     constant EG_EG_DELTAETA_VECTOR_WIDTH: positive := DETA_DPHI_VECTOR_WIDTH;
     constant EG_JET_DELTAETA_VECTOR_WIDTH: positive := DETA_DPHI_VECTOR_WIDTH;
     constant EG_TAU_DELTAETA_VECTOR_WIDTH: positive := DETA_DPHI_VECTOR_WIDTH;
+    constant JET_EG_DELTAETA_VECTOR_WIDTH: positive := DETA_DPHI_VECTOR_WIDTH;
     constant JET_JET_DELTAETA_VECTOR_WIDTH: positive := DETA_DPHI_VECTOR_WIDTH;
     constant JET_TAU_DELTAETA_VECTOR_WIDTH: positive := DETA_DPHI_VECTOR_WIDTH;
+    constant TAU_EG_DELTAETA_VECTOR_WIDTH: positive := DETA_DPHI_VECTOR_WIDTH;
+    constant TAU_JET_DELTAETA_VECTOR_WIDTH: positive := DETA_DPHI_VECTOR_WIDTH;
     constant TAU_TAU_DELTAETA_VECTOR_WIDTH: positive := DETA_DPHI_VECTOR_WIDTH;
     constant EG_MU_DELTAETA_VECTOR_WIDTH: positive := DETA_DPHI_VECTOR_WIDTH;
     constant JET_MU_DELTAETA_VECTOR_WIDTH: positive := DETA_DPHI_VECTOR_WIDTH;
@@ -367,8 +374,11 @@ package gtl_pkg is
     constant EG_EG_DELTAPHI_VECTOR_WIDTH: positive := DETA_DPHI_VECTOR_WIDTH;
     constant EG_JET_DELTAPHI_VECTOR_WIDTH: positive := DETA_DPHI_VECTOR_WIDTH;
     constant EG_TAU_DELTAPHI_VECTOR_WIDTH: positive := DETA_DPHI_VECTOR_WIDTH;
+    constant JET_EG_DELTAPHI_VECTOR_WIDTH: positive := DETA_DPHI_VECTOR_WIDTH;
     constant JET_JET_DELTAPHI_VECTOR_WIDTH: positive := DETA_DPHI_VECTOR_WIDTH;
     constant JET_TAU_DELTAPHI_VECTOR_WIDTH: positive := DETA_DPHI_VECTOR_WIDTH;
+    constant TAU_EG_DELTAPHI_VECTOR_WIDTH: positive := DETA_DPHI_VECTOR_WIDTH;
+    constant TAU_JET_DELTAPHI_VECTOR_WIDTH: positive := DETA_DPHI_VECTOR_WIDTH;
     constant TAU_TAU_DELTAPHI_VECTOR_WIDTH: positive := DETA_DPHI_VECTOR_WIDTH;
     constant EG_MU_DELTAPHI_VECTOR_WIDTH: positive := DETA_DPHI_VECTOR_WIDTH;
     constant JET_MU_DELTAPHI_VECTOR_WIDTH: positive := DETA_DPHI_VECTOR_WIDTH;
@@ -394,8 +404,11 @@ package gtl_pkg is
     constant EG_EG_DELTAR_VECTOR_WIDTH: positive := 2*DETA_DPHI_VECTOR_WIDTH;
     constant EG_JET_DELTAR_VECTOR_WIDTH: positive := 2*DETA_DPHI_VECTOR_WIDTH;
     constant EG_TAU_DELTAR_VECTOR_WIDTH: positive := 2*DETA_DPHI_VECTOR_WIDTH;
+    constant JET_EG_DELTAR_VECTOR_WIDTH: positive := 2*DETA_DPHI_VECTOR_WIDTH;
     constant JET_JET_DELTAR_VECTOR_WIDTH: positive := 2*DETA_DPHI_VECTOR_WIDTH;
     constant JET_TAU_DELTAR_VECTOR_WIDTH: positive := 2*DETA_DPHI_VECTOR_WIDTH;
+    constant TAU_EG_DELTAR_VECTOR_WIDTH: positive := 2*DETA_DPHI_VECTOR_WIDTH;
+    constant TAU_JET_DELTAR_VECTOR_WIDTH: positive := 2*DETA_DPHI_VECTOR_WIDTH;
     constant TAU_TAU_DELTAR_VECTOR_WIDTH: positive := 2*DETA_DPHI_VECTOR_WIDTH;
     constant EG_MU_DELTAR_VECTOR_WIDTH: positive := 2*DETA_DPHI_VECTOR_WIDTH;
     constant JET_MU_DELTAR_VECTOR_WIDTH: positive := 2*DETA_DPHI_VECTOR_WIDTH;
