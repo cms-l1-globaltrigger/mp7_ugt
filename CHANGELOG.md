@@ -12,7 +12,7 @@ Versions of ugt with new GTL structure (v2.0.0 and higher)
 
 #### Comment
 
-- mp7_ugt firmware release v2.4.8 (inserted additional constants and subtypes, removed constants in lut_pkg.vhd)
+- mp7_ugt firmware release v2.4.8 (gtl_pkg.vhd: inserted additional constants and subtypes, bug fix in function bx; lut_pkg.vhd: removed constants)
 
 #### Changed
 - source file:

@@ -2,6 +2,7 @@
 -- Package for constant and type definitions of GTL firmware in Global Trigger Upgrade system.
 
 -- Version-history:
+-- HB 2019-01-22: Bug fix in function bx.
 -- HB 2020-01-15: Inserted additional constants for orm correlation cuts (eg: TAU_EG_DELTAETA_VECTOR_WIDTH).
 -- HB 2020-01-14: Inserted additional subtypes for correlation cut with orm (eg: tau_jet_t).
 -- HB 2019-12-20: Bug fix in function bx.
@@ -789,11 +790,13 @@ end package;
 
 package body gtl_pkg is
 
--- Function to convert bx values from utm (e.g.: -2 to +2) to array index of bx data (e.g.: 0 to 4)
+-- Function to convert bx values from utm (e.g.: +2 to -2) to array index of bx data (e.g.: 0 to 4)
     function bx(i : integer) return natural is
+        variable conv_val : integer := 0;
         variable bx_conv : natural := 0;
     begin
-        bx_conv := (BX_PIPELINE_STAGES/2)+i;        
+        conv_val := (BX_PIPELINE_STAGES/2)-(i*2);
+        bx_conv := i+conv_val;        
         return bx_conv;
     end function;
 
