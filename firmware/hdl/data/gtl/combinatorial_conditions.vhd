@@ -40,10 +40,10 @@ architecture rtl of combinatorial_conditions is
 
     constant index_len : positive := 4096;
     
-    constant N_SLICE_1 : positive := SLICES(1)(1) - SLICES(1)(0) + 1;
-    constant N_SLICE_2 : positive := SLICES(2)(1) - SLICES(2)(0) + 1;
-    constant N_SLICE_3 : positive := SLICES(3)(1) - SLICES(3)(0) + 1;
-    constant N_SLICE_4 : positive := SLICES(4)(1) - SLICES(4)(0) + 1;
+--     constant N_SLICE_1 : positive := SLICES(1)(1) - SLICES(1)(0) + 1;
+--     constant N_SLICE_2 : positive := SLICES(2)(1) - SLICES(2)(0) + 1;
+--     constant N_SLICE_3 : positive := SLICES(3)(1) - SLICES(3)(0) + 1;
+--     constant N_SLICE_4 : positive := SLICES(4)(1) - SLICES(4)(0) + 1;
     
     signal cond_and_or, cond_o_v : std_logic_vector(0 to 0);
 
@@ -55,18 +55,18 @@ begin
         variable and_vec1 : std_logic_vector(index_len downto 1) := (others => '0');
         variable and_vec2 : std_logic_vector(index_len*2 downto index_len+1) := (others => '0');
         variable and_vec3 : std_logic_vector(index_len*3 downto index_len*2+1) := (others => '0');
-        variable and_vec4 : std_logic_vector(index_len*4 downto index_len*3+1) := (others => '0');
-        variable tmp1, tmp2, tmp3, tmp4 : std_logic := '0';
+--         variable and_vec4 : std_logic_vector(index_len*4 downto index_len*3+1) := (others => '0');
+        variable tmp1, tmp2, tmp3 : std_logic := '0';
     begin
         index := 0;
         and_vec1 := (others => '0');
         and_vec2 := (others => '0');
         and_vec3 := (others => '0');
-        and_vec4 := (others => '0');
+--         and_vec4 := (others => '0');
         tmp1 := '0';
         tmp2 := '0';
         tmp3 := '0';
-        tmp4 := '0';
+--         tmp4 := '0';
         for i in SLICES(1)(0) to SLICES(1)(1) loop
             if N_REQ = 1 then
                 index := index + 1;
@@ -100,8 +100,8 @@ begin
                                     and_vec2(index) := comb_1(i) and comb_2(j) and comb_3(k) and comb_4(l) and charge_corr_quad(i,j,k,l);
                                 elsif index > 2*index_len and index <= 3*index_len then
                                     and_vec3(index) := comb_1(i) and comb_2(j) and comb_3(k) and comb_4(l) and charge_corr_quad(i,j,k,l);
-                                elsif index > 3*index_len and index <= 4*index_len then
-                                    and_vec4(index) := comb_1(i) and comb_2(j) and comb_3(k) and comb_4(l) and charge_corr_quad(i,j,k,l);
+--                                 elsif index > 3*index_len and index <= 4*index_len then
+--                                     and_vec4(index) := comb_1(i) and comb_2(j) and comb_3(k) and comb_4(l) and charge_corr_quad(i,j,k,l);
                                 end if;
                             else
                                 if index <= index_len then
@@ -110,8 +110,8 @@ begin
                                     and_vec2(index) := comb_1(i) and comb_2(j) and comb_3(k) and comb_4(l);
                                 elsif index > 2*index_len and index <= 3*index_len then
                                     and_vec3(index) := comb_1(i) and comb_2(j) and comb_3(k) and comb_4(l);
-                                elsif index > 3*index_len and index <= 4*index_len then
-                                    and_vec4(index) := comb_1(i) and comb_2(j) and comb_3(k) and comb_4(l);
+--                                 elsif index > 3*index_len and index <= 4*index_len then
+--                                     and_vec4(index) := comb_1(i) and comb_2(j) and comb_3(k) and comb_4(l);
                                 end if;
                             end if;
                         end if;
@@ -126,11 +126,11 @@ begin
                 tmp2 := tmp2 or and_vec2(i);
             elsif i > 2*index_len and i <= 3*index_len then
                 tmp3 := tmp3 or and_vec3(i);
-            elsif i > 3*index_len and i <= 4*index_len then
-                tmp4 := tmp4 or and_vec4(i);
+--             elsif i > 3*index_len and i <= 4*index_len then
+--                 tmp4 := tmp4 or and_vec4(i);
             end if;
         end loop;
-        cond_and_or(0) <= tmp1 or tmp2 or tmp3 or tmp4;
+        cond_and_or(0) <= tmp1 or tmp2 or tmp3;
     end process and_or_p;
 
 -- Condition output register (default setting: no register)
