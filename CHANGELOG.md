@@ -8,7 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 Versions of ugt with new GTL structure (v2.0.0 and higher)
 
-### [v2.4.9] - 2020-01-25
+### [v2.4.9] - 2020-01-28
 
 #### Comment
 
@@ -17,6 +17,8 @@ Versions of ugt with new GTL structure (v2.0.0 and higher)
 #### Changed
 - source file:
   - ../hdl/data/gtl/combinatorial_conditions.vhd
+  - ../hdl/data/gtl/combinatorial_conditions_ovrm.vhd
+  - ../hdl/packages/gt_mp7_core_pkg.vhd
   
 ### [v2.4.8] - 2020-01-15
 
