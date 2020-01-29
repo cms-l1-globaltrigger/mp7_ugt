@@ -2,7 +2,7 @@
 -- Combinatorial conditions with overlap removal
 
 -- Version-history:
--- HB 2020-01-28: Improved logic for triple and quad conditions.
+-- HB 2020-01-28: Improved logic for triple and quad conditions. Module for calos only.
 -- HB 2019-10-17: Bug fixed.
 -- HB 2019-10-14: First design.
 
@@ -18,8 +18,8 @@ entity combinatorial_conditions_ovrm is
         N_OBJ_2 : positive;
         N_REQ : positive;
         SLICES : slices_type_array;
-        SLICES_OVRM : slices_type_array;
-        CHARGE_CORR_SEL : boolean
+        SLICES_OVRM : slices_type_array
+--         CHARGE_CORR_SEL : boolean
     );
     port(
         clk : in std_logic;        
@@ -29,9 +29,9 @@ entity combinatorial_conditions_ovrm is
         comb_4 : in std_logic_vector(0 to N_OBJ_1-1) := (others => '0');
         comb_ovrm : in std_logic_vector(0 to N_OBJ_2-1) := (others => '0');
         tbpt : in corr_cuts_array(0 to N_OBJ_1-1, 0 to N_OBJ_1-1) := (others => (others => '1'));
-        charge_corr_double : in muon_cc_double_std_logic_array := (others => (others => '1'));
-        charge_corr_triple : in muon_cc_triple_std_logic_array := (others => (others => (others => '1')));
-        charge_corr_quad : in muon_cc_quad_std_logic_array := (others => (others => (others => (others => '1'))));
+--         charge_corr_double : in muon_cc_double_std_logic_array := (others => (others => '1'));
+--         charge_corr_triple : in muon_cc_triple_std_logic_array := (others => (others => (others => '1')));
+--         charge_corr_quad : in muon_cc_quad_std_logic_array := (others => (others => (others => (others => '1'))));
         deta_ovrm : in corr_cuts_array(0 to N_OBJ_1-1, 0 to N_OBJ_2-1) := (others => (others => '0'));
         dphi_ovrm : in corr_cuts_array(0 to N_OBJ_1-1, 0 to N_OBJ_2-1) := (others => (others => '0'));
         dr_ovrm : in corr_cuts_array(0 to N_OBJ_1-1, 0 to N_OBJ_2-1) := (others => (others => '0'));
@@ -53,23 +53,23 @@ architecture rtl of combinatorial_conditions_ovrm is
 
 begin
 
--- Creating internal charge correlations for muon objects
-    cc_i: if CHARGE_CORR_SEL generate
-        l1: for i in 0 to N_MUON_OBJECTS-1 generate
-            l2: for j in 0 to N_MUON_OBJECTS-1 generate
-                cc_double_i(i,j) <= charge_corr_double(i,j);
-                l3: for k in 0 to N_MUON_OBJECTS-1 generate
-                    cc_triple_i(i,j,k) <= charge_corr_triple(i,j,k);
-                    l4: for l in 0 to N_MUON_OBJECTS-1 generate
-                        cc_quad_i(i,j,k,l) <= charge_corr_quad(i,j,k,l);
-                    end generate;    
-                end generate;    
-            end generate;    
-        end generate;    
-    end generate;    
+-- -- Creating internal charge correlations for muon objects
+--     cc_i: if CHARGE_CORR_SEL generate
+--         l1: for i in 0 to N_MUON_OBJECTS-1 generate
+--             l2: for j in 0 to N_MUON_OBJECTS-1 generate
+--                 cc_double_i(i,j) <= charge_corr_double(i,j);
+--                 l3: for k in 0 to N_MUON_OBJECTS-1 generate
+--                     cc_triple_i(i,j,k) <= charge_corr_triple(i,j,k);
+--                     l4: for l in 0 to N_MUON_OBJECTS-1 generate
+--                         cc_quad_i(i,j,k,l) <= charge_corr_quad(i,j,k,l);
+--                     end generate;    
+--                 end generate;    
+--             end generate;    
+--         end generate;    
+--     end generate;    
 
 -- AND-OR matrix
-    and_or_p: process(comb_1, comb_2, comb_3, comb_4, charge_corr_double, charge_corr_triple, charge_corr_quad, tbpt)
+    and_or_p: process(comb_1, comb_2, comb_3, comb_4, tbpt)
         variable index : integer := 0;
         variable and_vec1 : std_logic_vector(index_len downto 1) := (others => '0');
         variable and_vec2 : std_logic_vector(index_len*2 downto index_len+1) := (others => '0');
@@ -95,7 +95,7 @@ begin
                 for j in SLICES(2)(0) to SLICES(2)(1) loop
                     if N_REQ = 2 and (j/=i) then
                         index := index + 1;
-                        and_vec1(index) := comb_1(i) and comb_2(j) and cc_double_i(i,j) and tbpt(i,j) and comb_ovrm(m) and not
+                        and_vec1(index) := comb_1(i) and comb_2(j) and tbpt(i,j) and comb_ovrm(m) and not
                         ((deta_ovrm(i,m) or dphi_ovrm(i,m) or dr_ovrm(i,m) or deta_ovrm(j,m) or dphi_ovrm(j,m) or dr_ovrm(j,m)) and comb_ovrm(m));
                     end if;
                     for k in SLICES(3)(0) to SLICES(3)(1) loop
@@ -103,15 +103,15 @@ begin
                             index := index + 1;
 -- -- HB 2020-01-28: max. objects => max. length = 12*11*10*12 = 15840/5280=3.0 => 3 and parts
                             if index <= index_len then
-                                and_vec1(index) := comb_1(i) and comb_2(j) and comb_3(k) and cc_triple_i(i,j,k) and comb_ovrm(m) and not
+                                and_vec1(index) := comb_1(i) and comb_2(j) and comb_3(k) and comb_ovrm(m) and not
                                 ((deta_ovrm(i,m) or dphi_ovrm(i,m) or dr_ovrm(i,m) or deta_ovrm(j,m) or dphi_ovrm(j,m) or dr_ovrm(j,m) or 
                                 deta_ovrm(k,m) or dphi_ovrm(k,m) or dr_ovrm(k,m)) and comb_ovrm(m));
                             elsif index > index_len and index <= 2*index_len then
-                                and_vec2(index) := comb_1(i) and comb_2(j) and comb_3(k) and cc_triple_i(i,j,k) and comb_ovrm(m) and not
+                                and_vec2(index) := comb_1(i) and comb_2(j) and comb_3(k) and comb_ovrm(m) and not
                                 ((deta_ovrm(i,m) or dphi_ovrm(i,m) or dr_ovrm(i,m) or deta_ovrm(j,m) or dphi_ovrm(j,m) or dr_ovrm(j,m) or 
                                 deta_ovrm(k,m) or dphi_ovrm(k,m) or dr_ovrm(k,m)) and comb_ovrm(m));
                             elsif index > 2*index_len and index <= 3*index_len then
-                                and_vec3(index) := comb_1(i) and comb_2(j) and comb_3(k) and cc_triple_i(i,j,k) and comb_ovrm(m) and not
+                                and_vec3(index) := comb_1(i) and comb_2(j) and comb_3(k) and comb_ovrm(m) and not
                                 ((deta_ovrm(i,m) or dphi_ovrm(i,m) or dr_ovrm(i,m) or deta_ovrm(j,m) or dphi_ovrm(j,m) or dr_ovrm(j,m) or 
                                 deta_ovrm(k,m) or dphi_ovrm(k,m) or dr_ovrm(k,m)) and comb_ovrm(m));
                             end if;
@@ -121,19 +121,19 @@ begin
                             if N_REQ = 4 and (j/=i and k/=i and k/=j and l/=i and l/=j and l/=k) then
                                 index := index + 1;
                                 if index <= index_len then
-                                    and_vec1(index) := comb_1(i) and comb_2(j) and comb_3(k) and comb_4(l) and cc_quad_i(i,j,k,l) and comb_ovrm(m) and not
+                                    and_vec1(index) := comb_1(i) and comb_2(j) and comb_3(k) and comb_4(l) and comb_ovrm(m) and not
                                     ((deta_ovrm(i,m) or dphi_ovrm(i,m) or dr_ovrm(i,m) or deta_ovrm(j,m) or dphi_ovrm(j,m) or dr_ovrm(j,m) or
                                     deta_ovrm(k,m) or dphi_ovrm(k,m) or dr_ovrm(k,m) or deta_ovrm(l,m) or dphi_ovrm(l,m) or dr_ovrm(l,m)) and comb_ovrm(m));
                                 elsif index > index_len and index <= 2*index_len then
-                                    and_vec2(index) := comb_1(i) and comb_2(j) and comb_3(k) and comb_4(l) and cc_quad_i(i,j,k,l) and comb_ovrm(m) and not
+                                    and_vec2(index) := comb_1(i) and comb_2(j) and comb_3(k) and comb_4(l) and comb_ovrm(m) and not
                                     ((deta_ovrm(i,m) or dphi_ovrm(i,m) or dr_ovrm(i,m) or deta_ovrm(j,m) or dphi_ovrm(j,m) or dr_ovrm(j,m) or
                                     deta_ovrm(k,m) or dphi_ovrm(k,m) or dr_ovrm(k,m) or deta_ovrm(l,m) or dphi_ovrm(l,m) or dr_ovrm(l,m)) and comb_ovrm(m));
                                 elsif index > 2*index_len and index <= 3*index_len then
-                                    and_vec3(index) := comb_1(i) and comb_2(j) and comb_3(k) and comb_4(l) and cc_quad_i(i,j,k,l) and comb_ovrm(m) and not
+                                    and_vec3(index) := comb_1(i) and comb_2(j) and comb_3(k) and comb_4(l) and comb_ovrm(m) and not
                                     ((deta_ovrm(i,m) or dphi_ovrm(i,m) or dr_ovrm(i,m) or deta_ovrm(j,m) or dphi_ovrm(j,m) or dr_ovrm(j,m) or
                                     deta_ovrm(k,m) or dphi_ovrm(k,m) or dr_ovrm(k,m) or deta_ovrm(l,m) or dphi_ovrm(l,m) or dr_ovrm(l,m)) and comb_ovrm(m));
                                 elsif index > 3*index_len and index <= 4*index_len then
-                                    and_vec4(index) := comb_1(i) and comb_2(j) and comb_3(k) and comb_4(l) and cc_quad_i(i,j,k,l) and comb_ovrm(m) and not
+                                    and_vec4(index) := comb_1(i) and comb_2(j) and comb_3(k) and comb_4(l) and comb_ovrm(m) and not
                                     ((deta_ovrm(i,m) or dphi_ovrm(i,m) or dr_ovrm(i,m) or deta_ovrm(j,m) or dphi_ovrm(j,m) or dr_ovrm(j,m) or
                                     deta_ovrm(k,m) or dphi_ovrm(k,m) or dr_ovrm(k,m) or deta_ovrm(l,m) or dphi_ovrm(l,m) or dr_ovrm(l,m)) and comb_ovrm(m));
                                 end if;
