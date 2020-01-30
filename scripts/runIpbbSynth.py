@@ -277,7 +277,9 @@ def main():
     build_raw = args.build.split("x", 1)
     config.set('menu', 'build', build_raw[1])
 
-    config.set('menu', 'name', menu_name)
+    # Take args.menuname with distribution number
+    config.set('menu', 'name', args.menuname)    
+    # config.set('menu', 'name', menu_name)
     config.set('menu', 'location', url_menu)
     config.set('menu', 'modules', modules)
 
