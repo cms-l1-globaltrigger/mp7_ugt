@@ -2,7 +2,8 @@
 -- Package for constant and type definitions of GTL firmware in Global Trigger Upgrade system.
 
 -- Version-history:
--- HB 2019-01-22: Bug fix in function bx.
+-- HB 2020-02-17: Type for mass with 3 objects.
+-- HB 2020-01-22: Bug fix in function bx.
 -- HB 2020-01-15: Inserted additional constants for orm correlation cuts (eg: TAU_EG_DELTAETA_VECTOR_WIDTH).
 -- HB 2020-01-14: Inserted additional subtypes for correlation cut with orm (eg: tau_jet_t).
 -- HB 2019-12-20: Bug fix in function bx.
@@ -663,6 +664,8 @@ package gtl_pkg is
     type sin_cos_vector_array is array (0 to MAX_N_OBJECTS-1, 0 to MAX_N_OBJECTS-1) of std_logic_vector(MAX_SIN_COS_WIDTH-1 downto 0);
     type obj_bx_sin_cos_vector_array is array (0 to BX_PIPELINE_STAGES-1, 0 to BX_PIPELINE_STAGES-1) of sin_cos_vector_array;
     
+    type mass_3_obj_array is array (natural range <>, natural range <>, natural range <>) of std_logic;
+
 -- MUON charge
     type muon_charge_bits_array is array (0 to N_MU_OBJECTS-1) of std_logic_vector(MU_CHARGE_WIDTH-1 downto 0);
     type muon_cc_double_array is array (0 to N_MU_OBJECTS-1, 0 to N_MU_OBJECTS-1) of std_logic_vector(MU_CHARGE_WIDTH-1 downto 0);
