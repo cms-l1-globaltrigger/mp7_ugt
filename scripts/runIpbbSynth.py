@@ -41,6 +41,8 @@ DefaultGitlabUrlIPB = 'https://github.com/ipbus/ipbus-firmware.git'
 
 DefaultMenuUrl = 'https://raw.githubusercontent.com/herbberg/l1menus_gtl_v2_x_y/master'
     
+DefaultMenuRepo = 'https://github.com/herbberg/l1menus_gtl_v2_x_y/tree/master'
+    
 DefaultVivadoVersion = '2018.3'
     
 DefaultIpbbVersion = '0.2.8'
@@ -82,6 +84,7 @@ def parse_args():
     parser = argparse.ArgumentParser()
     parser.add_argument('menuname', type=tb.menuname_t, help="L1Menu name (eg. 'L1Menu_Collisions2018_v2_1_0-d1')")
     parser.add_argument('--menuurl', metavar='<path>', default=DefaultMenuUrl, help="L1Menu URL to retrieve files from (default is {})".format(DefaultMenuUrl))    
+    parser.add_argument('--menurepo', metavar='<path>', default=DefaultMenuRepo, help="L1Menu repository (default is {})".format(DefaultMenuRepo))    
     parser.add_argument('--vivado', metavar='<version>', default=DefaultVivadoVersion, type=tb.vivado_t, help="Vivado version to run (default is '{}')".format(DefaultVivadoVersion))
     parser.add_argument('--ipbb', metavar='<version>', default=DefaultIpbbVersion, type=tb.ipbb_version_t, help="IPBus builder version [tag] (default is '{}')".format(DefaultIpbbVersion))
     parser.add_argument('--ipburl', metavar='<path>', default=DefaultGitlabUrlIPB, help="URL of IPB firmware repo (default is '{}')".format(DefaultGitlabUrlIPB))
@@ -279,8 +282,7 @@ def main():
 
     # Take args.menuname with distribution number
     config.set('menu', 'name', args.menuname)    
-    # config.set('menu', 'name', menu_name)
-    config.set('menu', 'location', url_menu)
+    config.set('menu', 'location', args.menurepo)
     config.set('menu', 'modules', modules)
 
     config.add_section('tme')
