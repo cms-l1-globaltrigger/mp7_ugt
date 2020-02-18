@@ -738,6 +738,11 @@ package gtl_pkg is
     subtype mu_etmhf_t is corr_cuts_array(0 to N_MU_OBJECTS-1, 0 to 0);
     subtype mu_htmhf_t is corr_cuts_array(0 to N_MU_OBJECTS-1, 0 to 0);
   
+    subtype eg_eg_eg_t is mass_3_obj_array(0 to N_EG_OBJECTS-1, 0 to N_EG_OBJECTS-1, 0 to N_EG_OBJECTS-1);
+    subtype jet_jet_jet_t is mass_3_obj_array(0 to N_JET_OBJECTS-1, 0 to N_JET_OBJECTS-1, 0 to N_JET_OBJECTS-1);
+    subtype tau_tau_tau_t is mass_3_obj_array(0 to N_TAU_OBJECTS-1, 0 to N_TAU_OBJECTS-1, 0 to N_TAU_OBJECTS-1);
+    subtype mu_mu_mu_t is mass_3_obj_array(0 to N_MU_OBJECTS-1, 0 to N_MU_OBJECTS-1, 0 to N_MU_OBJECTS-1);
+
     type default_corr_cuts_rec is record
         eg_eg : eg_eg_t;
         eg_jet : eg_jet_t;
