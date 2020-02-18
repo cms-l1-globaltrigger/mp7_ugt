@@ -20,7 +20,7 @@ entity mass_3_obj_condition is
         in_1 : in std_logic_vector(0 to N_OBJ-1);
         in_2 : in std_logic_vector(0 to N_OBJ-1);        
         in_3 : in std_logic_vector(0 to N_OBJ-1);        
-        inv_mass : in mass_3_obj_array(0 to N_OBJ-1, 0 to N_OBJ-1, 0 to N_OBJ-1) := (others => (others => (others => (others => '1'))));
+        inv_mass : in mass_3_obj_array(0 to N_OBJ-1, 0 to N_OBJ-1, 0 to N_OBJ-1) := (others => (others => (others => (others => '0'))));
         cond_o : out std_logic
     );
 end mass_3_obj_condition;
