@@ -46,8 +46,10 @@ begin
         for i in SLICES(1)(0) to SLICES(1)(1) loop
             for j in SLICES(2)(0) to SLICES(2)(1) loop
                 for k in SLICES(3)(0) to SLICES(3)(1) loop
-                    index := index + 1;
-                    and_vec(index) := in_1(i) and in_2(j) and in_3(k) and inv_mass(i,j);
+                    if j>i and k>i and k>j then
+                        index := index + 1;
+                        and_vec(index) := in_1(i) and in_2(j) and in_3(k) and inv_mass(i,j,k);
+                    end if;
                 end loop;
             end loop;
         end loop;
