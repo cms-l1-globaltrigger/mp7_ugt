@@ -62,6 +62,7 @@ src data/gtl/muon_charge_correlations.vhd
 src data/gtl/reg_mux.vhd
 src data/gtl/sum_mass_calc.vhd
 src data/gtl/comparators_mass_3_obj.vhd
+src data/gtl/mass_3_obj_condition.vhd
 #
 src data/fdl/algo_mapping_rop.vhd
 src data/fdl/fdl_module.vhd
