@@ -88,6 +88,8 @@ vcom -93 -work work $HDL_DIR/data/gtl/transverse_mass.vhd
 vcom -93 -work work $HDL_DIR/data/gtl/twobody_pt_calc.vhd
 vcom -93 -work work $HDL_DIR/data/gtl/twobody_pt.vhd
 vcom -93 -work work $HDL_DIR/data/gtl/muon_charge_correlations.vhd
+vcom -93 -work work $HDL_DIR/data/gtl/sum_mass_calc.vhd
+vcom -93 -work work $HDL_DIR/data/gtl/comparators_mass_3_obj.vhd
 
 vcom -93 -work work $MENU_DIR/l1menu.vhd
 vcom -93 -work work $HDL_DIR/data/gtl/gtl_module.vhd
