@@ -2,7 +2,7 @@
 -- Package for constant and type definitions of GTL firmware in Global Trigger Upgrade system.
 
 -- Version-history:
--- HB 2020-02-17: Type for mass with 3 objects.
+-- HB 2020-02-17: Types and subtypes for mass with 3 objects.
 -- HB 2020-01-22: Bug fix in function bx.
 -- HB 2020-01-15: Inserted additional constants for orm correlation cuts (eg: TAU_EG_DELTAETA_VECTOR_WIDTH).
 -- HB 2020-01-14: Inserted additional subtypes for correlation cut with orm (eg: tau_jet_t).
@@ -738,10 +738,10 @@ package gtl_pkg is
     subtype mu_etmhf_t is corr_cuts_array(0 to N_MU_OBJECTS-1, 0 to 0);
     subtype mu_htmhf_t is corr_cuts_array(0 to N_MU_OBJECTS-1, 0 to 0);
   
-    subtype eg_eg_eg_t is mass_3_obj_array(0 to N_EG_OBJECTS-1, 0 to N_EG_OBJECTS-1, 0 to N_EG_OBJECTS-1);
-    subtype jet_jet_jet_t is mass_3_obj_array(0 to N_JET_OBJECTS-1, 0 to N_JET_OBJECTS-1, 0 to N_JET_OBJECTS-1);
-    subtype tau_tau_tau_t is mass_3_obj_array(0 to N_TAU_OBJECTS-1, 0 to N_TAU_OBJECTS-1, 0 to N_TAU_OBJECTS-1);
-    subtype mu_mu_mu_t is mass_3_obj_array(0 to N_MU_OBJECTS-1, 0 to N_MU_OBJECTS-1, 0 to N_MU_OBJECTS-1);
+    subtype mass_3_obj_eg_t is mass_3_obj_array(0 to N_EG_OBJECTS-1, 0 to N_EG_OBJECTS-1, 0 to N_EG_OBJECTS-1);
+    subtype mass_3_obj_jet_t is mass_3_obj_array(0 to N_JET_OBJECTS-1, 0 to N_JET_OBJECTS-1, 0 to N_JET_OBJECTS-1);
+    subtype mass_3_obj_tau_t is mass_3_obj_array(0 to N_TAU_OBJECTS-1, 0 to N_TAU_OBJECTS-1, 0 to N_TAU_OBJECTS-1);
+    subtype mass_3_obj_mu_t is mass_3_obj_array(0 to N_MU_OBJECTS-1, 0 to N_MU_OBJECTS-1, 0 to N_MU_OBJECTS-1);
 
     type default_corr_cuts_rec is record
         eg_eg : eg_eg_t;
