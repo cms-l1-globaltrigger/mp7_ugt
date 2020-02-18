@@ -36,13 +36,13 @@ package gtl_pkg is
 
 -- ========================================================
 
--- -- HB 2014-09-09: GTL and FDL firmware major, minor and revision versions moved to gt_mp7_core_pkg.vhd (GTL_FW_MAJOR_VERSION, etc.)
--- --                for creating a tag name by a script independent from L1Menu.
--- -- GTL firmware (fix part) version
---     constant GTL_FW_VERSION : std_logic_vector(31 downto 0) := X"00" &
---            std_logic_vector(to_unsigned(GTL_FW_MAJOR_VERSION, 8)) &
---            std_logic_vector(to_unsigned(GTL_FW_MINOR_VERSION, 8)) &
---            std_logic_vector(to_unsigned(GTL_FW_REV_VERSION, 8));
+-- HB 2014-09-09: GTL and FDL firmware major, minor and revision versions moved to gt_mp7_core_pkg.vhd (GTL_FW_MAJOR_VERSION, etc.)
+--                for creating a tag name by a script independent from L1Menu.
+-- GTL firmware (fix part) version
+    constant GTL_FW_VERSION : std_logic_vector(31 downto 0) := X"00" &
+           std_logic_vector(to_unsigned(GTL_FW_MAJOR_VERSION, 8)) &
+           std_logic_vector(to_unsigned(GTL_FW_MINOR_VERSION, 8)) &
+           std_logic_vector(to_unsigned(GTL_FW_REV_VERSION, 8));
 
 -- *******************************************************************************
 -- Definitions for GTL v2.x.y
