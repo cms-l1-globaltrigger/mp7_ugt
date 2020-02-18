@@ -55,7 +55,10 @@ begin
         l2comp: for j in 0 to N_OBJ-1 generate
             l3comp: for k in 0 to N_OBJ-1 generate
                 sum_i: if j>i and k>i and k>j generate
-                    sum_mass(i,j,k) <= data_vec_i(i,j) + data_vec_i(i,k)  + data_vec_i(j,k);
+--                     sum_mass(i,j,k) <= data_vec_i(i,j) + data_vec_i(i,k) + data_vec_i(j,k);
+                    sum_mass_calc_i: entity work.sum_mass_calc
+                        generic map(DATA_WIDTH)  
+                        port map(data_vec_i(i,j), data_vec_i(i,k), data_vec_i(j,k), sum_mass(i,j,k));
                     comp_unsigned_i: entity work.comp_unsigned
                         generic map(MODE, MIN_I, MAX_I)  
                         port map(sum_mass(i,j,k), comp(i,j,k));
