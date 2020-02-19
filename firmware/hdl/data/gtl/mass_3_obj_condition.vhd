@@ -2,6 +2,7 @@
 -- Condition for mass with 3 objects
 
 -- Version-history:
+-- HB 2020-02-19: Inserted charge correlation (for muons).
 -- HB 2020-02-18: First design.
 
 library ieee;
@@ -13,7 +14,8 @@ use work.gtl_pkg.all;
 entity mass_3_obj_condition is
     generic(
         N_OBJ : positive;
-        SLICES : slices_type_array
+        SLICES : slices_type_array;
+        CHARGE_CORR_SEL : boolean
     );
     port(
         clk : in std_logic;
@@ -21,6 +23,7 @@ entity mass_3_obj_condition is
         in_2 : in std_logic_vector(0 to N_OBJ-1);        
         in_3 : in std_logic_vector(0 to N_OBJ-1);        
         inv_mass : in mass_3_obj_array(0 to N_OBJ-1, 0 to N_OBJ-1, 0 to N_OBJ-1);
+        charge_corr_triple : in muon_cc_triple_std_logic_array := (others => (others => (others => '1')));
         cond_o : out std_logic
     );
 end mass_3_obj_condition;
@@ -48,7 +51,11 @@ begin
                 for k in SLICES(3)(0) to SLICES(3)(1) loop
                     if j>i and k>i and k>j then
                         index := index + 1;
-                        and_vec(index) := in_1(i) and in_2(j) and in_3(k) and inv_mass(i,j,k);
+                        if CHARGE_CORR_SEL then
+                            and_vec(index) := in_1(i) and in_2(j) and in_3(k) and inv_mass(i,j,k) and charge_corr_triple(i,j,k);
+                        else
+                            and_vec(index) := in_1(i) and in_2(j) and in_3(k) and inv_mass(i,j,k);
+                        end if;
                     end if;
                 end loop;
             end loop;
