@@ -1,7 +1,8 @@
 -- Description:
--- Condition for mass with 3 objects
+-- Condition for invariant mass with 3 objects (of same type and same bx)
 
 -- Version-history:
+-- HB 2020-02-24: Changed number of instances of and_vec.
 -- HB 2020-02-19: Inserted charge correlation (for muons).
 -- HB 2020-02-18: First design.
 
@@ -49,7 +50,7 @@ begin
         for i in SLICES(1)(0) to SLICES(1)(1) loop
             for j in SLICES(2)(0) to SLICES(2)(1) loop
                 for k in SLICES(3)(0) to SLICES(3)(1) loop
-                    if j>i and k>i and k>j then
+                    if j/=i and k/=i and k/=j then
                         index := index + 1;
                         if CHARGE_CORR_SEL then
                             and_vec(index) := in_1(i) and in_2(j) and in_3(k) and inv_mass(i,j,k) and charge_corr_triple(i,j,k);
