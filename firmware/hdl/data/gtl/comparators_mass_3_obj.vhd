@@ -73,11 +73,11 @@ begin
     l1comp: for i in 0 to N_OBJ-1 generate
         l2comp: for j in 0 to N_OBJ-1 generate
             l3comp: for k in 0 to N_OBJ-1 generate
-                comp_i: if j/=i and /=i and k/=j generate
+                comp_if_i: if j/=i and /=i and k/=j generate
                     comp_unsigned_i: entity work.comp_unsigned
                         generic map(MODE, MIN_I, MAX_I)  
                         port map(sum_mass(i,j,k), comp(i,j,k));
-                end generate comp_i;    
+                end generate comp_if_i;    
                 comp_i(i,j,k)(0) <= comp(i,j,k);
                 out_reg_i : entity work.reg_mux
                     generic map(1, OUT_REG_COMP) 
