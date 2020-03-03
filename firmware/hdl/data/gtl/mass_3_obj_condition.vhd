@@ -2,6 +2,7 @@
 -- Condition for invariant mass with 3 objects (of same type and same bx)
 
 -- Version-history:
+-- HB 2020-03-03: Bug fixed in process.
 -- HB 2020-02-24: Changed number of instances of and_vec.
 -- HB 2020-02-19: Inserted charge correlation (for muons).
 -- HB 2020-02-18: First design.
@@ -39,7 +40,7 @@ architecture rtl of mass_3_obj_condition is
 begin
 
 -- AND-OR matrix
-    and_or_p: process(in_1, in_2, in_3, inv_mass)
+    and_or_p: process(in_1, in_2, in_3, inv_mass, charge_corr_triple)
         variable index : integer := 0;
         variable and_vec : std_logic_vector((N_SLICE_1*N_SLICE_2*N_SLICE_3) downto 1) := (others => '0');
         variable tmp : std_logic := '0';
