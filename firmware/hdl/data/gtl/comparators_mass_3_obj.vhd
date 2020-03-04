@@ -38,6 +38,9 @@ architecture rtl of comparators_mass_3_obj is
     type comp_i_array is array (0 to N_OBJ, 0 to N_OBJ-1, 0 to N_OBJ-1) of std_logic_vector(0 downto 0);
     signal comp_i : comp_i_array;
     signal comp_r : comp_i_array;
+    
+    attribute use_dsp : string;
+    attribute use_dsp of sum_mass : signal is "yes";
 
 begin
 
