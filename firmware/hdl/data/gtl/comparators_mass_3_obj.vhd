@@ -39,9 +39,6 @@ architecture rtl of comparators_mass_3_obj is
     signal comp_i : comp_i_array;
     signal comp_r : comp_i_array;
     
-    attribute use_dsp : string;
-    attribute use_dsp of sum_mass : signal is "yes";
-
 begin
 
     l1_in_reg: for i in 0 to N_OBJ-1 generate

@@ -26,9 +26,13 @@ architecture rtl of sum_mass_calc is
 
     signal sum_mass_1 : std_logic_vector(DATA_WIDTH downto 0);
     
+    attribute use_dsp : string;
+    attribute use_dsp of sum_mass_1_2 : signal is "yes";
+    attribute use_dsp of sum_mass : signal is "yes";
+
 begin
 
-    sum_mass_1 <= ('0' & in1) + in2;
-    sum_mass <= ('0' & sum_mass_1) + in3;
+    sum_mass_1_2 <= ('0' & in1) + in2;
+    sum_mass <= ('0' & sum_mass_1_2) + in3;
           
 end architecture rtl;
