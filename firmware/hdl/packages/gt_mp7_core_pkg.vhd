@@ -12,17 +12,18 @@
 -- ===================================================================================
 -- actual versions of ugt:
 -- use "FRAME_VERSION" as mp7_ugt release fw version (used for tag name)
--- mp7_ugt (=FRAME_VERSION): v2.4.10
+-- mp7_ugt (=FRAME_VERSION): v2.4.11
 --
 --  control: v2.0.1
---  gtl: v2.4.8
+--  gtl: v2.4.9
 --  fdl: v1.3.5
 
 -- Version-history of GTL part:
+-- HB 2020-01-28: v2.4.9: added modules comparators_mass_3_obj.vhd and mass_3_obj_condition.vhd for invariabt mass with 3 objects.
 -- HB 2020-01-28: v2.4.8: changed combinatorial_conditions_ovrm.vhd for calos only.
 -- HB 2020-01-28: v2.4.7: bug fixed in combinatorial_conditions.vhd and combinatorial_conditions_ovrm.vhd.
 -- HB 2019-12-11: v2.4.6: inserted additional constants and subtypes in gtl_pkg.vhd, removed constants in lut_pkg.vhd.
--- HB 2019-12-11: v2.4.5: replaced "MUON/muon" by "MU/mu", bug fix in bx function, added esums to bx pipeline, updated use of charge correlation in conditions, updated transverse mass --                        calculation, inserted bx-bx combination for correlations.
+-- HB 2019-12-11: v2.4.5: replaced "MUON/muon" by "MU/mu", bug fix in bx function, added esums to bx pipeline, updated use of charge correlation in conditions, updated transverse mass calculation, inserted bx-bx combination for correlations.
 -- HB 2019-11-20: v2.4.4: added subtypes (for asymmetry and minimum-bias) and bug fixed in gtl_pkg.vhd. Inserted Logic for charge in comparators_obj_cuts.vhd.
 -- HB 2019-11-12: v2.4.3: bug fixed "function bx" in gtl_pkg.vhd.
 -- HB 2019-11-11: v2.4.2: bug fix in gtl_pkg.vhd.

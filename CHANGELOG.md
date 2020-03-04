@@ -8,16 +8,21 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 Versions of ugt with new GTL structure (v2.0.0 and higher)
 
-### [v2.4.11] - 2020-02-05
+### [v2.4.11] - 2020-03-04
 
 #### Comment
 
-- mp7_ugt firmware release v2.4.11 (updated versions)
+- mp7_ugt firmware release v2.4.11
+
+#### Added
+- source file:
+  - ../hdl/data/gtl/comparators_mass_3_obj.vhd
+  - ../hdl/data/gtl/mass_3_obj_condition.vhd
 
 #### Changed
 - source file:
   - ../hdl/packages/gt_mp7_core_pkg.vhd
-  
+
 ### [v2.4.10] - 2020-02-04
 
 #### Comment
@@ -29,7 +34,7 @@ Versions of ugt with new GTL structure (v2.0.0 and higher)
   - ../hdl/data/gtl/combinatorial_conditions_ovrm.vhd
 - script:
   - ../scripts/runIpbbSynth.py
-  
+
 ### [v2.4.9] - 2020-01-28
 
 #### Comment
@@ -41,7 +46,7 @@ Versions of ugt with new GTL structure (v2.0.0 and higher)
   - ../hdl/data/gtl/combinatorial_conditions.vhd
   - ../hdl/data/gtl/combinatorial_conditions_ovrm.vhd
   - ../hdl/packages/gt_mp7_core_pkg.vhd
-  
+
 ### [v2.4.8] - 2020-01-15
 
 #### Comment
@@ -52,7 +57,7 @@ Versions of ugt with new GTL structure (v2.0.0 and higher)
 - source file:
   - ../hdl/packages/gtl_pkg.vhd
   - ../hdl/packages/lut_pkg.vhd
-  
+
 ### [v2.4.7] - 2020-01-10
 
 #### Comment
@@ -121,7 +126,7 @@ Versions of ugt with new GTL structure (v2.0.0 and higher)
 #### Changed
 - file name:
   - ../hdl/packages/gtl_pkg.vhd
-  
+
 ### [v2.4.3] - 2019-11-11
 
 #### Comment
