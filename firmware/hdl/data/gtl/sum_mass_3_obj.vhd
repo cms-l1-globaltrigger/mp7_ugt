@@ -25,7 +25,7 @@ architecture rtl of sum_mass_3_obj is
     type data_vec_array is array(0 to N_OBJ-1, 0 to N_OBJ-1) of std_logic_vector(DATA_WIDTH-1 downto 0);
     signal data_vec : data_vec_array;
     type sum_temp_array is array(0 to N_OBJ-1, 0 to N_OBJ-1, 0 to N_OBJ-1) of std_logic_vector(DATA_WIDTH-1 downto 0);
-    signal sum_temp : data_vec_array;
+    signal sum_temp : sum_temp_array;
     
 begin
 
