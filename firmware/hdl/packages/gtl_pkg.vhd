@@ -104,7 +104,7 @@ package gtl_pkg is
     constant MAX_OBJ_BITS : positive := 64; -- muon
 
     constant MAX_OBJ_PARAMETER_WIDTH : positive := 16; -- used 16 for hex notation of requirements - max. parameter width of objects: towercount = 13
-    constant MAX_CORR_CUTS_WIDTH : positive := 56; -- max inv mass width (2*MAX_PT_WIDTH+MAX_COSH_COS_WIDTH = 51) - used 52 for hex notation !
+    constant MAX_CORR_CUTS_WIDTH : positive := 56; -- max mass width (2*MAX_PT_WIDTH+MAX_COSH_COS_WIDTH = 54) - used 56 for hex notation !
     constant MAX_COSH_COS_WIDTH : positive := 27; -- CALO_MUON_COSH_COS_VECTOR_WIDTH 
     constant MAX_PT_WIDTH : positive := 12; -- max. pt width (esums pt = 12)
     constant MAX_ETA_WIDTH : positive := 9; -- max. eta width(muon eta = 9)
@@ -664,7 +664,7 @@ package gtl_pkg is
     type sin_cos_vector_array is array (0 to MAX_N_OBJECTS-1, 0 to MAX_N_OBJECTS-1) of std_logic_vector(MAX_SIN_COS_WIDTH-1 downto 0);
     type obj_bx_sin_cos_vector_array is array (0 to BX_PIPELINE_STAGES-1, 0 to BX_PIPELINE_STAGES-1) of sin_cos_vector_array;
     
-    type sum_mass_array is array(0 to MAX_N_OBJECTS-1, 0 to MAX_N_OBJECTS-1, 0 to MAX_N_OBJECTS-1) of std_logic_vector(MAX_CORR_CUTS_WIDTH+1 downto 0);
+    type sum_mass_array is array(0 to MAX_N_OBJECTS-1, 0 to MAX_N_OBJECTS-1, 0 to MAX_N_OBJECTS-1) of std_logic_vector(MAX_CORR_CUTS_WIDTH-1 downto 0);
     type mass_3_obj_array is array (natural range <>, natural range <>, natural range <>) of std_logic;
 
 -- MUON charge
