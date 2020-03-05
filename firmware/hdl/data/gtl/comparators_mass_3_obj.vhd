@@ -33,8 +33,8 @@ architecture rtl of comparators_mass_3_obj is
     signal sum_mass_i : sum_mass_array(0 to N_OBJ-1, 0 to N_OBJ-1, 0 to N_OBJ-1) := (others => (others => (others => (others => '0'))));   
     signal comp_temp, comp : mass_3_obj_array(0 to N_OBJ-1, 0 to N_OBJ-1, 0 to N_OBJ-1) := (others => (others => (others => '0')));
     type comp_i_array is array (0 to N_OBJ, 0 to N_OBJ-1, 0 to N_OBJ-1) of std_logic_vector(0 downto 0);
-    signal comp_i : comp_i_array;
-    signal comp_r : comp_i_array;
+    signal comp_ri : comp_i_array;
+    signal comp_ro : comp_i_array;
     
 begin
 
@@ -55,11 +55,11 @@ begin
                     comp(k,i,j) <= comp_temp(i,j,k);
                     comp(k,j,i) <= comp_temp(i,j,k);                    
                 end generate comp_i;    
-                comp_i(i,j,k)(0) <= comp(i,j,k);
+                comp_ri(i,j,k)(0) <= comp(i,j,k);
                 out_reg_i : entity work.reg_mux
                     generic map(1, OUT_REG_COMP) 
-                    port map(clk, comp_i(i,j,k), comp_r(i,j,k)); 
-                comp_o(i,j,k) <= comp_r(i,j,k)(0);
+                    port map(clk, comp_ri(i,j,k), comp_ro(i,j,k)); 
+                comp_o(i,j,k) <= comp_ro(i,j,k)(0);
             end generate l3_comp;    
         end generate l2_comp;
     end generate l1_comp;
