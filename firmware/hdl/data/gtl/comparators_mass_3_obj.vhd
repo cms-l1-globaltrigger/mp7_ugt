@@ -31,7 +31,7 @@ architecture rtl of comparators_mass_3_obj is
     constant MIN_I : std_logic_vector(DATA_WIDTH-1 downto 0) := MIN_REQ(DATA_WIDTH-1 downto 0);
     constant MAX_I : std_logic_vector(DATA_WIDTH-1 downto 0) := MAX_REQ(DATA_WIDTH-1 downto 0);
     type sum_mass_vec_array is array (0 to N_OBJ, 0 to N_OBJ-1, 0 to N_OBJ-1) of std_logic_vector(DATA_WIDTH-1 downto 0);
-    signal sum_mass_vec, sum_mass_i : sum_mass_array(0 to N_OBJ-1, 0 to N_OBJ-1, 0 to N_OBJ-1) := (others => (others => (others => (others => '0'))));   
+    signal sum_mass_vec, sum_mass_i : sum_mass_vec_array(0 to N_OBJ-1, 0 to N_OBJ-1, 0 to N_OBJ-1) := (others => (others => (others => (others => '0'))));   
     signal comp_temp, comp : mass_3_obj_array(0 to N_OBJ-1, 0 to N_OBJ-1, 0 to N_OBJ-1) := (others => (others => (others => '0')));
     type comp_i_array is array (0 to N_OBJ, 0 to N_OBJ-1, 0 to N_OBJ-1) of std_logic_vector(0 downto 0);
     signal comp_ri : comp_i_array;
