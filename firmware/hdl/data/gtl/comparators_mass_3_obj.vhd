@@ -21,7 +21,7 @@ entity comparators_mass_3_obj is
     );
     port(
         clk : in std_logic;
-        sum_mass : in sum_mass_array(0 to N_OBJ-1, 0 to N_OBJ-1, 0 to N_OBJ-1);
+        sum_mass : in sum_mass_array;
         comp_o : out mass_3_obj_array(0 to N_OBJ-1, 0 to N_OBJ-1, 0 to N_OBJ-1)
     );
 end comparators_mass_3_obj;
@@ -30,7 +30,8 @@ architecture rtl of comparators_mass_3_obj is
 
     constant MIN_I : std_logic_vector(DATA_WIDTH-1 downto 0) := MIN_REQ(DATA_WIDTH-1 downto 0);
     constant MAX_I : std_logic_vector(DATA_WIDTH-1 downto 0) := MAX_REQ(DATA_WIDTH-1 downto 0);
-    signal sum_mass_i : sum_mass_array(0 to N_OBJ-1, 0 to N_OBJ-1, 0 to N_OBJ-1) := (others => (others => (others => (others => '0'))));   
+    type sum_mass_vec_array is array (0 to N_OBJ, 0 to N_OBJ-1, 0 to N_OBJ-1) of std_logic_vector(DATA_WIDTH-1 downto 0);
+    signal sum_mass_vec, sum_mass_i : sum_mass_array(0 to N_OBJ-1, 0 to N_OBJ-1, 0 to N_OBJ-1) := (others => (others => (others => (others => '0'))));   
     signal comp_temp, comp : mass_3_obj_array(0 to N_OBJ-1, 0 to N_OBJ-1, 0 to N_OBJ-1) := (others => (others => (others => '0')));
     type comp_i_array is array (0 to N_OBJ, 0 to N_OBJ-1, 0 to N_OBJ-1) of std_logic_vector(0 downto 0);
     signal comp_ri : comp_i_array;
@@ -41,10 +42,13 @@ begin
     l1_comp: for i in 0 to N_OBJ-1 generate
         l2_comp: for j in 0 to N_OBJ-1 generate
             l3_comp: for k in 0 to N_OBJ-1 generate
+                l3: for l in 0 to DATA_WIDTH-1 generate
+                    sum_mass_vec(i,j,k)(l) <= sum_mass(i,j,k,l);
+                end generate l3;
                 comp_i: if j>i and k>i and k>j generate
                     in_reg_i : entity work.reg_mux
                         generic map(DATA_WIDTH, IN_REG_COMP)  
-                        port map(clk, sum_mass(i,j,k), sum_mass_i(i,j,k));                
+                        port map(clk, sum_mass_vec(i,j,k), sum_mass_i(i,j,k));                
                     comp_unsigned_i: entity work.comp_unsigned
                         generic map(MODE, MIN_I, MAX_I)  
                         port map(sum_mass_i(i,j,k), comp_temp(i,j,k));

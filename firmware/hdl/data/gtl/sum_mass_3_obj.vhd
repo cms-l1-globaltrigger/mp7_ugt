@@ -24,6 +24,8 @@ architecture rtl of sum_mass_3_obj is
 
     type data_vec_array is array(0 to N_OBJ-1, 0 to N_OBJ-1) of std_logic_vector(DATA_WIDTH-1 downto 0);
     signal data_vec : data_vec_array;
+    type sum_temp_array is array(0 to N_OBJ-1, 0 to N_OBJ-1, 0 to N_OBJ-1) of std_logic_vector(DATA_WIDTH-1 downto 0);
+    signal sum_temp : data_vec_array;
     
 begin
 
@@ -41,8 +43,11 @@ begin
                 sum_i: if j>i and k>i and k>j generate
                     sum_mass_calc_i: entity work.sum_mass_calc
                         generic map(DATA_WIDTH)  
-                        port map(data_vec(i,j), data_vec(i,k), data_vec(j,k), sum_o(i,j,k)(DATA_WIDTH-1 downto 0));
-                end generate sum_i;    
+                        port map(data_vec(i,j), data_vec(i,k), data_vec(j,k), sum_temp(i,j,k)(DATA_WIDTH-1 downto 0));
+                end generate sum_i;
+                l4_sum: for l in 0 to DATA_WIDTH-1 generate
+                    sum_temp(i,j,k,l) <= sum_temp(i,j,k)(l);
+                end generate l4_sum;    
             end generate l3_sum;    
         end generate l2_sum;
     end generate l1_sum;

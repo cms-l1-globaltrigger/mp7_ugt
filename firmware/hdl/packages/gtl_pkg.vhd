@@ -664,7 +664,8 @@ package gtl_pkg is
     type sin_cos_vector_array is array (0 to MAX_N_OBJECTS-1, 0 to MAX_N_OBJECTS-1) of std_logic_vector(MAX_SIN_COS_WIDTH-1 downto 0);
     type obj_bx_sin_cos_vector_array is array (0 to BX_PIPELINE_STAGES-1, 0 to BX_PIPELINE_STAGES-1) of sin_cos_vector_array;
     
-    type sum_mass_array is array(0 to MAX_N_OBJECTS-1, 0 to MAX_N_OBJECTS-1, 0 to MAX_N_OBJECTS-1) of std_logic_vector(MAX_CORR_CUTS_WIDTH-1 downto 0);
+    type sum_mass_array is array(0 to MAX_N_OBJECTS-1, 0 to MAX_N_OBJECTS-1, 0 to MAX_N_OBJECTS-1, MAX_CORR_CUTS_WIDTH-1 downto 0) of std_logic;
+    type obj_bx_sum_mass_array is array (0 to BX_PIPELINE_STAGES-1) of sum_mass_array;
     type mass_3_obj_array is array (natural range <>, natural range <>, natural range <>) of std_logic;
 
 -- MUON charge
