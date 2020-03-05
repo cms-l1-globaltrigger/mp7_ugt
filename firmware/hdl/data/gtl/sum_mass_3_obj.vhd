@@ -1,10 +1,8 @@
 -- Description:
--- Comparators for mass with 3 objects (summary of 3 masses for 2 objects) of same object type and same bx.
+-- Summary of 3 masses for 2 objects (of same object type and same bx) used for invariant mass of 3 objects.
 
 -- Version-history:
--- HB 2020-03-04: Changed loop for sum_mass.
--- HB 2020-02-24: Changed number of instances of sum_mass_calc.
--- HB 2020-02-17: First design.
+-- HB 2020-03-05: First design.
 
 library ieee;
 use ieee.std_logic_1164.all;
@@ -17,7 +15,6 @@ entity sum_mass_3_obj is
         DATA_WIDTH : positive
     );
     port(
-        clk : in std_logic;
         data : in corr_cuts_std_logic_array;
         sum_o : out sum_mass_array(0 to N_OBJ-1, 0 to N_OBJ-1, 0 to N_OBJ-1)
     );
