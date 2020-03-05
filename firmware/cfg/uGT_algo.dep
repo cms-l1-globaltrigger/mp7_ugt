@@ -61,6 +61,7 @@ src data/gtl/twobody_pt.vhd
 src data/gtl/muon_charge_correlations.vhd
 src data/gtl/reg_mux.vhd
 src data/gtl/sum_mass_calc.vhd
+src data/gtl/sum_mass_3_obj.vhd
 src data/gtl/comparators_mass_3_obj.vhd
 src data/gtl/mass_3_obj_condition.vhd
 #
