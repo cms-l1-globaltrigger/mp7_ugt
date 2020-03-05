@@ -16,7 +16,7 @@ entity sum_mass_3_obj is
     );
     port(
         data : in corr_cuts_std_logic_array;
-        sum_o : out sum_mass_array(0 to N_OBJ-1, 0 to N_OBJ-1, 0 to N_OBJ-1)
+        sum_o : out sum_mass_array
     );
 end sum_mass_3_obj;
 
