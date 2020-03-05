@@ -16,7 +16,7 @@ entity sum_mass_3_obj is
     );
     port(
         data : in corr_cuts_std_logic_array;
-        sum_o : out sum_mass_array
+        sum_o : out sum_mass_array := (others => (others => (others => (others => '0'))))
     );
 end sum_mass_3_obj;
 
@@ -41,7 +41,7 @@ begin
                 sum_i: if j>i and k>i and k>j generate
                     sum_mass_calc_i: entity work.sum_mass_calc
                         generic map(DATA_WIDTH)  
-                        port map(data_vec(i,j), data_vec(i,k), data_vec(j,k), sum_o(i,j,k));
+                        port map(data_vec(i,j), data_vec(i,k), data_vec(j,k), sum_o(i,j,k)(DATA_WIDTH-1 downto 0));
                 end generate sum_i;    
             end generate l3_sum;    
         end generate l2_sum;
