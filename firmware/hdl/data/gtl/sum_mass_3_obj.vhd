@@ -43,10 +43,10 @@ begin
                 sum_i: if j>i and k>i and k>j generate
                     sum_mass_calc_i: entity work.sum_mass_calc
                         generic map(DATA_WIDTH)  
-                        port map(data_vec(i,j), data_vec(i,k), data_vec(j,k), sum_temp(i,j,k)(DATA_WIDTH-1 downto 0));
+                        port map(data_vec(i,j), data_vec(i,k), data_vec(j,k), sum_temp(i,j,k));
                 end generate sum_i;
                 l4_sum: for l in 0 to DATA_WIDTH-1 generate
-                    sum_temp(i,j,k,l) <= sum_temp(i,j,k)(l);
+                    sum_o(i,j,k,l) <= sum_temp(i,j,k)(l);
                 end generate l4_sum;    
             end generate l3_sum;    
         end generate l2_sum;
