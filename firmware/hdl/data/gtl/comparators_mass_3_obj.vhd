@@ -38,18 +38,13 @@ architecture rtl of comparators_mass_3_obj is
     
 begin
 
-    l1_in_reg: for i in 0 to N_OBJ-1 generate
-        l2_in_reg: for j in 0 to N_OBJ-1 generate
-            in_reg_i : entity work.reg_mux
-                generic map(DATA_WIDTH, IN_REG_COMP)  
-                port map(clk, sum_mass(i,j), sum_mass_i(i,j));                
-        end generate l2_in_reg;
-    end generate l1_in_reg;
-
-    l1_sum_comp: for i in 0 to N_OBJ-1 generate
-        l2_sum_comp: for j in 0 to N_OBJ-1 generate
-            l3_sum_comp: for k in 0 to N_OBJ-1 generate
-                sum_comp_i: if j>i and k>i and k>j generate
+    l1_comp: for i in 0 to N_OBJ-1 generate
+        l2_comp: for j in 0 to N_OBJ-1 generate
+            l3_comp: for k in 0 to N_OBJ-1 generate
+                comp_i: if j>i and k>i and k>j generate
+                    in_reg_i : entity work.reg_mux
+                        generic map(DATA_WIDTH, IN_REG_COMP)  
+                        port map(clk, sum_mass(i,j,k), sum_mass_i(i,j,k));                
                     comp_unsigned_i: entity work.comp_unsigned
                         generic map(MODE, MIN_I, MAX_I)  
                         port map(sum_mass_i(i,j,k), comp_temp(i,j,k));
@@ -59,14 +54,14 @@ begin
                     comp(j,k,i) <= comp_temp(i,j,k);
                     comp(k,i,j) <= comp_temp(i,j,k);
                     comp(k,j,i) <= comp_temp(i,j,k);                    
-                end generate sum_comp_i;    
+                end generate comp_i;    
                 comp_i(i,j,k)(0) <= comp(i,j,k);
                 out_reg_i : entity work.reg_mux
                     generic map(1, OUT_REG_COMP) 
                     port map(clk, comp_i(i,j,k), comp_r(i,j,k)); 
                 comp_o(i,j,k) <= comp_r(i,j,k)(0);
-            end generate l3_sum_comp;    
-        end generate l2_sum_comp;
-    end generate l1_sum_comp;
+            end generate l3_comp;    
+        end generate l2_comp;
+    end generate l1_comp;
 
 end architecture rtl;
