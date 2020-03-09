@@ -1,7 +1,8 @@
 -- Description:
--- Comparators for mass with 3 objects (summary of 3 masses for 2 objects) of same object type and same bx.
+-- Comparators for mass with 3 objects (input: summary of 3 invariant masses of 2 objects of same object type and same bx).
 
 -- Version-history:
+-- HB 2020-03-06: Changed logic: sum mass outside of comparator.
 -- HB 2020-03-04: Changed loop for sum_mass.
 -- HB 2020-02-24: Changed number of instances of sum_mass_calc.
 -- HB 2020-02-17: First design.
@@ -42,9 +43,9 @@ begin
     l1_comp: for i in 0 to N_OBJ-1 generate
         l2_comp: for j in 0 to N_OBJ-1 generate
             l3_comp: for k in 0 to N_OBJ-1 generate
-                l3: for l in 0 to DATA_WIDTH-1 generate
+                l_in: for l in 0 to DATA_WIDTH-1 generate
                     sum_mass_vec(i,j,k)(l) <= sum_mass(i,j,k,l);
-                end generate l3;
+                end generate l_in;
                 comp_i: if j>i and k>i and k>j generate
                     in_reg_i : entity work.reg_mux
                         generic map(DATA_WIDTH, IN_REG_COMP)  

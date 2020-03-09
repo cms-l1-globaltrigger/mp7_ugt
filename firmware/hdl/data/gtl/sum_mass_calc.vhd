@@ -2,6 +2,7 @@
 -- Calculation of sum mass of 3 objects.
 
 -- Version history:
+-- HB 2020-03-09: No attribute use_dsp (see sum_mass_calc_dsp.vhd for logic with attribute use_dsp).
 -- HB 2020-03-04: Added attribute use_dsp.
 -- HB 2020-02-18: First design.
 
@@ -27,10 +28,6 @@ architecture rtl of sum_mass_calc is
 
     signal sum_mass_1_2 : std_logic_vector(DATA_WIDTH downto 0);
     
-    attribute use_dsp : string;
-    attribute use_dsp of sum_mass_1_2 : signal is "yes";
-    attribute use_dsp of sum_mass : signal is "yes";
-
 begin
 
     sum_mass_1_2 <= ('0' & in1) + in2;
