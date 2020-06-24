@@ -2,8 +2,9 @@
 -- Package for constant and type definitions of GTL firmware in Global Trigger Upgrade system.
 
 -- Version-history:
+-- HB 2020-06-24: changes for new muon structure with "unconstraint pt" and "impact parameter".
 -- HB 2020-02-17: Types and subtypes for mass with 3 objects.
--- HB 2020-01-22: Bug fix in function bx.
+-- HB 2019-01-22: Bug fix in function bx.
 -- HB 2020-01-15: Inserted additional constants for orm correlation cuts (eg: TAU_EG_DELTAETA_VECTOR_WIDTH).
 -- HB 2020-01-14: Inserted additional subtypes for correlation cut with orm (eg: tau_jet_t).
 -- HB 2019-12-20: Bug fix in function bx.
@@ -142,8 +143,18 @@ package gtl_pkg is
     constant MU_IDX_BITS_HIGH : natural := 42;
     constant MU_PHI_RAW_LOW : natural := 43;
     constant MU_PHI_RAW_HIGH : natural := 52;
-    constant MU_ETA_RAW_LOW : natural := 53;
-    constant MU_ETA_RAW_HIGH : natural := 61;
+-- HB 2020-06-08: MUON_ETA_RAW not used anymore in GT.
+-- constant MU_ETA_RAW_LOW : natural := 53;
+-- constant MU_ETA_RAW_HIGH : natural := 61;
+-- HB 2020-06-08: updated for new muon structure with "unconstraint pt" and "impact parameter".
+-- 8 bit "unconstraint pt" [UPT] (requirements with lower and upper limit - window), bits 60..53
+-- 2 bit "impact parameter" [IP] (requirements given by LUT), bits 63..62
+-- bit 61 is reserved
+    constant MU_UPT_LOW : natural := 53;
+    constant MU_UPT_HIGH : natural := 60;
+    constant MU_IP_LOW : natural := 62;
+    constant MU_IP_HIGH : natural := 63;
+
     constant MU_PHI_WIDTH: positive := MU_PHI_HIGH-MU_PHI_LOW+1;
     constant MU_PT_WIDTH: positive := MU_PT_HIGH-MU_PT_LOW+1;
     constant MU_QUAL_WIDTH: positive := MU_QUAL_HIGH-MU_QUAL_LOW+1;
@@ -152,7 +163,9 @@ package gtl_pkg is
     constant MU_CHARGE_WIDTH: positive := MU_CHARGE_HIGH-MU_CHARGE_LOW+1;
     constant MU_IDX_BITS_WIDTH: positive := MU_IDX_BITS_HIGH-MU_IDX_BITS_LOW+1;
     constant MU_PHI_RAW_WIDTH: positive := MU_PHI_RAW_HIGH-MU_PHI_RAW_LOW+1;
-    constant MU_ETA_RAW_WIDTH: positive := MU_ETA_RAW_HIGH-MU_ETA_RAW_LOW+1;
+--     constant MU_ETA_RAW_WIDTH: positive := MU_ETA_RAW_HIGH-MU_ETA_RAW_LOW+1;
+    constant MU_UPT_WIDTH: positive := MU_UPT_HIGH-MU_UPT_LOW+1;
+    constant MU_IP_WIDTH: positive := MU_IP_HIGH-MU_IP_LOW+1;
     constant MU_PT_VECTOR_WIDTH: positive := 12; -- max. value 255.5 GeV => 2555 (255.5 * 10**MUON_INV_MASS_PT_PRECISION) => 0x9FB
 
 -- *******************************************************************************************************
@@ -540,6 +553,8 @@ package gtl_pkg is
         iso : std_logic_vector(MU_ISO_HIGH-MU_ISO_LOW downto 0);
         qual : std_logic_vector(MU_QUAL_HIGH-MU_QUAL_LOW downto 0);
         charge : std_logic_vector(MU_CHARGE_HIGH-MU_CHARGE_LOW downto 0);
+        upt : std_logic_vector(MU_UPT_HIGH-MU_UPT_LOW downto 0);
+        ip : std_logic_vector(MU_IP_HIGH-MU_IP_LOW downto 0);
     end record muon_record;
     
     type muon_record_array is array (natural range <>) of muon_record;
