@@ -1062,7 +1062,7 @@ constant MU_PT_LUT : muon_pt_lut_array := (
 );
 
 -- muon unconstraint pt LUT
-type muon_upt_lut_array is array (0 to 2**(D_S_I_MUON_V2.upt_high-D_S_I_MUON_V2.upt_low+1)-1) of natural range 0 to 2545;
+type muon_upt_lut_array is array (0 to 2**(MU_UPT_HIGH - MU_UPT_LOW + 1)-1) of natural range 0 to 2545;
 
 constant MU_UPT_LUT : muon_upt_lut_array := (
 0, 5, 15, 25, 35, 45, 55, 65, 75, 85, 95, 105, 115, 125, 135, 145,
