@@ -12,13 +12,14 @@
 -- ===================================================================================
 -- actual versions of ugt:
 -- use "FRAME_VERSION" as mp7_ugt release fw version (used for tag name)
--- mp7_ugt (=FRAME_VERSION): v2.4.11
+-- mp7_ugt (=FRAME_VERSION): v2.5.0
 --
 --  control: v2.0.1
---  gtl: v2.4.9
+--  gtl: v2.5.0
 --  fdl: v1.3.5
 
 -- Version-history of GTL part:
+-- HB 2020-01-28: v2.5.0: changes for new muon structure with "unconstraint pt" and "impact parameter".
 -- HB 2020-01-28: v2.4.9: added modules comparators_mass_3_obj.vhd and mass_3_obj_condition.vhd for invariabt mass with 3 objects.
 -- HB 2020-01-28: v2.4.8: changed combinatorial_conditions_ovrm.vhd for calos only.
 -- HB 2020-01-28: v2.4.7: bug fixed in combinatorial_conditions.vhd and combinatorial_conditions_ovrm.vhd.
@@ -61,16 +62,16 @@ package gt_mp7_core_pkg is
 -- ==================================================================================================
 -- CONTROL = FRAME version (given by the editor of control.vhd)
     constant FRAME_MAJOR_VERSION : integer range 0 to 255 := 2;
-    constant FRAME_MINOR_VERSION : integer range 0 to 255 := 4;
-    constant FRAME_REV_VERSION   : integer range 0 to 255 := 10;
+    constant FRAME_MINOR_VERSION : integer range 0 to 255 := 5;
+    constant FRAME_REV_VERSION   : integer range 0 to 255 := 0;
 	constant FRAME_VERSION : std_logic_vector(31 downto 0) := X"00" &
            std_logic_vector(to_unsigned(FRAME_MAJOR_VERSION, 8)) &
            std_logic_vector(to_unsigned(FRAME_MINOR_VERSION, 8)) &
            std_logic_vector(to_unsigned(FRAME_REV_VERSION, 8));
 -- GTL firmware (fix part) version
     constant GTL_FW_MAJOR_VERSION : integer range 0 to 255 := 2;
-    constant GTL_FW_MINOR_VERSION : integer range 0 to 255 := 4;
-    constant GTL_FW_REV_VERSION   : integer range 0 to 255 := 8;
+    constant GTL_FW_MINOR_VERSION : integer range 0 to 255 := 5;
+    constant GTL_FW_REV_VERSION   : integer range 0 to 255 := 0;
 -- FDL firmware version
     constant FDL_FW_MAJOR_VERSION : integer range 0 to 255 := 1;
     constant FDL_FW_MINOR_VERSION : integer range 0 to 255 := 3;

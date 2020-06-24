@@ -2,7 +2,7 @@
 -- Package for constant and type definitions of GTL firmware in Global Trigger Upgrade system.
 
 -- Version-history:
--- HB 2020-06-24: changes for new muon structure with "unconstraint pt" and "impact parameter".
+-- HB 2020-06-24: Changes for new muon structure with "unconstraint pt" and "impact parameter".
 -- HB 2020-02-17: Types and subtypes for mass with 3 objects.
 -- HB 2019-01-22: Bug fix in function bx.
 -- HB 2020-01-15: Inserted additional constants for orm correlation cuts (eg: TAU_EG_DELTAETA_VECTOR_WIDTH).
