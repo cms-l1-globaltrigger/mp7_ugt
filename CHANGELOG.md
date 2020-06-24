@@ -8,6 +8,17 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 Versions of ugt with new GTL structure (v2.0.0 and higher)
 
+### [v2.5.0] - 2020-06-24
+
+#### Comment
+
+- mp7_ugt firmware release v2.5.0 (inserted new muon structure: unconstraint pt and impact parameter)
+
+#### Changed
+- source file:
+  - ../hdl/packages/gtl_pkg.vhd
+  - ../hdl/packages/lut_pkg.vhd
+
 ### [v2.4.11] - 2020-02-05
 
 #### Comment
